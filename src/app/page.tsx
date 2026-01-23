@@ -40,7 +40,7 @@ export default function Home() {
       </div>
 
       {/* Layer 1: Marquee Background (3 Lines, Diagonal -12deg, White, Exclusion) */}
-      <div className="absolute inset-0 z-0 flex flex-col justify-center items-center mix-blend-exclusion pointer-events-none opacity-80">
+      <div className="absolute inset-0 z-50 flex flex-col justify-center items-center mix-blend-exclusion pointer-events-none opacity-80">
         <div className="w-[150%] -rotate-12 space-y-4">
 
           {/* Row 1 */}
