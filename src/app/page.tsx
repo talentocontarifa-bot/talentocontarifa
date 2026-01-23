@@ -9,6 +9,15 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-radial-blue relative overflow-hidden flex flex-col items-center justify-center p-4">
 
+      {/* Background Grunge Pattern Overlay */}
+      <div className="absolute inset-0 z-0 opacity-40 mix-blend-multiply pointer-events-none"
+        style={{
+          backgroundImage: 'url("/assets/grunge_pattern.webp")',
+          backgroundRepeat: 'repeat',
+          backgroundSize: '300px'
+        }}
+      ></div>
+
       {/* Layer 1: Marquee Background (3 Lines, Tighter, Behind Brain) */}
       <div className="absolute inset-0 z-0 flex flex-col justify-center items-center mix-blend-overlay pointer-events-none opacity-40">
         <div className="w-[150%] -rotate-12 space-y-4">
