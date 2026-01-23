@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-radial-blue relative overflow-hidden flex flex-col items-center justify-center p-4">
 
-      {/* Background Grunge Pattern Overlay */}
-      <div className="absolute inset-0 z-0 opacity-40 mix-blend-multiply pointer-events-none"
+      {/* Background Grunge Pattern Overlay - Glitching */}
+      <div className="absolute inset-0 z-0 opacity-30 mix-blend-multiply pointer-events-none animate-glitch"
         style={{
           backgroundImage: 'url("/assets/grunge_pattern.webp")',
           backgroundRepeat: 'repeat',
@@ -18,14 +18,14 @@ export default function Home() {
         }}
       ></div>
 
-      {/* Layer 1: Marquee Background (3 Lines, Tighter, Behind Brain) */}
-      <div className="absolute inset-0 z-0 flex flex-col justify-center items-center mix-blend-overlay pointer-events-none opacity-40">
-        <div className="w-[150%] -rotate-12 space-y-4">
+      {/* Layer 1: Marquee Background (3 Lines, Straight, White, Exclusion) */}
+      <div className="absolute inset-0 z-0 flex flex-col justify-center items-center mix-blend-exclusion pointer-events-none opacity-80">
+        <div className="w-full space-y-4">
 
           {/* Row 1 */}
           <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline">
             {Array(20).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`font-black tracking-tighter text-white/60 
+              <span key={i} className={`font-black tracking-tighter text-white 
                 ${i % 3 === 0 ? 'text-4xl md:text-6xl font-serif italic' : i % 3 === 1 ? 'text-3xl md:text-5xl font-mono' : 'text-5xl md:text-7xl font-sans'}
               `}>
                 {txt}
@@ -36,7 +36,7 @@ export default function Home() {
           {/* Row 2 (Reverse) */}
           <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline" style={{ animationDirection: 'reverse' }}>
             {Array(20).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`font-black tracking-tighter text-white/60 
+              <span key={i} className={`font-black tracking-tighter text-white 
                  ${i % 4 === 0 ? 'text-6xl md:text-8xl font-sans italic' : i % 4 === 1 ? 'text-4xl md:text-6xl font-serif' : 'text-5xl md:text-7xl font-mono'}
               `}>
                 {txt}
@@ -47,7 +47,7 @@ export default function Home() {
           {/* Row 3 */}
           <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline">
             {Array(20).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`font-black tracking-tighter text-white/60 
+              <span key={i} className={`font-black tracking-tighter text-white 
                  ${i % 5 === 0 ? 'text-4xl md:text-6xl font-mono italic' : i % 5 === 1 ? 'text-5xl md:text-7xl font-sans' : 'text-3xl md:text-5xl font-serif'}
               `}>
                 {txt}
