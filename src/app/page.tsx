@@ -9,22 +9,26 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-radial-blue relative overflow-hidden flex flex-col items-center justify-center p-4">
 
-      {/* Background Grunge Pattern - Tiled Glitch Effect 
-          Instead of one big bg, we use a grid of divs to glitch independently 
+      {/* Background Grunge Pattern - Static Tiled Glitch Effect 
+          Deterministic "failure" effect: some tiles inverted/flipped based on index
       */}
       <div className="absolute inset-0 z-0 opacity-30 mix-blend-multiply pointer-events-none grid grid-cols-4 grid-rows-4 overflow-hidden">
-        {Array(16).fill(0).map((_, i) => (
-          <div key={i} className="relative w-full h-full overflow-hidden">
-            <div
-              className={`absolute inset-0 bg-repeat bg-[length:300px] animate-glitch `}
-              style={{
-                backgroundImage: 'url("/assets/grunge_pattern.webp")',
-                animationDelay: `${Math.random() * 5}s`, // Random delay per tile
-                animationDuration: `${2 + Math.random() * 3}s` // Random speed
-              }}
-            ></div>
-          </div>
-        ))}
+        {Array(16).fill(0).map((_, i) => {
+          // Deterministic Logic for "Random" Glitches so it matches server/client
+          const isInverted = i === 3 || i === 7 || i === 10 || i === 12;
+          const isFlipped = i === 1 || i === 6 || i === 11 || i === 15;
+
+          return (
+            <div key={i} className={`relative w-full h-full overflow-hidden ${isInverted ? 'invert hue-rotate-90' : ''} ${isFlipped ? 'scale-x-[-1]' : ''}`}>
+              <div
+                className="absolute inset-0 bg-repeat bg-[length:300px]"
+                style={{
+                  backgroundImage: 'url("/assets/grunge_pattern.webp")',
+                }}
+              ></div>
+            </div>
+          )
+        })}
       </div>
 
       {/* Layer 1: Marquee Background (3 Lines, Diagonal -12deg, White, Exclusion) */}
@@ -103,9 +107,11 @@ export default function Home() {
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95, rotate: [0, -5, 5, 0] }}
-          onClick={() => {
+          onClick={(e) => {
+            // Create audio on click to ensure browser allows it
             const audio = new Audio('/assets/coin.mp3');
-            audio.play().catch(e => console.error(e));
+            audio.volume = 1.0;
+            audio.play().catch(console.error);
           }}
         >
           <div className="relative w-full h-full glitch-wrapper" data-text="CEREBRO">
@@ -148,34 +154,16 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Radioactive CTA Button */}
+        {/* Outline/Wireframe CTA Button (Reverted but Rounded) */}
         <motion.button
-          whileHover={{ scale: 1.1, textShadow: "0 0 8px rgb(0,0,0)" }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => {
-            // Optional: Another sound here?
-          }}
-          className="relative px-12 py-6 mt-8 rounded-full font-black text-2xl md:text-4xl italic tracking-tighter shadow-[0_0_40px_rgba(0,255,100,0.6)] overflow-visible group"
-          style={{
-            background: 'linear-gradient(90deg, #00FF9D 0%, #00F0FF 100%)',
-            color: '#000030',
-            border: '2px solid #fff'
-          }}
+          whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(57,255,20,0.6)" }}
+          whileTap={{ scale: 0.95 }}
+          className="relative px-12 py-6 mt-8 rounded-full bg-transparent border-4 border-accent text-accent font-black text-2xl md:text-3xl uppercase tracking-widest overflow-hidden shadow-[0_0_20px_rgba(57,255,20,0.4)] group"
         >
-          {/* Glitch Artifacts */}
-          <span className="absolute -left-2 top-1/2 w-4 h-1 bg-white animate-pulse"></span>
-          <span className="absolute -right-2 top-1/3 w-3 h-1 bg-primary animate-ping"></span>
-
-          <span className="relative z-10 flex items-center gap-2 drop-shadow-sm">
-            EJECUTAR VENTAS
-            {/* Simple radioactive icon */}
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 animate-spin-slow" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              {/* Replaced clock with nuclear-ish shape if needed, sticking to simple punchy icon for now or standard radioactive symbol if pure svg */}
-            </svg>
+          <span className="absolute inset-0 w-full h-full bg-accent/10 group-hover:bg-accent/20 transition-all"></span>
+          <span className="relative z-10 flex items-center gap-3">
+            Ejecutar Ventas
           </span>
-
-          <div className="absolute inset-0 rounded-full blur-md bg-green-400 opacity-50 group-hover:opacity-100 animate-pulse-fast"></div>
         </motion.button>
 
         {/* Small White Shield as Footer Closer */}
