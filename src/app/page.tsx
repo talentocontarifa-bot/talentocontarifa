@@ -9,10 +9,10 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-radial-blue relative overflow-hidden flex flex-col items-center justify-center p-4">
 
-      {/* Layer 1: Background Shield (Escudo) from PNG */}
+      {/* Layer 1: Background Shield (Escudo) from SVG */}
       <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
         <Image
-          src="/assets/uploaded_image_1_1769137813079.png"
+          src="/assets/escudo.svg"
           alt="Escudo Background"
           width={800}
           height={800}
