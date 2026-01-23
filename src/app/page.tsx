@@ -73,13 +73,16 @@ export default function Home() {
 
         {/* Text Content */}
         <div className="mt-8 mb-4 space-y-4 max-w-3xl relative z-20 px-4">
-          <p className="text-xl md:text-3xl text-white font-medium italic leading-relaxed">
-            Lo único que nos importa es que tu <span className="text-secondary font-black">SERVICIO</span> o
-            <span className="text-secondary font-black block md:inline"> PRODUCTO</span> se vea <span className="bg-accent text-black px-2 font-black transform -skew-x-12 inline-block shadow-[4px_4px_0_rgba(0,0,0,1)]">FREGÓN</span>,
-          </p>
-          <p className="text-xl md:text-3xl text-white font-medium italic">
-            que tú te veas <span className="bg-accent text-black px-2 font-bold transform -skew-x-12 inline-block shadow-[4px_4px_0_rgba(0,0,0,1)]">FREGÓN</span> y que
-          </p>
+          {/* Boxed Text Block */}
+          <div className="bg-black p-6 md:p-8 transform -skew-x-3 shadow-[10px_10px_0_rgba(255,0,60,0.5)] border border-white/10">
+            <p className="text-xl md:text-3xl text-white font-medium italic leading-relaxed transform skew-x-3">
+              Lo único que nos importa es que tu <span className="text-secondary font-black">SERVICIO</span> o
+              <span className="text-secondary font-black block md:inline"> PRODUCTO</span> se vea <span className="bg-accent text-black px-2 font-black transform -skew-x-12 inline-block shadow-[4px_4px_0_rgba(0,0,0,1)]">FREGÓN</span>,
+            </p>
+            <p className="text-xl md:text-3xl text-white font-medium italic mt-2 transform skew-x-3">
+              que tú te veas <span className="bg-accent text-black px-2 font-bold transform -skew-x-12 inline-block shadow-[4px_4px_0_rgba(0,0,0,1)]">FREGÓN</span> y que
+            </p>
+          </div>
 
           <div className="relative mt-6">
             <div className="text-5xl md:text-8xl font-black italic text-secondary tracking-tighter leading-none glitch-wrapper" data-text="VENDAS, VENDAS,">
