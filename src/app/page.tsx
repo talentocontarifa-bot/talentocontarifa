@@ -28,28 +28,41 @@ export default function Home() {
 
       {/* Layer 2: Marquee Background (Inclined & Blinking) */}
       <div className="absolute inset-0 z-1 overflow-hidden pointer-events-none flex flex-col justify-center items-center mix-blend-exclusion">
-        <div className="w-[150%] -rotate-6 space-y-12 opacity-80">
-          <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline">
+        <div className="w-[150%] -rotate-6 space-y-2 opacity-80">
+
+          {/* Row 1 */}
+          <div className="animate-marquee whitespace-nowrap flex gap-8 items-baseline">
             {Array(15).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`text-7xl md:text-9xl font-black tracking-tighter text-white animate-pulse-fast ${i % 3 === 0 ? 'font-serif italic' : i % 3 === 1 ? 'font-mono' : 'font-sans'}`}>
+              <span key={i} className={`font-black tracking-tighter text-white animate-pulse-fast 
+                ${i % 3 === 0 ? 'text-4xl md:text-6xl font-serif italic' : i % 3 === 1 ? 'text-2xl md:text-4xl font-mono' : 'text-5xl md:text-7xl font-sans'}
+              `}>
                 {txt}
               </span>
             ))}
           </div>
-          <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline" style={{ animationDirection: 'reverse' }}>
+
+          {/* Row 2 (Reverse) */}
+          <div className="animate-marquee whitespace-nowrap flex gap-8 items-baseline" style={{ animationDirection: 'reverse' }}>
             {Array(15).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`text-7xl md:text-9xl font-black tracking-tighter text-white opacity-50 ${i % 3 === 0 ? 'font-sans italic' : i % 3 === 1 ? 'font-serif' : 'font-mono'}`}>
+              <span key={i} className={`font-black tracking-tighter text-white opacity-50 
+                 ${i % 4 === 0 ? 'text-6xl md:text-8xl font-sans italic' : i % 4 === 1 ? 'text-3xl md:text-5xl font-serif' : 'text-4xl md:text-6xl font-mono'}
+              `}>
                 {txt}
               </span>
             ))}
           </div>
-          <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline">
+
+          {/* Row 3 */}
+          <div className="animate-marquee whitespace-nowrap flex gap-8 items-baseline">
             {Array(15).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`text-7xl md:text-9xl font-black tracking-tighter text-white animate-pulse-fast ${i % 3 === 0 ? 'font-mono italic' : i % 3 === 1 ? 'font-sans' : 'font-serif'}`}>
+              <span key={i} className={`font-black tracking-tighter text-white animate-pulse-fast 
+                 ${i % 5 === 0 ? 'text-3xl md:text-5xl font-mono italic' : i % 5 === 1 ? 'text-5xl md:text-7xl font-sans' : 'text-2xl md:text-4xl font-serif'}
+              `}>
                 {txt}
               </span>
             ))}
           </div>
+
         </div>
       </div>
 
@@ -75,13 +88,13 @@ export default function Home() {
       {/* Main Content (Z-Index above marquee) */}
       <div className="relative z-10 flex flex-col items-center text-center w-full max-w-4xl mt-12 md:mt-4">
 
-        {/* Floating Glitch Brain (Image 0) */}
+        {/* Floating Glitch Brain (Cerebro WebP) */}
         <motion.div
           className="relative w-[320px] h-[320px] md:w-[450px] md:h-[450px]"
           animate={{ translateY: [-10, 10, -10] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         >
-          <div className="relative w-full h-full glitch-wrapper" data-text="CEREBRO"> {/* Wrapper for glitch context if needed, but applied to image container */}
+          <div className="relative w-full h-full glitch-wrapper" data-text="CEREBRO">
             <Image
               src="/assets/cerebro.webp"
               alt="Cerebro Talento"
