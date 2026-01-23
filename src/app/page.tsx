@@ -9,18 +9,27 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-radial-blue relative overflow-hidden flex flex-col items-center justify-center p-4">
 
-      {/* Background Grunge Pattern Overlay - Glitching */}
-      <div className="absolute inset-0 z-0 opacity-30 mix-blend-multiply pointer-events-none animate-glitch"
-        style={{
-          backgroundImage: 'url("/assets/grunge_pattern.webp")',
-          backgroundRepeat: 'repeat',
-          backgroundSize: '300px'
-        }}
-      ></div>
+      {/* Background Grunge Pattern - Tiled Glitch Effect 
+          Instead of one big bg, we use a grid of divs to glitch independently 
+      */}
+      <div className="absolute inset-0 z-0 opacity-30 mix-blend-multiply pointer-events-none grid grid-cols-4 grid-rows-4 overflow-hidden">
+        {Array(16).fill(0).map((_, i) => (
+          <div key={i} className="relative w-full h-full overflow-hidden">
+            <div
+              className={`absolute inset-0 bg-repeat bg-[length:300px] animate-glitch `}
+              style={{
+                backgroundImage: 'url("/assets/grunge_pattern.webp")',
+                animationDelay: `${Math.random() * 5}s`, // Random delay per tile
+                animationDuration: `${2 + Math.random() * 3}s` // Random speed
+              }}
+            ></div>
+          </div>
+        ))}
+      </div>
 
-      {/* Layer 1: Marquee Background (3 Lines, Straight, White, Exclusion) */}
+      {/* Layer 1: Marquee Background (3 Lines, Diagonal -12deg, White, Exclusion) */}
       <div className="absolute inset-0 z-0 flex flex-col justify-center items-center mix-blend-exclusion pointer-events-none opacity-80">
-        <div className="w-full space-y-4">
+        <div className="w-[150%] -rotate-12 space-y-4">
 
           {/* Row 1 */}
           <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline">
@@ -78,7 +87,7 @@ export default function Home() {
           <Link href="https://www.facebook.com/talentocontarifa" target="_blank" className="hover:scale-110 transition-transform">
             <Facebook className="text-white w-6 h-6 md:w-8 md:h-8 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" />
           </Link>
-          <Link href="https://wa.me/5211234567890" target="_blank" className="hover:scale-110 transition-transform">
+          <Link href="https://wa.me/5219845828658" target="_blank" className="hover:scale-110 transition-transform">
             <MessageCircle className="text-white w-6 h-6 md:w-8 md:h-8 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" />
           </Link>
         </div>
