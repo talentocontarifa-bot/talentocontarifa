@@ -82,7 +82,7 @@ export default function Home() {
       {/* Layer 2: Marquee Overlay (Holograma Rayos-X - Z-40) 
           Este es el que "atraviesa" el cerebro visualmente.
       */}
-      <div className="absolute inset-0 z-40 flex flex-col justify-center items-center pointer-events-none mix-blend-hard-light">
+      <div className="absolute inset-0 z-0 flex flex-col justify-center items-center pointer-events-none mix-blend-exclusion">
         <div className="w-[150%] -rotate-12 space-y-4">
 
           {/* Row 1 */}
@@ -104,7 +104,7 @@ export default function Home() {
               <span key={i} className={`font-black tracking-tighter text-transparent 
                  ${i % 4 === 0 ? 'text-6xl md:text-8xl font-sans italic' : i % 4 === 1 ? 'text-4xl md:text-6xl font-serif' : 'text-5xl md:text-7xl font-mono'}
               `}
-                style={{ WebkitTextStroke: '2px rgba(57, 255, 20, 0.8)' }}
+                style={{ WebkitTextStroke: '2px rgba(255, 255, 255, 0.8)' }}
               >
                 {txt}
               </span>
@@ -117,7 +117,7 @@ export default function Home() {
               <span key={i} className={`font-black tracking-tighter text-transparent 
                  ${i % 5 === 0 ? 'text-4xl md:text-6xl font-mono italic' : i % 5 === 1 ? 'text-5xl md:text-7xl font-sans' : 'text-3xl md:text-5xl font-serif'}
               `}
-                style={{ WebkitTextStroke: '1px rgba(207, 15, 52, 0.9)' }}
+                style={{ WebkitTextStroke: '1px rgba(255, 255, 255, 0.8)' }}
               >
                 {txt}
               </span>
