@@ -2,67 +2,25 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Menu, Zap, Facebook, MessageCircle } from "lucide-react";
+import { Facebook, MessageCircle } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-radial-blue relative overflow-hidden flex flex-col items-center justify-center p-4">
 
-      {/* Layer 1: Background Shield (Escudo) from SVG - Colored Mask & Positioned Top */}
-      <div className="absolute inset-x-0 top-[10%] z-0 pointer-events-none flex justify-center">
-        <div
-          className="w-[500px] h-[500px] md:w-[800px] md:h-[800px] bg-[#cf0f34] opacity-80"
-          style={{
-            maskImage: 'url(/assets/escudo.svg)',
-            maskSize: 'contain',
-            maskRepeat: 'no-repeat',
-            maskPosition: 'center',
-            WebkitMaskImage: 'url(/assets/escudo.svg)',
-            WebkitMaskSize: 'contain',
-            WebkitMaskRepeat: 'no-repeat',
-            WebkitMaskPosition: 'center'
-          }}
-        ></div>
-      </div>
-
-      {/* Layer 2: Marquee Background (Inclined & Blinking) */}
-      <div className="absolute inset-0 z-1 overflow-hidden pointer-events-none flex flex-col justify-center items-center mix-blend-exclusion">
-        <div className="w-[150%] -rotate-6 space-y-2 opacity-80">
-
-          {/* Row 1 */}
+      {/* Layer 1: Marquee Background (Single Line, Behind Brain) */}
+      <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 z-0 flex flex-col justify-center items-center mix-blend-exclusion pointer-events-none">
+        <div className="w-[120%] -rotate-6 opacity-60">
           <div className="animate-marquee whitespace-nowrap flex gap-8 items-baseline">
             {Array(15).fill("SE RENTA").map((txt, i) => (
               <span key={i} className={`font-black tracking-tighter text-white animate-pulse-fast 
-                ${i % 3 === 0 ? 'text-4xl md:text-6xl font-serif italic' : i % 3 === 1 ? 'text-2xl md:text-4xl font-mono' : 'text-5xl md:text-7xl font-sans'}
+                ${i % 3 === 0 ? 'text-6xl md:text-9xl font-serif italic' : i % 3 === 1 ? 'text-5xl md:text-8xl font-mono' : 'text-7xl md:text-[10rem] font-sans'}
               `}>
                 {txt}
               </span>
             ))}
           </div>
-
-          {/* Row 2 (Reverse) */}
-          <div className="animate-marquee whitespace-nowrap flex gap-8 items-baseline" style={{ animationDirection: 'reverse' }}>
-            {Array(15).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`font-black tracking-tighter text-white opacity-50 
-                 ${i % 4 === 0 ? 'text-6xl md:text-8xl font-sans italic' : i % 4 === 1 ? 'text-3xl md:text-5xl font-serif' : 'text-4xl md:text-6xl font-mono'}
-              `}>
-                {txt}
-              </span>
-            ))}
-          </div>
-
-          {/* Row 3 */}
-          <div className="animate-marquee whitespace-nowrap flex gap-8 items-baseline">
-            {Array(15).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`font-black tracking-tighter text-white animate-pulse-fast 
-                 ${i % 5 === 0 ? 'text-3xl md:text-5xl font-mono italic' : i % 5 === 1 ? 'text-5xl md:text-7xl font-sans' : 'text-2xl md:text-4xl font-serif'}
-              `}>
-                {txt}
-              </span>
-            ))}
-          </div>
-
         </div>
       </div>
 
@@ -78,10 +36,17 @@ export default function Home() {
           />
         </div>
 
-        <div className="flex gap-6 text-white text-sm font-bold tracking-widest uppercase items-center">
-          <Link href="#" className="hidden md:block hover:text-primary transition-colors hover:shadow-[0_0_10px_#00f0ff] hover:text-stroke-primary">Paquetes</Link>
-          <Link href="#" className="hidden md:block hover:text-primary transition-colors hover:shadow-[0_0_10px_#00f0ff] hover:text-stroke-primary">Orientación</Link>
-          <Menu className="w-8 h-8 md:hidden cursor-pointer" />
+        <div className="flex gap-4 text-white items-center">
+          <Link href="#" className="hidden md:block text-sm font-bold tracking-widest uppercase hover:text-primary transition-colors hover:shadow-[0_0_10px_#00f0ff] hover:text-stroke-primary mr-4">Paquetes</Link>
+          <Link href="#" className="hidden md:block text-sm font-bold tracking-widest uppercase hover:text-primary transition-colors hover:shadow-[0_0_10px_#00f0ff] hover:text-stroke-primary mr-4">Orientación</Link>
+
+          {/* Social Icons moved to Header */}
+          <Link href="https://www.facebook.com/talentocontarifa" target="_blank" className="hover:scale-110 transition-transform">
+            <Facebook className="text-white w-6 h-6 md:w-8 md:h-8 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" />
+          </Link>
+          <Link href="https://wa.me/5211234567890" target="_blank" className="hover:scale-110 transition-transform">
+            <MessageCircle className="text-white w-6 h-6 md:w-8 md:h-8 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" />
+          </Link>
         </div>
       </nav>
 
@@ -143,16 +108,17 @@ export default function Home() {
           </span>
         </motion.button>
 
-      </div>
+        {/* Small White Shield as Footer Closer */}
+        <div className="mt-16 opacity-50 hover:opacity-100 transition-opacity">
+          <Image
+            src="/assets/escudo.svg"
+            alt="Talento Shield"
+            width={60}
+            height={60}
+            className="brightness-0 invert"
+          />
+        </div>
 
-      {/* Social Footer - Bottom Right Corner */}
-      <div className="absolute bottom-6 right-6 z-50 flex gap-4">
-        <Link href="https://www.facebook.com/talentocontarifa" target="_blank" className="hover:scale-110 transition-transform">
-          <Facebook className="text-white w-10 h-10 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" />
-        </Link>
-        <Link href="https://wa.me/5211234567890" target="_blank" className="hover:scale-110 transition-transform">
-          <MessageCircle className="text-white w-10 h-10 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" />
-        </Link>
       </div>
 
     </main>
