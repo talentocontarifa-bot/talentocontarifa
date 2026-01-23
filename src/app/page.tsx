@@ -69,9 +69,6 @@ export default function Home() {
             />
           </div>
 
-          {/* Holographic Ring Effect */}
-          <div className="absolute inset-0 rounded-full border-2 border-primary/20 rotate-12 scale-110 animate-pulse-fast"></div>
-          <div className="absolute inset-0 rounded-full border border-secondary/20 -rotate-12 scale-125"></div>
         </motion.div>
 
         {/* Text Content */}
