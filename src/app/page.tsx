@@ -175,6 +175,7 @@ export default function Home() {
               src="/assets/cerebro.webp"
               alt="Cerebro Talento"
               fill
+              sizes="(max-width: 768px) 320px, 450px"
               className="object-contain drop-shadow-[0_0_50px_rgba(0,240,255,0.4)] animate-glitch group-hover:brightness-125 transition-all"
               priority
             />
