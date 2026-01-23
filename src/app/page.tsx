@@ -10,13 +10,13 @@ export default function Home() {
     <main className="min-h-screen bg-radial-blue relative overflow-hidden flex flex-col items-center justify-center p-4">
 
       {/* Layer 1: Background Shield (Escudo) from SVG */}
-      <div className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
+      <div className="absolute inset-0 flex items-center justify-center z-5 pointer-events-none">
         <Image
           src="/assets/escudo.svg"
           alt="Escudo Background"
-          width={800}
-          height={800}
-          className="w-[90%] md:w-[60%] h-auto object-contain animate-pulse-fast opacity-20 blur-sm mix-blend-overlay"
+          width={900}
+          height={900}
+          className="w-[100%] md:w-[70%] h-auto object-contain opacity-50"
         />
       </div>
 
