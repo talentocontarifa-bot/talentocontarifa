@@ -9,10 +9,10 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-radial-blue relative overflow-hidden flex flex-col items-center justify-center p-4">
 
-      {/* Layer 1: Background Shield (Escudo) from SVG - Colored Mask */}
-      <div className="absolute inset-0 flex items-center justify-center z-5 pointer-events-none mb-10 md:mb-0">
+      {/* Layer 1: Background Shield (Escudo) from SVG - Colored Mask & Positioned Top */}
+      <div className="absolute inset-x-0 top-[10%] z-0 pointer-events-none flex justify-center">
         <div
-          className="w-[350px] h-[350px] md:w-[600px] md:h-[600px] bg-[#cf0f34]"
+          className="w-[500px] h-[500px] md:w-[800px] md:h-[800px] bg-[#cf0f34] opacity-80"
           style={{
             maskImage: 'url(/assets/escudo.svg)',
             maskSize: 'contain',
@@ -29,23 +29,23 @@ export default function Home() {
       {/* Layer 2: Marquee Background (Inclined & Blinking) */}
       <div className="absolute inset-0 z-1 overflow-hidden pointer-events-none flex flex-col justify-center items-center mix-blend-exclusion">
         <div className="w-[150%] -rotate-6 space-y-12 opacity-80">
-          <div className="animate-marquee whitespace-nowrap flex gap-16">
-            {Array(10).fill(["SE RENTA", "FOR RENT", "A LOUER", "ZU VERMIETEN", "ALUGA-SE", "SI AFFITTA"]).flat().map((txt, i) => (
-              <span key={i} className="text-8xl font-black italic tracking-tighter text-white">
+          <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline">
+            {Array(15).fill("SE RENTA").map((txt, i) => (
+              <span key={i} className={`text-7xl md:text-9xl font-black tracking-tighter text-white animate-pulse-fast ${i % 3 === 0 ? 'font-serif italic' : i % 3 === 1 ? 'font-mono' : 'font-sans'}`}>
                 {txt}
               </span>
             ))}
           </div>
-          <div className="animate-marquee whitespace-nowrap flex gap-16" style={{ animationDirection: 'reverse' }}>
-            {Array(10).fill(["SE RENTA", "FOR RENT", "A LOUER", "ZU VERMIETEN", "ALUGA-SE", "SI AFFITTA"]).flat().map((txt, i) => (
-              <span key={i} className="text-8xl font-black italic tracking-tighter text-white">
+          <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline" style={{ animationDirection: 'reverse' }}>
+            {Array(15).fill("SE RENTA").map((txt, i) => (
+              <span key={i} className={`text-7xl md:text-9xl font-black tracking-tighter text-white opacity-50 ${i % 3 === 0 ? 'font-sans italic' : i % 3 === 1 ? 'font-serif' : 'font-mono'}`}>
                 {txt}
               </span>
             ))}
           </div>
-          <div className="animate-marquee whitespace-nowrap flex gap-16">
-            {Array(10).fill(["SE RENTA", "FOR RENT", "A LOUER", "ZU VERMIETEN", "ALUGA-SE", "SI AFFITTA"]).flat().map((txt, i) => (
-              <span key={i} className="text-8xl font-black italic tracking-tighter text-white">
+          <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline">
+            {Array(15).fill("SE RENTA").map((txt, i) => (
+              <span key={i} className={`text-7xl md:text-9xl font-black tracking-tighter text-white animate-pulse-fast ${i % 3 === 0 ? 'font-mono italic' : i % 3 === 1 ? 'font-sans' : 'font-serif'}`}>
                 {txt}
               </span>
             ))}
@@ -56,12 +56,12 @@ export default function Home() {
       {/* Navbar */}
       <nav className="absolute top-0 w-full flex justify-between items-center px-6 py-6 z-50">
         <div className="relative w-48 h-12">
-          {/* Using Horizontal Logo SVG */}
+          {/* Using Horizontal Logo SVG - White Filter */}
           <Image
             src="/assets/horizontal.svg"
             alt="Talento con Tarifa Logo"
             fill
-            className="object-contain object-left"
+            className="object-contain object-left brightness-0 invert"
           />
         </div>
 
