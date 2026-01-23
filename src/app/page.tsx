@@ -39,14 +39,14 @@ export default function Home() {
         })}
       </div>
 
-      {/* Layer 1: Marquee Background (3 Lines, Diagonal -12deg, White, Exclusion) */}
-      <div className="absolute inset-0 z-50 flex flex-col justify-center items-center mix-blend-exclusion pointer-events-none opacity-80">
+      {/* Layer 1: Marquee Background (Fondo Sólido - Z-0) */}
+      <div className="absolute inset-0 z-0 flex flex-col justify-center items-center mix-blend-exclusion pointer-events-none opacity-40">
         <div className="w-[150%] -rotate-12 space-y-4">
 
           {/* Row 1 */}
           <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline">
             {Array(20).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`font-black tracking-tighter text-white 
+              <span key={i} className={`font-black tracking-tighter text-white/50 
                 ${i % 3 === 0 ? 'text-4xl md:text-6xl font-serif italic' : i % 3 === 1 ? 'text-3xl md:text-5xl font-mono' : 'text-5xl md:text-7xl font-sans'}
               `}>
                 {txt}
@@ -57,7 +57,7 @@ export default function Home() {
           {/* Row 2 (Reverse) */}
           <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline" style={{ animationDirection: 'reverse' }}>
             {Array(20).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`font-black tracking-tighter text-white 
+              <span key={i} className={`font-black tracking-tighter text-white/50 
                  ${i % 4 === 0 ? 'text-6xl md:text-8xl font-sans italic' : i % 4 === 1 ? 'text-4xl md:text-6xl font-serif' : 'text-5xl md:text-7xl font-mono'}
               `}>
                 {txt}
@@ -68,9 +68,57 @@ export default function Home() {
           {/* Row 3 */}
           <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline">
             {Array(20).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`font-black tracking-tighter text-white 
+              <span key={i} className={`font-black tracking-tighter text-white/50 
                  ${i % 5 === 0 ? 'text-4xl md:text-6xl font-mono italic' : i % 5 === 1 ? 'text-5xl md:text-7xl font-sans' : 'text-3xl md:text-5xl font-serif'}
               `}>
+                {txt}
+              </span>
+            ))}
+          </div>
+
+        </div>
+      </div>
+
+      {/* Layer 2: Marquee Overlay (Holograma Rayos-X - Z-40) 
+          Este es el que "atraviesa" el cerebro visualmente.
+      */}
+      <div className="absolute inset-0 z-40 flex flex-col justify-center items-center pointer-events-none mix-blend-hard-light">
+        <div className="w-[150%] -rotate-12 space-y-4">
+
+          {/* Row 1 */}
+          <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline">
+            {Array(20).fill("SE RENTA").map((txt, i) => (
+              <span key={i} className={`font-black tracking-tighter text-transparent 
+                ${i % 3 === 0 ? 'text-4xl md:text-6xl font-serif italic' : i % 3 === 1 ? 'text-3xl md:text-5xl font-mono' : 'text-5xl md:text-7xl font-sans'}
+              `}
+                style={{ WebkitTextStroke: '1px rgba(255, 255, 255, 0.8)' }}
+              >
+                {txt}
+              </span>
+            ))}
+          </div>
+
+          {/* Row 2 (Reverse) */}
+          <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline" style={{ animationDirection: 'reverse' }}>
+            {Array(20).fill("SE RENTA").map((txt, i) => (
+              <span key={i} className={`font-black tracking-tighter text-transparent 
+                 ${i % 4 === 0 ? 'text-6xl md:text-8xl font-sans italic' : i % 4 === 1 ? 'text-4xl md:text-6xl font-serif' : 'text-5xl md:text-7xl font-mono'}
+              `}
+                style={{ WebkitTextStroke: '2px rgba(57, 255, 20, 0.8)' }}
+              >
+                {txt}
+              </span>
+            ))}
+          </div>
+
+          {/* Row 3 */}
+          <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline">
+            {Array(20).fill("SE RENTA").map((txt, i) => (
+              <span key={i} className={`font-black tracking-tighter text-transparent 
+                 ${i % 5 === 0 ? 'text-4xl md:text-6xl font-mono italic' : i % 5 === 1 ? 'text-5xl md:text-7xl font-sans' : 'text-3xl md:text-5xl font-serif'}
+              `}
+                style={{ WebkitTextStroke: '1px rgba(207, 15, 52, 0.9)' }}
+              >
                 {txt}
               </span>
             ))}
