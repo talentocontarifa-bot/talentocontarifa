@@ -9,18 +9,43 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-radial-blue relative overflow-hidden flex flex-col items-center justify-center p-4">
 
-      {/* Layer 1: Marquee Background (Single Line, Behind Brain) */}
-      <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 z-0 flex flex-col justify-center items-center mix-blend-exclusion pointer-events-none">
-        <div className="w-[120%] -rotate-6 opacity-60">
-          <div className="animate-marquee whitespace-nowrap flex gap-8 items-baseline">
-            {Array(15).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`font-black tracking-tighter text-white animate-pulse-fast 
-                ${i % 3 === 0 ? 'text-6xl md:text-9xl font-serif italic' : i % 3 === 1 ? 'text-5xl md:text-8xl font-mono' : 'text-7xl md:text-[10rem] font-sans'}
+      {/* Layer 1: Marquee Background (3 Lines, Tighter, Behind Brain) */}
+      <div className="absolute inset-0 z-0 flex flex-col justify-center items-center mix-blend-overlay pointer-events-none opacity-40">
+        <div className="w-[150%] -rotate-12 space-y-4">
+
+          {/* Row 1 */}
+          <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline">
+            {Array(20).fill("SE RENTA").map((txt, i) => (
+              <span key={i} className={`font-black tracking-tighter text-white/60 
+                ${i % 3 === 0 ? 'text-4xl md:text-6xl font-serif italic' : i % 3 === 1 ? 'text-3xl md:text-5xl font-mono' : 'text-5xl md:text-7xl font-sans'}
               `}>
                 {txt}
               </span>
             ))}
           </div>
+
+          {/* Row 2 (Reverse) */}
+          <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline" style={{ animationDirection: 'reverse' }}>
+            {Array(20).fill("SE RENTA").map((txt, i) => (
+              <span key={i} className={`font-black tracking-tighter text-white/60 
+                 ${i % 4 === 0 ? 'text-6xl md:text-8xl font-sans italic' : i % 4 === 1 ? 'text-4xl md:text-6xl font-serif' : 'text-5xl md:text-7xl font-mono'}
+              `}>
+                {txt}
+              </span>
+            ))}
+          </div>
+
+          {/* Row 3 */}
+          <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline">
+            {Array(20).fill("SE RENTA").map((txt, i) => (
+              <span key={i} className={`font-black tracking-tighter text-white/60 
+                 ${i % 5 === 0 ? 'text-4xl md:text-6xl font-mono italic' : i % 5 === 1 ? 'text-5xl md:text-7xl font-sans' : 'text-3xl md:text-5xl font-serif'}
+              `}>
+                {txt}
+              </span>
+            ))}
+          </div>
+
         </div>
       </div>
 
