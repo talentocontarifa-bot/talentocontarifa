@@ -9,37 +9,43 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-radial-blue relative overflow-hidden flex flex-col items-center justify-center p-4">
 
-      {/* Layer 1: Background Shield (Escudo) from SVG */}
-      <div className="absolute inset-0 flex items-center justify-center z-5 pointer-events-none">
-        <Image
-          src="/assets/escudo.svg"
-          alt="Escudo Background"
-          width={900}
-          height={900}
-          className="w-[100%] md:w-[70%] h-auto object-contain opacity-50"
-        />
+      {/* Layer 1: Background Shield (Escudo) from SVG - Colored Mask */}
+      <div className="absolute inset-0 flex items-center justify-center z-5 pointer-events-none mb-10 md:mb-0">
+        <div
+          className="w-[350px] h-[350px] md:w-[600px] md:h-[600px] bg-[#cf0f34]"
+          style={{
+            maskImage: 'url(/assets/escudo.svg)',
+            maskSize: 'contain',
+            maskRepeat: 'no-repeat',
+            maskPosition: 'center',
+            WebkitMaskImage: 'url(/assets/escudo.svg)',
+            WebkitMaskSize: 'contain',
+            WebkitMaskRepeat: 'no-repeat',
+            WebkitMaskPosition: 'center'
+          }}
+        ></div>
       </div>
 
       {/* Layer 2: Marquee Background (Inclined & Blinking) */}
-      <div className="absolute inset-0 z-1 overflow-hidden pointer-events-none flex flex-col justify-center items-center">
-        <div className="w-[150%] -rotate-6 space-y-8 opacity-40">
-          <div className="animate-marquee whitespace-nowrap flex gap-8">
-            {Array(20).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`text-8xl font-black italic tracking-tighter ${i % 2 === 0 ? 'text-stroke-primary' : 'text-primary'} animate-pulse-fast`}>
+      <div className="absolute inset-0 z-1 overflow-hidden pointer-events-none flex flex-col justify-center items-center mix-blend-exclusion">
+        <div className="w-[150%] -rotate-6 space-y-12 opacity-80">
+          <div className="animate-marquee whitespace-nowrap flex gap-16">
+            {Array(10).fill(["SE RENTA", "FOR RENT", "A LOUER", "ZU VERMIETEN", "ALUGA-SE", "SI AFFITTA"]).flat().map((txt, i) => (
+              <span key={i} className="text-8xl font-black italic tracking-tighter text-white">
                 {txt}
               </span>
             ))}
           </div>
-          <div className="animate-marquee whitespace-nowrap flex gap-8" style={{ animationDirection: 'reverse' }}>
-            {Array(20).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`text-8xl font-black italic tracking-tighter ${i % 2 !== 0 ? 'text-stroke-white' : 'text-white'} opacity-30`}>
+          <div className="animate-marquee whitespace-nowrap flex gap-16" style={{ animationDirection: 'reverse' }}>
+            {Array(10).fill(["SE RENTA", "FOR RENT", "A LOUER", "ZU VERMIETEN", "ALUGA-SE", "SI AFFITTA"]).flat().map((txt, i) => (
+              <span key={i} className="text-8xl font-black italic tracking-tighter text-white">
                 {txt}
               </span>
             ))}
           </div>
-          <div className="animate-marquee whitespace-nowrap flex gap-8">
-            {Array(20).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`text-8xl font-black italic tracking-tighter ${i % 2 === 0 ? 'text-stroke-primary' : 'text-primary'} animate-pulse-fast`}>
+          <div className="animate-marquee whitespace-nowrap flex gap-16">
+            {Array(10).fill(["SE RENTA", "FOR RENT", "A LOUER", "ZU VERMIETEN", "ALUGA-SE", "SI AFFITTA"]).flat().map((txt, i) => (
+              <span key={i} className="text-8xl font-black italic tracking-tighter text-white">
                 {txt}
               </span>
             ))}
@@ -50,9 +56,9 @@ export default function Home() {
       {/* Navbar */}
       <nav className="absolute top-0 w-full flex justify-between items-center px-6 py-6 z-50">
         <div className="relative w-48 h-12">
-          {/* Using Image 2 (Horizontal Logo) */}
+          {/* Using Horizontal Logo SVG */}
           <Image
-            src="/assets/uploaded_image_2_1769137813079.png"
+            src="/assets/horizontal.svg"
             alt="Talento con Tarifa Logo"
             fill
             className="object-contain object-left"
@@ -60,8 +66,8 @@ export default function Home() {
         </div>
 
         <div className="flex gap-6 text-white text-sm font-bold tracking-widest uppercase items-center">
-          <Link href="#" className="hidden md:block hover:text-primary transition-colors hover:shadow-[0_0_10px_#00f0ff]">Paquetes</Link>
-          <Link href="#" className="hidden md:block hover:text-primary transition-colors hover:shadow-[0_0_10px_#00f0ff]">Orientación</Link>
+          <Link href="#" className="hidden md:block hover:text-primary transition-colors hover:shadow-[0_0_10px_#00f0ff] hover:text-stroke-primary">Paquetes</Link>
+          <Link href="#" className="hidden md:block hover:text-primary transition-colors hover:shadow-[0_0_10px_#00f0ff] hover:text-stroke-primary">Orientación</Link>
           <Menu className="w-8 h-8 md:hidden cursor-pointer" />
         </div>
       </nav>
