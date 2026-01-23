@@ -77,7 +77,7 @@ export default function Home() {
         >
           <div className="relative w-full h-full glitch-wrapper" data-text="CEREBRO"> {/* Wrapper for glitch context if needed, but applied to image container */}
             <Image
-              src="/assets/uploaded_image_0_1769137813079.png"
+              src="/assets/cerebro.webp"
               alt="Cerebro Talento"
               fill
               className="object-contain drop-shadow-[0_0_50px_rgba(0,240,255,0.4)] animate-glitch"
