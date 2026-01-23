@@ -15,11 +15,19 @@ export default function Home() {
       <div className="absolute inset-0 z-0 opacity-30 mix-blend-multiply pointer-events-none grid grid-cols-4 grid-rows-4 overflow-hidden">
         {Array(16).fill(0).map((_, i) => {
           // Deterministic Logic for "Random" Glitches so it matches server/client
-          const isInverted = i === 3 || i === 7 || i === 10 || i === 12;
-          const isFlipped = i === 1 || i === 6 || i === 11 || i === 15;
+          const isInverted = i === 3 || i === 7 || i === 10 || i === 12; // Static Inverted
+          const isFlipped = i === 1 || i === 6 || i === 11 || i === 15; // Static Flipped
+          const isGlitching = i === 2 || i === 5 || i === 9 || i === 14; // Animated Glitch Invert
 
           return (
-            <div key={i} className={`relative w-full h-full overflow-hidden ${isInverted ? 'invert hue-rotate-90' : ''} ${isFlipped ? 'scale-x-[-1]' : ''}`}>
+            <div key={i} className={`relative w-full h-full overflow-hidden 
+               ${isInverted ? 'invert hue-rotate-90' : ''} 
+               ${isFlipped ? 'scale-x-[-1]' : ''} 
+               ${isGlitching ? 'animate-glitch-invert' : ''}
+             `}
+              style={{
+                animationDelay: isGlitching ? `${i * 0.5}s` : '0s'
+              }}>
               <div
                 className="absolute inset-0 bg-repeat bg-[length:300px]"
                 style={{

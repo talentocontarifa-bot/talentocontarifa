@@ -23,6 +23,47 @@
   --animate-float: float 4s ease-in-out infinite;
   --animate-marquee: marquee 20s linear infinite;
   --animate-pulse-fast: pulse-fast 0.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-glitch-invert: glitch-invert 4s infinite step-end;
+
+  @keyframes glitch-invert {
+
+    0%,
+    100% {
+      filter: invert(0);
+    }
+
+    5% {
+      filter: invert(1);
+    }
+
+    10% {
+      filter: invert(0);
+    }
+
+    50% {
+      filter: invert(0);
+    }
+
+    55% {
+      filter: invert(1);
+    }
+
+    60% {
+      filter: invert(0);
+    }
+
+    85% {
+      filter: invert(0);
+    }
+
+    90% {
+      filter: invert(1);
+    }
+
+    95% {
+      filter: invert(0);
+    }
+  }
 }
 
 body {
