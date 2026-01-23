@@ -16,6 +16,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Talento con Tarifa | Agencia Irreverente",
   description: "Tu agencia irreverente. Vendes o te vas.",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({

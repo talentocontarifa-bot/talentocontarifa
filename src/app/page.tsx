@@ -96,22 +96,31 @@ export default function Home() {
       {/* Main Content (Z-Index above marquee) */}
       <div className="relative z-10 flex flex-col items-center text-center w-full max-w-4xl mt-12 md:mt-4">
 
-        {/* Floating Glitch Brain (Cerebro WebP) */}
+        {/* Floating Glitch Brain (Cerebro WebP) - Interactive */}
         <motion.div
-          className="relative w-[320px] h-[320px] md:w-[450px] md:h-[450px]"
+          className="relative w-[320px] h-[320px] md:w-[450px] md:h-[450px] cursor-pointer group"
           animate={{ translateY: [-10, 10, -10] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95, rotate: [0, -5, 5, 0] }}
+          onClick={() => {
+            const audio = new Audio('/assets/coin.mp3');
+            audio.play().catch(e => console.error(e));
+          }}
         >
           <div className="relative w-full h-full glitch-wrapper" data-text="CEREBRO">
             <Image
               src="/assets/cerebro.webp"
               alt="Cerebro Talento"
               fill
-              className="object-contain drop-shadow-[0_0_50px_rgba(0,240,255,0.4)] animate-glitch"
+              className="object-contain drop-shadow-[0_0_50px_rgba(0,240,255,0.4)] animate-glitch group-hover:brightness-125 transition-all"
               priority
             />
           </div>
-
+          {/* Click Hint */}
+          <span className="absolute -top-12 left-1/2 -translate-x-1/2 bg-black text-white px-3 py-1 text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-primary/50">
+            DONT TOUCH THE BRAIN!
+          </span>
         </motion.div>
 
         {/* Text Content */}
@@ -139,16 +148,34 @@ export default function Home() {
           </div>
         </div>
 
-        {/* CTA Button */}
+        {/* Radioactive CTA Button */}
         <motion.button
-          whileHover={{ scale: 1.05, filter: "brightness(1.2)" }}
-          whileTap={{ scale: 0.95 }}
-          className="relative group px-10 py-6 mt-6 bg-transparent border-4 border-accent text-accent font-black text-2xl md:text-3xl uppercase tracking-widest overflow-hidden shadow-[0_0_20px_rgba(57,255,20,0.4)]"
+          whileHover={{ scale: 1.1, textShadow: "0 0 8px rgb(0,0,0)" }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => {
+            // Optional: Another sound here?
+          }}
+          className="relative px-12 py-6 mt-8 rounded-full font-black text-2xl md:text-4xl italic tracking-tighter shadow-[0_0_40px_rgba(0,255,100,0.6)] overflow-visible group"
+          style={{
+            background: 'linear-gradient(90deg, #00FF9D 0%, #00F0FF 100%)',
+            color: '#000030',
+            border: '2px solid #fff'
+          }}
         >
-          <span className="absolute inset-0 w-full h-full bg-accent/10 group-hover:bg-accent/20 transition-all"></span>
-          <span className="relative z-10 flex items-center gap-3">
-            Ejecutar Ventas
+          {/* Glitch Artifacts */}
+          <span className="absolute -left-2 top-1/2 w-4 h-1 bg-white animate-pulse"></span>
+          <span className="absolute -right-2 top-1/3 w-3 h-1 bg-primary animate-ping"></span>
+
+          <span className="relative z-10 flex items-center gap-2 drop-shadow-sm">
+            EJECUTAR VENTAS
+            {/* Simple radioactive icon */}
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 animate-spin-slow" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              {/* Replaced clock with nuclear-ish shape if needed, sticking to simple punchy icon for now or standard radioactive symbol if pure svg */}
+            </svg>
           </span>
+
+          <div className="absolute inset-0 rounded-full blur-md bg-green-400 opacity-50 group-hover:opacity-100 animate-pulse-fast"></div>
         </motion.button>
 
         {/* Small White Shield as Footer Closer */}
