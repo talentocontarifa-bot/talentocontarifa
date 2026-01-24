@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Rocket, Brain, Zap, DollarSign, Menu, X, ArrowRight, Star } from 'lucide-react';
+import Image from 'next/image';
+import { Rocket, DollarSign, Menu, X, ArrowRight, Star } from 'lucide-react';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,12 +30,12 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-black flex items-center justify-center transform -rotate-3 hover:rotate-0 transition-transform">
-                <Zap className="text-[#CCFF00]" size={24} />
+              <div className="w-10 h-10 bg-black flex items-center justify-center transform -rotate-3 hover:rotate-0 transition-transform p-2">
+                <Image src="/icon.svg" alt="Icono" width={24} height={24} className="object-contain" />
               </div>
-              <span className="text-2xl font-black tracking-tighter uppercase italic">
-                TALENTO<span className="text-transparent bg-clip-text bg-gradient-to-r from-black to-gray-800">CON</span>TARIFA
-              </span>
+              <div className="relative w-48 h-8 md:w-64 md:h-10 ml-2">
+                <Image src="/assets/horizontal.svg" alt="Talento con Tarifa" fill className="object-contain" />
+              </div>
             </div>
 
             {/* Desktop Nav */}
@@ -113,9 +114,16 @@ const App = () => {
             {/* Abstract visual representation of "The Brain" */}
             <div className="relative w-72 h-72 md:w-96 md:h-96">
               <div className="absolute inset-0 bg-black transform rotate-6 border-4 border-black rounded-full"></div>
-              <div className="absolute inset-0 bg-white transform -rotate-3 border-4 border-black rounded-full flex items-center justify-center overflow-hidden">
-                <Brain size={180} strokeWidth={1.5} className="text-black animate-pulse" />
-                <div className="absolute inset-0 bg-[#CCFF00] mix-blend-multiply opacity-50"></div>
+              <div className="absolute inset-0 bg-white transform -rotate-3 border-4 border-black rounded-full flex items-center justify-center overflow-hidden p-8">
+                <div className="relative w-full h-full">
+                  <Image
+                    src="/assets/cerebro.webp"
+                    alt="Cerebro Agencial"
+                    fill
+                    className="object-contain animate-pulse"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-[#CCFF00] mix-blend-multiply opacity-20"></div>
               </div>
               <div className="absolute -bottom-8 -right-8 bg-white border-4 border-black p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform rotate-12">
                 <p className="font-black text-center text-sm">DON'T TOUCH <br /> THE BRAIN</p>
