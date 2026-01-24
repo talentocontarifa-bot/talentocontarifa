@@ -30,10 +30,18 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
-              <div className="w-16 h-16 bg-[#CCFF00] flex items-center justify-center hover:rotate-0 transition-transform p-2 border-2 border-black">
-                <Image src="/icon.svg" alt="Icono" width={40} height={40} className="object-contain" />
+              <div className="w-12 h-12 bg-black flex items-center justify-center transform -rotate-3 hover:rotate-0 transition-transform p-2 border-2 border-black shadow-[2px_2px_0px_0px_#CCFF00]">
+                {/* Filter to turn the icon Neon Yellow (#CCFF00) */}
+                <Image
+                  src="/icon.svg"
+                  alt="Icono"
+                  width={32}
+                  height={32}
+                  className="object-contain"
+                  style={{ filter: 'invert(82%) sepia(55%) saturate(738%) hue-rotate(24deg) brightness(103%) contrast(104%)' }}
+                />
               </div>
-              <div className="relative w-48 h-12 md:w-80 md:h-20 ml-4">
+              <div className="relative w-40 h-10 md:w-64 md:h-12 ml-2">
                 <Image src="/assets/horizontal.svg" alt="Talento con Tarifa" fill className="object-contain grayscale brightness-0" />
               </div>
             </div>
@@ -112,19 +120,16 @@ const App = () => {
 
           <div className="w-full md:w-1/2 flex justify-center relative">
             {/* Abstract visual representation of "The Brain" */}
-            <div className="relative w-[350px] h-[350px] md:w-[600px] md:h-[600px]">
-              <div className="absolute inset-0 bg-black transform rotate-6 border-4 border-black rounded-full"></div>
-              <div className="absolute inset-0 bg-[#CCFF00] transform -rotate-3 border-4 border-black rounded-full flex items-center justify-center overflow-hidden p-0">
-                <div className="relative w-full h-full scale-[1.3]"> {/* Scale up inner image significantly */}
-                  <Image
-                    src="/assets/cerebro.webp"
-                    alt="Cerebro Agencial"
-                    fill
-                    className="object-contain animate-pulse"
-                  />
-                </div>
-              </div>
-              <div className="absolute -bottom-8 -right-8 bg-white border-4 border-black p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform rotate-12">
+            {/* Free Floating Brain (No Circle) */}
+            <div className="relative w-[280px] h-[280px] md:w-[450px] md:h-[450px] hover:scale-105 transition-transform duration-500">
+              <Image
+                src="/assets/cerebro.webp"
+                alt="Cerebro Agencial"
+                fill
+                className="object-contain drop-shadow-[10px_10px_0px_rgba(0,0,0,1)] animate-float"
+              />
+
+              <div className="absolute -bottom-4 -right-4 bg-white border-4 border-black p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform rotate-6 z-20">
                 <p className="font-black text-center text-sm">DON'T TOUCH <br /> THE BRAIN</p>
               </div>
             </div>
@@ -137,7 +142,10 @@ const App = () => {
         <div className="whitespace-nowrap animate-marquee flex gap-8">
           {[...Array(20)].map((_, i) => (
             <span key={i} className="text-2xl font-black mx-4 flex items-center gap-4">
-              SE RENTA TALENTO <Star fill="white" size={16} />
+              SE RENTA TALENTO
+              <span className="relative w-8 h-8">
+                <Image src="/icon.svg" alt="*" fill className="object-contain brightness-0 invert" />
+              </span>
             </span>
           ))}
         </div>
