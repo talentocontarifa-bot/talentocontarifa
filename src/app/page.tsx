@@ -126,7 +126,8 @@ const App = () => {
                 src="/assets/cerebro.webp"
                 alt="Cerebro Agencial"
                 fill
-                className="object-contain drop-shadow-[10px_10px_0px_rgba(0,0,0,1)] animate-float"
+                className="object-contain animate-float"
+                style={{ filter: "drop-shadow(10px 10px 0px #000) drop-shadow(10px 10px 0px #fff)" }}
               />
 
               <div className="absolute -bottom-4 -right-4 bg-white border-4 border-black p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform rotate-6 z-20">
