@@ -1,241 +1,282 @@
 "use client";
 
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { Facebook, MessageCircle } from "lucide-react";
-import Link from "next/link";
+import React, { useState, useEffect } from 'react';
+import { Rocket, Brain, Zap, DollarSign, Menu, X, ArrowRight, Star } from 'lucide-react';
 
-export default function Home() {
+const App = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Handle scroll for navbar style
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: 'PAQUETES', href: '#paquetes' },
+    { name: 'ORIENTACIÓN', href: '#orientacion' },
+    { name: 'MANIFIESTO', href: '#manifiesto' },
+  ];
+
   return (
-    <main className="min-h-screen bg-radial-blue relative overflow-hidden flex flex-col items-center justify-center p-4">
-
-      {/* Background Grunge Pattern - Static Tiled Glitch Effect 
-          Deterministic "failure" effect: some tiles inverted/flipped based on index
-      */}
-      <div className="absolute inset-0 z-0 opacity-30 mix-blend-multiply pointer-events-none grid grid-cols-4 grid-rows-4 overflow-hidden">
-        {Array(16).fill(0).map((_, i) => {
-          // Deterministic Logic for "Random" Glitches so it matches server/client
-          const isInverted = i === 3 || i === 7 || i === 10 || i === 12; // Static Inverted
-          const isFlipped = i === 1 || i === 6 || i === 11 || i === 15; // Static Flipped
-          const isGlitching = i === 2 || i === 5 || i === 9 || i === 14; // Animated Glitch Invert
-
-          return (
-            <div key={i} className={`relative w-full h-full overflow-hidden 
-               ${isInverted ? 'invert hue-rotate-90' : ''} 
-               ${isFlipped ? 'scale-x-[-1]' : ''} 
-               ${isGlitching ? 'animate-glitch-invert' : ''}
-             `}
-              style={{
-                animationDelay: isGlitching ? `${i * 0.5}s` : '0s'
-              }}>
-              <div
-                className="absolute inset-0 bg-repeat bg-[length:300px]"
-                style={{
-                  backgroundImage: 'url("/assets/grunge_pattern.webp")',
-                }}
-              ></div>
+    <div className="min-h-screen bg-[#F0F0F0] font-sans text-black selection:bg-black selection:text-[#CCFF00]">
+      {/* Navigation */}
+      <nav className={`fixed w-full z-50 transition-all duration-300 border-b-4 border-black ${scrolled ? 'bg-white py-2' : 'bg-[#CCFF00] py-4'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center space-x-2">
+              <div className="w-10 h-10 bg-black flex items-center justify-center transform -rotate-3 hover:rotate-0 transition-transform">
+                <Zap className="text-[#CCFF00]" size={24} />
+              </div>
+              <span className="text-2xl font-black tracking-tighter uppercase italic">
+                TALENTO<span className="text-transparent bg-clip-text bg-gradient-to-r from-black to-gray-800">CON</span>TARIFA
+              </span>
             </div>
-          )
-        })}
-      </div>
 
-      {/* Layer 1: Marquee Background (Fondo Sólido - Z-0) */}
-      <div className="absolute inset-0 z-0 flex flex-col justify-center items-center mix-blend-exclusion pointer-events-none opacity-40">
-        <div className="w-[150%] -rotate-12 space-y-4">
+            {/* Desktop Nav */}
+            <div className="hidden md:flex items-center space-x-8">
+              {navLinks.map((link) => (
+                <a key={link.name} href={link.href} className="font-black text-lg hover:underline decoration-4 underline-offset-4 decoration-black">
+                  {link.name}
+                </a>
+              ))}
+              <button className="bg-black text-white px-6 py-2 font-bold border-2 border-transparent hover:bg-white hover:text-black hover:border-black hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all">
+                EJECUTAR VENTAS
+              </button>
+            </div>
 
-          {/* Row 1 */}
-          <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline">
-            {Array(20).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`font-black tracking-tighter text-white/50 
-                ${i % 3 === 0 ? 'text-4xl md:text-6xl font-serif italic' : i % 3 === 1 ? 'text-3xl md:text-5xl font-mono' : 'text-5xl md:text-7xl font-sans'}
-              `}>
-                {txt}
-              </span>
-            ))}
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 border-2 border-black bg-white hover:bg-gray-100">
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
-
-          {/* Row 2 (Reverse) */}
-          <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline" style={{ animationDirection: 'reverse' }}>
-            {Array(20).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`font-black tracking-tighter text-white/50 
-                 ${i % 4 === 0 ? 'text-6xl md:text-8xl font-sans italic' : i % 4 === 1 ? 'text-4xl md:text-6xl font-serif' : 'text-5xl md:text-7xl font-mono'}
-              `}>
-                {txt}
-              </span>
-            ))}
-          </div>
-
-          {/* Row 3 */}
-          <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline">
-            {Array(20).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`font-black tracking-tighter text-white/50 
-                 ${i % 5 === 0 ? 'text-4xl md:text-6xl font-mono italic' : i % 5 === 1 ? 'text-5xl md:text-7xl font-sans' : 'text-3xl md:text-5xl font-serif'}
-              `}>
-                {txt}
-              </span>
-            ))}
-          </div>
-
-        </div>
-      </div>
-
-      {/* Layer 2: Marquee Overlay (Holograma Rayos-X - Z-40) 
-          Este es el que "atraviesa" el cerebro visualmente.
-      */}
-      <div className="absolute inset-0 z-0 flex flex-col justify-center items-center pointer-events-none mix-blend-exclusion">
-        <div className="w-[150%] -rotate-12 space-y-4">
-
-          {/* Row 1 */}
-          <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline">
-            {Array(20).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`font-black tracking-tighter text-transparent 
-                ${i % 3 === 0 ? 'text-4xl md:text-6xl font-serif italic' : i % 3 === 1 ? 'text-3xl md:text-5xl font-mono' : 'text-5xl md:text-7xl font-sans'}
-              `}
-                style={{ WebkitTextStroke: '1px rgba(255, 255, 255, 0.8)' }}
-              >
-                {txt}
-              </span>
-            ))}
-          </div>
-
-          {/* Row 2 (Reverse) */}
-          <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline" style={{ animationDirection: 'reverse' }}>
-            {Array(20).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`font-black tracking-tighter text-transparent 
-                 ${i % 4 === 0 ? 'text-6xl md:text-8xl font-sans italic' : i % 4 === 1 ? 'text-4xl md:text-6xl font-serif' : 'text-5xl md:text-7xl font-mono'}
-              `}
-                style={{ WebkitTextStroke: '2px rgba(255, 255, 255, 0.8)' }}
-              >
-                {txt}
-              </span>
-            ))}
-          </div>
-
-          {/* Row 3 */}
-          <div className="animate-marquee whitespace-nowrap flex gap-12 items-baseline">
-            {Array(20).fill("SE RENTA").map((txt, i) => (
-              <span key={i} className={`font-black tracking-tighter text-transparent 
-                 ${i % 5 === 0 ? 'text-4xl md:text-6xl font-mono italic' : i % 5 === 1 ? 'text-5xl md:text-7xl font-sans' : 'text-3xl md:text-5xl font-serif'}
-              `}
-                style={{ WebkitTextStroke: '1px rgba(255, 255, 255, 0.8)' }}
-              >
-                {txt}
-              </span>
-            ))}
-          </div>
-
-        </div>
-      </div>
-
-      {/* Navbar */}
-      <nav className="absolute top-0 w-full flex justify-between items-center px-6 py-6 z-50">
-        <div className="relative w-48 h-12">
-          {/* Using Horizontal Logo SVG - White Filter */}
-          <Image
-            src="/assets/horizontal.svg"
-            alt="Talento con Tarifa Logo"
-            fill
-            className="object-contain object-left brightness-0 invert"
-          />
         </div>
 
-        <div className="flex gap-4 text-white items-center">
-          <Link href="#" className="hidden md:block text-sm font-bold tracking-widest uppercase hover:text-primary transition-colors hover:shadow-[0_0_10px_#00f0ff] hover:text-stroke-primary mr-4">Paquetes</Link>
-          <Link href="#" className="hidden md:block text-sm font-bold tracking-widest uppercase hover:text-primary transition-colors hover:shadow-[0_0_10px_#00f0ff] hover:text-stroke-primary mr-4">Orientación</Link>
-
-          {/* Social Icons moved to Header */}
-          <Link href="https://www.facebook.com/talentocontarifa" target="_blank" className="hover:scale-110 transition-transform">
-            <Facebook className="text-white w-6 h-6 md:w-8 md:h-8 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" />
-          </Link>
-          <Link href="https://wa.me/5219845828658" target="_blank" className="hover:scale-110 transition-transform">
-            <MessageCircle className="text-white w-6 h-6 md:w-8 md:h-8 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" />
-          </Link>
-        </div>
+        {/* Mobile Nav */}
+        {isMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 w-full bg-black text-white border-b-4 border-black">
+            <div className="px-4 py-6 space-y-4">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="block text-2xl font-black hover:text-[#CCFF00] tracking-wider"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.name}
+                </a>
+              ))}
+              <button className="w-full mt-4 bg-[#CCFF00] text-black px-6 py-4 font-black text-xl border-2 border-white hover:bg-white transition-colors">
+                EJECUTAR VENTAS !!!
+              </button>
+            </div>
+          </div>
+        )}
       </nav>
 
-      {/* Main Content (Z-Index above marquee) */}
-      <div className="relative z-10 flex flex-col items-center text-center w-full max-w-4xl mt-12 md:mt-4">
+      {/* Hero Section */}
+      <header className="pt-32 pb-16 md:pt-48 md:pb-32 px-4 relative overflow-hidden bg-[#CCFF00]">
+        {/* Decorative Grid Background */}
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle, #000 2px, transparent 2px)', backgroundSize: '24px 24px' }}></div>
 
-        {/* Floating Glitch Brain (Cerebro WebP) - Interactive */}
-        <motion.div
-          className="relative w-[320px] h-[320px] md:w-[450px] md:h-[450px] cursor-pointer group"
-          animate={{ translateY: [-10, 10, -10] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95, rotate: [0, -5, 5, 0] }}
-          onClick={(e) => {
-            // Create audio on click to ensure browser allows it
-            const audio = new Audio('/assets/coin.mp3');
-            audio.volume = 1.0;
-            audio.play().catch(console.error);
-          }}
-        >
-          <div className="relative w-full h-full glitch-wrapper" data-text="CEREBRO">
-            <Image
-              src="/assets/cerebro.webp"
-              alt="Cerebro Talento"
-              fill
-              sizes="(max-width: 768px) 320px, 450px"
-              className="object-contain drop-shadow-[0_0_50px_rgba(0,240,255,0.4)] animate-glitch group-hover:brightness-125 transition-all"
-              priority
-            />
-          </div>
-          {/* Click Hint */}
-          <span className="absolute -top-12 left-1/2 -translate-x-1/2 bg-black text-white px-3 py-1 text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-primary/50">
-            DONT TOUCH THE BRAIN!
-          </span>
-        </motion.div>
-
-        {/* Text Content */}
-        <div className="mt-8 mb-4 space-y-4 max-w-3xl relative z-20 px-4">
-          {/* Boxed Text Block */}
-          <div className="bg-black p-6 md:p-8 transform -skew-x-3 shadow-[10px_10px_0_rgba(255,0,60,0.5)] border border-white/10">
-            <p className="text-xl md:text-3xl text-white font-medium italic leading-relaxed transform skew-x-3">
-              Lo único que nos importa es que tu <span className="text-secondary font-black">SERVICIO</span> o
-              <span className="text-secondary font-black block md:inline"> PRODUCTO</span> se vea <span className="bg-accent text-black px-2 font-black transform -skew-x-12 inline-block shadow-[4px_4px_0_rgba(0,0,0,1)]">FREGÓN</span>,
-            </p>
-            <p className="text-xl md:text-3xl text-white font-medium italic mt-2 transform skew-x-3">
-              que tú te veas <span className="bg-accent text-black px-2 font-bold transform -skew-x-12 inline-block shadow-[4px_4px_0_rgba(0,0,0,1)]">FREGÓN</span> y que
-            </p>
-          </div>
-
-          <div className="relative mt-6">
-            <div className="text-5xl md:text-8xl font-black italic text-secondary tracking-tighter leading-none glitch-wrapper" data-text="VENDAS, VENDAS,">
-              VENDAS, VENDAS,
+        <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row items-center gap-12">
+          <div className="w-full md:w-1/2 space-y-8">
+            <div className="inline-block bg-black text-white px-4 py-1 font-bold text-sm transform -rotate-2">
+              AGENCIA IRREVERENTE
             </div>
-            <div className="block mt-2">
-              <div className="text-6xl md:text-9xl font-black italic text-secondary tracking-tighter leading-none glitch-wrapper" data-text="VENDAS!!!">
-                VENDAS!!!
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-none tracking-tighter">
+              TU MARCA <br />
+              <span className="bg-white px-2 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] text-black inline-block transform rotate-1 my-2">SE VE FREGÓN</span> <br />
+              O NO SE VENDE.
+            </h1>
+            <p className="text-xl md:text-2xl font-bold max-w-lg border-l-8 border-black pl-6 py-2">
+              Lo único que nos importa es que vendas, vendas y VENDAS. Sin rodeos.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <button className="bg-black text-[#CCFF00] px-8 py-4 text-xl font-black border-4 border-black hover:bg-transparent hover:text-black hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center justify-center gap-2 group">
+                <Rocket className="group-hover:-translate-y-1 transition-transform" />
+                QUIERO VENDER
+              </button>
+              <button className="bg-white text-black px-8 py-4 text-xl font-black border-4 border-black hover:bg-gray-100 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all">
+                VER PAQUETES
+              </button>
+            </div>
+          </div>
+
+          <div className="w-full md:w-1/2 flex justify-center relative">
+            {/* Abstract visual representation of "The Brain" */}
+            <div className="relative w-72 h-72 md:w-96 md:h-96">
+              <div className="absolute inset-0 bg-black transform rotate-6 border-4 border-black rounded-full"></div>
+              <div className="absolute inset-0 bg-white transform -rotate-3 border-4 border-black rounded-full flex items-center justify-center overflow-hidden">
+                <Brain size={180} strokeWidth={1.5} className="text-black animate-pulse" />
+                <div className="absolute inset-0 bg-[#CCFF00] mix-blend-multiply opacity-50"></div>
+              </div>
+              <div className="absolute -bottom-8 -right-8 bg-white border-4 border-black p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform rotate-12">
+                <p className="font-black text-center text-sm">DON'T TOUCH <br /> THE BRAIN</p>
               </div>
             </div>
           </div>
         </div>
+      </header>
 
-        {/* Outline/Wireframe CTA Button (Reverted but Rounded) */}
-        <motion.button
-          whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(57,255,20,0.6)" }}
-          whileTap={{ scale: 0.95 }}
-          className="relative px-12 py-6 mt-8 rounded-full bg-transparent border-4 border-accent text-accent font-black text-2xl md:text-3xl uppercase tracking-widest overflow-hidden shadow-[0_0_20px_rgba(57,255,20,0.4)] group"
-        >
-          <span className="absolute inset-0 w-full h-full bg-accent/10 group-hover:bg-accent/20 transition-all"></span>
-          <span className="relative z-10 flex items-center gap-3">
-            Ejecutar Ventas
-          </span>
-        </motion.button>
-
-        {/* Small White Shield as Footer Closer */}
-        <div className="mt-16 opacity-50 hover:opacity-100 transition-opacity">
-          <Image
-            src="/assets/escudo.svg"
-            alt="Talento Shield"
-            width={60}
-            height={60}
-            className="brightness-0 invert"
-          />
+      {/* Marquee Strip */}
+      <div className="bg-black text-white py-4 overflow-hidden border-y-4 border-black rotate-1 scale-105 z-20 relative">
+        <div className="whitespace-nowrap animate-marquee flex gap-8">
+          {[...Array(20)].map((_, i) => (
+            <span key={i} className="text-2xl font-black mx-4 flex items-center gap-4">
+              SE RENTA TALENTO <Star fill="white" size={16} />
+            </span>
+          ))}
         </div>
-
+        <style>{`
+          @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .animate-marquee {
+            animation: marquee 20s linear infinite;
+          }
+        `}</style>
       </div>
 
-    </main>
+      {/* Philosophy Section */}
+      <section id="manifiesto" className="py-20 px-4 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="order-2 md:order-1 relative">
+              <div className="border-4 border-black p-8 bg-[#F0F0F0] shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
+                <h3 className="text-3xl font-black mb-4">¿POR QUÉ NOSOTROS?</h3>
+                <ul className="space-y-4">
+                  <li className="flex items-start gap-3">
+                    <div className="bg-black text-[#CCFF00] p-1 mt-1"><ArrowRight size={16} /></div>
+                    <span className="font-bold text-lg">Odiamos el diseño aburrido.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="bg-black text-[#CCFF00] p-1 mt-1"><ArrowRight size={16} /></div>
+                    <span className="font-bold text-lg">Tu producto merece verse increíble.</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <div className="bg-black text-[#CCFF00] p-1 mt-1"><ArrowRight size={16} /></div>
+                    <span className="font-bold text-lg">No vendemos humo, vendemos resultados.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className="order-1 md:order-2">
+              <h2 className="text-5xl md:text-6xl font-black leading-tight mb-6 uppercase">
+                Hacemos que tu servicio se vea <span className="bg-[#CCFF00] px-2 italic">FREGÓN</span>.
+              </h2>
+              <p className="text-xl font-medium leading-relaxed mb-6">
+                No somos una agencia tradicional con trajes y corbatas. Somos el cerebro creativo que necesitas para dejar de ser invisible.
+              </p>
+              <div className="flex items-center gap-4">
+                <div className="h-1 flex-1 bg-black"></div>
+                <DollarSign size={48} className="text-black" />
+                <div className="h-1 flex-1 bg-black"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section id="paquetes" className="py-24 px-4 bg-black text-white relative">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl md:text-7xl font-black text-white mb-4 tracking-tighter">
+              PAQUETES <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#CCFF00] to-green-500">DEVASTADORES</span>
+            </h2>
+            <p className="text-gray-400 text-xl font-bold max-w-2xl mx-auto">
+              Elige tu arma. Todo lo que necesitas para dominar tu mercado sin vender un riñón.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Card 1 */}
+            <div className="bg-white text-black p-8 border-4 border-[#CCFF00] hover:translate-y-[-10px] transition-transform duration-300 relative group">
+              <div className="absolute -top-6 -right-6 bg-[#CCFF00] text-black px-4 py-2 font-black border-2 border-black transform rotate-12 group-hover:rotate-0 transition-transform">
+                BÁSICO
+              </div>
+              <h3 className="text-3xl font-black mb-4 uppercase">Despegue</h3>
+              <div className="text-5xl font-black mb-6">$XX<span className="text-2xl font-bold">.00</span></div>
+              <ul className="space-y-3 mb-8">
+                <li className="font-bold border-b border-gray-200 pb-2">Branding Esencial</li>
+                <li className="font-bold border-b border-gray-200 pb-2">3 Post para Redes</li>
+                <li className="font-bold border-b border-gray-200 pb-2">Asesoría de Impacto</li>
+              </ul>
+              <button className="w-full bg-black text-white py-4 font-black text-lg border-2 border-black hover:bg-[#CCFF00] hover:text-black transition-colors">
+                LO QUIERO
+              </button>
+            </div>
+
+            {/* Card 2 (Featured) */}
+            <div className="bg-[#CCFF00] text-black p-8 border-4 border-white transform md:-translate-y-8 shadow-[0px_0px_40px_rgba(204,255,0,0.3)] relative">
+              <div className="absolute top-0 left-0 w-full bg-black text-white text-center py-1 font-bold uppercase tracking-widest text-sm">
+                Más Popular
+              </div>
+              <h3 className="text-4xl font-black mb-4 uppercase mt-6">Dominio</h3>
+              <div className="text-6xl font-black mb-6">$XX<span className="text-3xl font-bold">.00</span></div>
+              <ul className="space-y-3 mb-8">
+                <li className="font-black border-b border-black pb-2">Rebranding Total</li>
+                <li className="font-black border-b border-black pb-2">Estrategia de Ventas</li>
+                <li className="font-black border-b border-black pb-2">Sitio Web One-Page</li>
+                <li className="font-black border-b border-black pb-2">Campañas Ads</li>
+              </ul>
+              <button className="w-full bg-white text-black py-4 font-black text-lg border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all">
+                CONTRATAR AHORA
+              </button>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-white text-black p-8 border-4 border-[#CCFF00] hover:translate-y-[-10px] transition-transform duration-300 relative group">
+              <h3 className="text-3xl font-black mb-4 uppercase">Imperio</h3>
+              <div className="text-5xl font-black mb-6">$XX<span className="text-2xl font-bold">.00</span></div>
+              <ul className="space-y-3 mb-8">
+                <li className="font-bold border-b border-gray-200 pb-2">Todo incluido</li>
+                <li className="font-bold border-b border-gray-200 pb-2">Consultoría 24/7</li>
+                <li className="font-bold border-b border-gray-200 pb-2">Desarrollo a Medida</li>
+              </ul>
+              <button className="w-full bg-black text-white py-4 font-black text-lg border-2 border-black hover:bg-[#CCFF00] hover:text-black transition-colors">
+                COTIZAR
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Footer */}
+      <footer className="bg-[#CCFF00] pt-20 pb-10 px-4 border-t-4 border-black">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-6xl md:text-8xl font-black text-black mb-8 leading-none">
+            ¿LISTO PARA <br /> VENDER?
+          </h2>
+          <div className="flex flex-col md:flex-row justify-center gap-6 mb-16">
+            <button className="bg-black text-white px-10 py-5 text-2xl font-black border-4 border-transparent hover:bg-white hover:text-black hover:border-black hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all">
+              WHATSAPP
+            </button>
+            <button className="bg-transparent text-black px-10 py-5 text-2xl font-black border-4 border-black hover:bg-black hover:text-[#CCFF00] transition-all">
+              EMAIL
+            </button>
+          </div>
+
+          <div className="border-t-4 border-black pt-8 flex flex-col md:flex-row justify-between items-center gap-4 font-bold">
+            <p>Talento con Tarifa © {new Date().getFullYear()}</p>
+            <div className="flex gap-6">
+              <a href="#" className="hover:underline">Instagram</a>
+              <a href="#" className="hover:underline">Facebook</a>
+              <a href="#" className="hover:underline">TikTok</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
-}
+};
+
+export default App;
