@@ -38,7 +38,7 @@ const App = () => {
                   width={32}
                   height={32}
                   className="object-contain"
-                  style={{ filter: 'invert(82%) sepia(55%) saturate(738%) hue-rotate(24deg) brightness(103%) contrast(104%)' }}
+                  style={{ filter: 'brightness(0) saturate(100%) invert(76%) sepia(59%) saturate(637%) hue-rotate(66deg) brightness(101%) contrast(101%)' }}
                 />
               </div>
               <div className="relative w-40 h-10 md:w-64 md:h-12 ml-2">
@@ -126,8 +126,7 @@ const App = () => {
                 src="/assets/cerebro.webp"
                 alt="Cerebro Agencial"
                 fill
-                className="object-contain animate-float"
-                style={{ filter: "drop-shadow(10px 10px 0px #000) drop-shadow(10px 10px 0px #fff)" }}
+                className="object-contain drop-shadow-[10px_10px_0px_rgba(0,0,0,1)] animate-float"
               />
 
               <div className="absolute -bottom-4 -right-4 bg-white border-4 border-black p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform rotate-6 z-20">
@@ -193,7 +192,9 @@ const App = () => {
               </p>
               <div className="flex items-center gap-4">
                 <div className="h-1 flex-1 bg-black"></div>
-                <DollarSign size={48} className="text-black" />
+                <div className="relative w-12 h-12">
+                  <Image src="/assets/escudo.svg" alt="Escudo" fill className="object-contain brightness-0" />
+                </div>
                 <div className="h-1 flex-1 bg-black"></div>
               </div>
             </div>
