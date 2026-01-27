@@ -220,12 +220,12 @@ const BentoGrid = () => (
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
           <div>
             <h2 className="text-black text-5xl md:text-7xl font-black uppercase leading-none tracking-tighter">
-              NUESTRO <br /> ARSENAL
+              ESTÉTICA <br /> ES MUNICIÓN
             </h2>
           </div>
           <p className="text-xl font-medium max-w-md text-gray-600 border-l-4 border-black pl-4">
-            Herramientas diseñadas para una sola cosa: <br />
-            <strong className="text-black">Destruir a tu competencia.</strong>
+            Tenemos la mala costumbre,<br />
+            <strong className="text-black">de hacerlo personal.</strong>
           </p>
         </div>
       </FadeIn>
@@ -348,7 +348,15 @@ const Process = () => (
                   <p className="font-bold border-t-2 border-black pt-4 mt-4">Sin ruido. Sin piedad. Sin excusas.</p>
                 </div>
                 <div className="mt-8 flex justify-end">
-                  <Shield size={32} className="text-black" />
+                  <div className="relative w-8 h-8">
+                    <Image
+                      src="/icon.svg"
+                      alt="Seal"
+                      fill
+                      className="object-contain"
+                      style={{ filter: 'brightness(0)' }}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
