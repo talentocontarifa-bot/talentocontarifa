@@ -551,7 +551,14 @@ ${formData.audience}
             <aside className="hidden md:flex flex-col w-96 border-r-4 border-black bg-white z-20 relative shadow-[4px_0px_0px_0px_rgba(0,0,0,0.1)]">
                 <div className="p-8 border-b-4 border-black bg-[#CCFF00]">
                     <div className="flex items-center gap-3 text-black">
-                        <div className="border-2 border-black p-1 bg-black text-[#CCFF00]"><Cpu size={32} /></div>
+                        <div className="p-1 text-[#CCFF00] w-12 h-12 relative">
+                            <Image
+                                src="/icon.svg"
+                                alt="Logo"
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
                         <div>
                             <span className="font-black text-2xl tracking-tighter block leading-none">TALENTO<br />CON TARIFA</span>
                         </div>
