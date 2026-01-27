@@ -113,7 +113,7 @@ export default function ContactForm() {
 ${formData.pain}
 ----------------------------------------`.trim();
 
-        return `https://wa.me/5219845828658?text=${encodeURIComponent(message)}`;
+        return `https://wa.me/5215644982624?text=${encodeURIComponent(message)}`;
     };
 
     if (!mounted) return null;
@@ -126,12 +126,13 @@ ${formData.pain}
             <aside className="w-full md:w-[400px] border-b-4 md:border-b-0 md:border-r-4 border-black bg-white z-20 relative flex flex-col justify-between shrink-0">
                 <div className="p-8 border-b-4 border-black bg-[#CCFF00]">
                     <div className="flex items-center gap-3 text-black">
-                        <div className="p-1 text-[#CCFF00] w-12 h-12 relative">
+                        <div className="p-1 text-black w-12 h-12 relative">
                             <Image
                                 src="/icon.svg"
                                 alt="Logo"
                                 fill
                                 className="object-contain"
+                                style={{ filter: 'brightness(0)' }}
                             />
                         </div>
                         <div>
@@ -152,11 +153,11 @@ ${formData.pain}
                     <div className="space-y-4 pt-8">
                         <div className="flex items-center gap-3 font-bold">
                             <div className="bg-black text-[#CCFF00] p-2"><Mail size={20} /></div>
-                            <span>contacto@talentocontarifa.lat</span>
+                            <span>talentocontarifa@gmail.com</span>
                         </div>
                         <div className="flex items-center gap-3 font-bold">
                             <div className="bg-black text-[#CCFF00] p-2"><Phone size={20} /></div>
-                            <span>+52 1 984 582 8658</span>
+                            <span>+52 1 564 498 2624</span>
                         </div>
                     </div>
                 </div>
