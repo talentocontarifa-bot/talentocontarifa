@@ -117,19 +117,16 @@ const Hero = () => {
 
           <FadeIn delay={0.2}>
             <p className="text-xl md:text-2xl font-medium text-gray-700 max-w-lg leading-relaxed">
-              La estética no es un adorno. Es una jerarquía.
-              Elevamos su marca del <span className="font-bold bg-[#CCFF00]/50 px-1">ruido a la autoridad.</span>
+              El mercado es un campo de batalla. La estética es su calibre.
+              Elevamos su marca de <span className="font-bold bg-[#CCFF00]/50 px-1">civil a comandante.</span>
             </p>
           </FadeIn>
 
           <FadeIn delay={0.3}>
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
-              <button className="h-16 px-10 bg-[#CCFF00] text-black font-black text-lg uppercase tracking-wider border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[6px] hover:translate-y-[6px] transition-all flex items-center justify-center gap-2">
-                QUIERO VENDER <ArrowRight strokeWidth={3} />
-              </button>
-              <button className="h-16 px-10 bg-transparent text-black font-black text-lg uppercase tracking-wider border-2 border-black hover:bg-black hover:text-white transition-colors flex items-center justify-center">
-                NUESTRO LEGADO
-              </button>
+              <a href="/form" className="h-16 px-10 bg-[#CCFF00] text-black font-black text-lg uppercase tracking-wider border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[6px] hover:translate-y-[6px] transition-all flex items-center justify-center gap-2">
+                INICIAR MISIÓN <ArrowRight strokeWidth={3} />
+              </a>
             </div>
           </FadeIn>
         </div>
@@ -173,7 +170,7 @@ const Marquee = () => (
     <div className="flex whitespace-nowrap animate-marquee">
       {[...Array(10)].map((_, i) => (
         <div key={i} className="flex items-center gap-8 mx-4">
-          <span className="text-4xl font-black tracking-tight">AUDACIA CALCULADA</span>
+          <span className="text-4xl font-black tracking-tight">VIOLENCIA ESTÉTICA</span>
           <div className="relative w-8 h-8">
             {/* 
                             Icon applied with CSS filter to match the Neon Volt color (#CCFF00).
@@ -189,7 +186,7 @@ const Marquee = () => (
               style={{ filter: 'brightness(0) saturate(100%) invert(76%) sepia(59%) saturate(637%) hue-rotate(66deg) brightness(101%) contrast(101%)' }}
             />
           </div>
-          <span className="text-4xl text-transparent [-webkit-text-stroke:1px_#CCFF00] font-black tracking-tight">ELEGANCIA RENTABLE</span>
+          <span className="text-4xl text-transparent [-webkit-text-stroke:1px_#CCFF00] font-black tracking-tight">DOMINIO TOTAL</span>
           <div className="relative w-8 h-8">
             <Image
               src="/icon.svg"
@@ -329,10 +326,36 @@ const Process = () => (
         </div>
         <div className="relative h-[600px] border-2 border-black bg-white p-4 hidden lg:block shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
           <div className="bg-gray-100 h-full w-full flex items-center justify-center overflow-hidden relative">
-            <BarChart size={200} className="text-gray-300 absolute" />
-            <div className="relative z-10 text-center bg-black text-white p-8 max-w-xs rotate-[-2deg]">
-              <p className="font-black text-2xl uppercase mb-2">RESULTADOS</p>
-              <div className="text-6xl font-black text-[#CCFF00]">10X</div>
+            <Crosshair size={200} className="text-gray-300 absolute opacity-20" />
+            <div className="relative z-10 w-full max-w-sm">
+              <div className="bg-black text-[#CCFF00] p-4 font-black uppercase text-xl flex justify-between items-center mb-4">
+                <span>STATUS DE MISIÓN</span>
+                <div className="w-3 h-3 bg-[#CCFF00] rounded-full animate-pulse"></div>
+              </div>
+              <div className="bg-white border-2 border-black p-8 space-y-6">
+                <div className="flex items-center justify-between border-b-2 border-gray-100 pb-2">
+                  <span className="font-bold">OBJETIVO PRIMARIO</span>
+                  <span className="font-black text-[#CCFF00] bg-black px-2">DOMINIO</span>
+                </div>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Check className="text-[#CCFF00] bg-black p-1 rounded-sm" size={20} />
+                    <span className="font-mono text-sm tracking-wider">INCREMENTO DE VENTAS</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Check className="text-[#CCFF00] bg-black p-1 rounded-sm" size={20} />
+                    <span className="font-mono text-sm tracking-wider">POSICIONAMIENTO DE AUTORIDAD</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Check className="text-[#CCFF00] bg-black p-1 rounded-sm" size={20} />
+                    <span className="font-mono text-sm tracking-wider">RETENCIÓN DE USUARIOS</span>
+                  </div>
+                </div>
+                <div className="mt-6 pt-4 border-t-2 border-black">
+                  <p className="text-xs font-mono text-gray-500 mb-1">PROBABILIDAD DE ÉXITO</p>
+                  <div className="text-4xl font-black">ASEGURADA</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
