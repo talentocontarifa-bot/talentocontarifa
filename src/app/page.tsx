@@ -117,8 +117,8 @@ const Hero = () => {
 
           <FadeIn delay={0.2}>
             <p className="text-xl md:text-2xl font-medium text-gray-700 max-w-lg leading-relaxed">
-              El mercado es un campo de batalla. La estética es su calibre.
-              Elevamos su marca de <span className="font-bold bg-[#CCFF00]/50 px-1">civil a comandante.</span>
+              El mercado es un campo de batalla. <br />
+              Queremos ser tu <span className="font-bold bg-[#CCFF00]/50 px-1">ventaja injusta.</span>
             </p>
           </FadeIn>
 
@@ -168,16 +168,10 @@ const Hero = () => {
 const Marquee = () => (
   <div className="bg-black text-[#CCFF00] border-y-4 border-black py-4 overflow-hidden rotate-1 scale-[1.02] relative z-20">
     <div className="flex whitespace-nowrap animate-marquee">
-      {[...Array(10)].map((_, i) => (
+      {[...Array(6)].map((_, i) => (
         <div key={i} className="flex items-center gap-8 mx-4">
-          <span className="text-4xl font-black tracking-tight">VIOLENCIA ESTÉTICA</span>
+          <span className="text-4xl font-black tracking-tight">RÁPIDOS</span>
           <div className="relative w-8 h-8">
-            {/* 
-                            Icon applied with CSS filter to match the Neon Volt color (#CCFF00).
-                            Since the icon is black, we first invert it to white, then apply hue rotation.
-                            Filter: sepia(100%) saturate(1000%) hue-rotate(40deg) approximates yellow/green.
-                            Using the precise filter from V1: 
-                        */}
             <Image
               src="/icon.svg"
               alt="Icon"
@@ -186,7 +180,17 @@ const Marquee = () => (
               style={{ filter: 'brightness(0) saturate(100%) invert(76%) sepia(59%) saturate(637%) hue-rotate(66deg) brightness(101%) contrast(101%)' }}
             />
           </div>
-          <span className="text-4xl text-transparent [-webkit-text-stroke:1px_#CCFF00] font-black tracking-tight">DOMINIO TOTAL</span>
+          <span className="text-4xl text-transparent [-webkit-text-stroke:1px_#CCFF00] font-black tracking-tight">RAPACES</span>
+          <div className="relative w-8 h-8">
+            <Image
+              src="/icon.svg"
+              alt="Icon"
+              fill
+              className="object-contain drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+              style={{ filter: 'brightness(0) saturate(100%) invert(76%) sepia(59%) saturate(637%) hue-rotate(66deg) brightness(101%) contrast(101%)' }}
+            />
+          </div>
+          <span className="text-4xl font-black tracking-tight">ASTUTOS</span>
           <div className="relative w-8 h-8">
             <Image
               src="/icon.svg"
@@ -326,34 +330,25 @@ const Process = () => (
         </div>
         <div className="relative h-[600px] border-2 border-black bg-white p-4 hidden lg:block shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]">
           <div className="bg-gray-100 h-full w-full flex items-center justify-center overflow-hidden relative">
-            <Crosshair size={200} className="text-gray-300 absolute opacity-20" />
+            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-black to-transparent"></div>
             <div className="relative z-10 w-full max-w-sm">
               <div className="bg-black text-[#CCFF00] p-4 font-black uppercase text-xl flex justify-between items-center mb-4">
-                <span>STATUS DE MISIÓN</span>
+                <span>ARCHIVO CONFIDENCIAL</span>
                 <div className="w-3 h-3 bg-[#CCFF00] rounded-full animate-pulse"></div>
               </div>
-              <div className="bg-white border-2 border-black p-8 space-y-6">
-                <div className="flex items-center justify-between border-b-2 border-gray-100 pb-2">
-                  <span className="font-bold">OBJETIVO PRIMARIO</span>
-                  <span className="font-black text-[#CCFF00] bg-black px-2">DOMINIO</span>
+              <div className="bg-white border-2 border-black p-8 relative">
+                <div className="absolute -top-3 -left-3 bg-[#CCFF00] text-black text-xs font-bold px-2 py-1 rotate-[-5deg] border border-black uppercase">
+                  Solo Personal Autorizado
                 </div>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <Check className="text-[#CCFF00] bg-black p-1 rounded-sm" size={20} />
-                    <span className="font-mono text-sm tracking-wider">INCREMENTO DE VENTAS</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Check className="text-[#CCFF00] bg-black p-1 rounded-sm" size={20} />
-                    <span className="font-mono text-sm tracking-wider">POSICIONAMIENTO DE AUTORIDAD</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Check className="text-[#CCFF00] bg-black p-1 rounded-sm" size={20} />
-                    <span className="font-mono text-sm tracking-wider">RETENCIÓN DE USUARIOS</span>
-                  </div>
+                <h3 className="font-black text-3xl uppercase mb-6 leading-none">NUESTRO MANIFIESTO</h3>
+                <div className="space-y-4 font-mono font-medium text-sm leading-relaxed text-gray-800">
+                  <p>Mercenarios del marketing.</p>
+                  <p>Rápidos, rapaces y sigilosos.</p>
+                  <p>Nos vendemos al mejor postor y entregamos resultados tangibles.</p>
+                  <p className="font-bold border-t-2 border-black pt-4 mt-4">Sin ruido. Sin piedad. Sin excusas.</p>
                 </div>
-                <div className="mt-6 pt-4 border-t-2 border-black">
-                  <p className="text-xs font-mono text-gray-500 mb-1">PROBABILIDAD DE ÉXITO</p>
-                  <div className="text-4xl font-black">ASEGURADA</div>
+                <div className="mt-8 flex justify-end">
+                  <Shield size={32} className="text-black" />
                 </div>
               </div>
             </div>
