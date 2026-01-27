@@ -97,7 +97,9 @@ const Hero = () => {
         <div className="space-y-8 order-2 lg:order-1">
           <FadeIn>
             <div className="inline-flex items-center gap-2 bg-black text-white px-4 py-1.5 font-bold text-xs uppercase tracking-widest mb-2 border-l-4 border-[#CCFF00]">
-              <Zap size={14} className="text-[#CCFF00]" fill="#CCFF00" />
+              <div className="relative w-4 h-4">
+                <Image src="/icon.svg" alt="Icon" fill className="object-contain" style={{ filter: 'brightness(0) saturate(100%) invert(84%) sepia(35%) saturate(466%) hue-rotate(15deg) brightness(108%) contrast(106%)' }} />
+              </div>
               Agencia de Alto Rendimiento
             </div>
           </FadeIn>
@@ -115,9 +117,8 @@ const Hero = () => {
 
           <FadeIn delay={0.2}>
             <p className="text-xl md:text-2xl font-medium text-gray-700 max-w-lg leading-relaxed">
-              No somos artistas. Somos estrategas visuales.
-              Convertimos tu tráfico en dinero con diseño que
-              <span className="font-bold bg-[#CCFF00]/50 px-1"> golpea duro.</span>
+              La estética no es un adorno. Es una jerarquía.
+              Elevamos su marca del <span className="font-bold bg-[#CCFF00]/50 px-1">ruido a la autoridad.</span>
             </p>
           </FadeIn>
 
@@ -127,7 +128,7 @@ const Hero = () => {
                 QUIERO VENDER <ArrowRight strokeWidth={3} />
               </button>
               <button className="h-16 px-10 bg-transparent text-black font-black text-lg uppercase tracking-wider border-2 border-black hover:bg-black hover:text-white transition-colors flex items-center justify-center">
-                VER MILAGROS
+                NUESTRO LEGADO
               </button>
             </div>
           </FadeIn>
@@ -155,10 +156,10 @@ const Hero = () => {
               initial={{ x: 50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="absolute bottom-10 -left-4 md:-left-12 bg-white p-4 border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] z-20 max-w-[200px]"
+              className="absolute bottom-10 -left-4 md:-left-12 bg-white p-4 border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] z-20 max-w-[240px]"
             >
-              <div className="text-4xl font-black text-black mb-1">+400%</div>
-              <div className="text-xs font-bold text-gray-500 uppercase leading-tight">Incremento promedio en conversión</div>
+              <div className="text-4xl font-black text-black mb-1">90%</div>
+              <div className="text-xs font-bold text-gray-500 uppercase leading-tight">DE LAS MARCAS SON RUIDO. SEA LA SEÑAL.</div>
             </motion.div>
           </motion.div>
         </div>
@@ -172,7 +173,7 @@ const Marquee = () => (
     <div className="flex whitespace-nowrap animate-marquee">
       {[...Array(10)].map((_, i) => (
         <div key={i} className="flex items-center gap-8 mx-4">
-          <span className="text-4xl font-black tracking-tight">RESULTADOS RABIOSOS</span>
+          <span className="text-4xl font-black tracking-tight">AUDACIA CALCULADA</span>
           <div className="relative w-8 h-8">
             {/* 
                             Icon applied with CSS filter to match the Neon Volt color (#CCFF00).
@@ -188,7 +189,7 @@ const Marquee = () => (
               style={{ filter: 'brightness(0) saturate(100%) invert(76%) sepia(59%) saturate(637%) hue-rotate(66deg) brightness(101%) contrast(101%)' }}
             />
           </div>
-          <span className="text-4xl text-transparent [-webkit-text-stroke:1px_#CCFF00] font-black tracking-tight">SIN EXCUSAS</span>
+          <span className="text-4xl text-transparent [-webkit-text-stroke:1px_#CCFF00] font-black tracking-tight">ELEGANCIA RENTABLE</span>
           <div className="relative w-8 h-8">
             <Image
               src="/icon.svg"
@@ -283,7 +284,7 @@ const BentoGrid = () => (
         >
           <Play size={48} className="mb-4 text-black" />
           <h3 className="text-2xl font-black uppercase mb-2">Contenido</h3>
-          <p className="font-medium text-gray-600">Video marketing y copy que retiene la atención.</p>
+          <p className="font-medium text-gray-600">Síntesis Digital. Dirección creativa potenciada por modelos de IA Generativa de vanguardia.</p>
         </motion.div>
       </div>
     </div>
@@ -311,18 +312,18 @@ const Process = () => (
           <div className="space-y-12">
             <ProcessStep
               num="01"
-              title="Diagnóstico Brutal"
-              desc="Analizamos tu marca actual. Te decimos qué apexta y por qué no vendes. Sin filtros."
+              title="Diagnóstico Implacable"
+              desc="La verdad es incómoda pero rentable. Revelamos las ineficiencias narrativas que su competencia agradece."
             />
             <ProcessStep
               num="02"
-              title="Estrategia & Ejecución"
-              desc="Diseñamos el plan de ataque. Branding, Web, Ads. Todo alineado para matar."
+              title="Ingeniería de Precisión"
+              desc="Cada pixel y cada palabra tienen un propósito financiero. Nada es azar. Estructura y forma."
             />
             <ProcessStep
               num="03"
               title="Escalado"
-              desc="Lanzamos, medimos y optimizamos. No paramos hasta ver números verdes."
+              desc="Lanzamos mísiles teledirigidos al mercado. Optimización constante hasta la dominación."
             />
           </div>
         </div>
@@ -332,7 +333,6 @@ const Process = () => (
             <div className="relative z-10 text-center bg-black text-white p-8 max-w-xs rotate-[-2deg]">
               <p className="font-black text-2xl uppercase mb-2">RESULTADOS</p>
               <div className="text-6xl font-black text-[#CCFF00]">10X</div>
-              <p className="text-xs font-mono mt-4 text-gray-400">GARANTÍA DE CALIDAD</p>
             </div>
           </div>
         </div>
