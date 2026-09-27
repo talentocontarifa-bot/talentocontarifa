@@ -1,242 +1,40 @@
 @import "tailwindcss";
 
 :root {
-  /* New Blue Theme */
-  --background: #000040;
-  --foreground: #ffffff;
-  --primary: #00f0ff;
-  --secondary: #ff003c;
-  --accent: #39ff14;
+  --background: #F0F0F0;
+  --foreground: #000000;
+  --brand-yellow: #CCFF00;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-secondary: var(--secondary);
-  --color-accent: var(--accent);
   --font-share-tech: var(--font-share-tech);
   --font-inter: var(--font-inter);
-
-  /* Animations */
-  --animate-glitch: glitch 0.3s cubic-bezier(.25, .46, .45, .94) infinite;
-  --animate-float: float 4s ease-in-out infinite;
-  --animate-marquee: marquee 20s linear infinite;
-  --animate-pulse-fast: pulse-fast 0.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  --animate-glitch-invert: glitch-invert 4s infinite step-end;
-
-  @keyframes glitch-invert {
-
-    0%,
-    100% {
-      filter: invert(0);
-    }
-
-    5% {
-      filter: invert(1);
-    }
-
-    10% {
-      filter: invert(0);
-    }
-
-    50% {
-      filter: invert(0);
-    }
-
-    55% {
-      filter: invert(1);
-    }
-
-    60% {
-      filter: invert(0);
-    }
-
-    85% {
-      filter: invert(0);
-    }
-
-    90% {
-      filter: invert(1);
-    }
-
-    95% {
-      filter: invert(0);
-    }
-  }
+  --font-space-grotesk: var(--font-space-grotesk);
 }
 
 body {
-  background: var(--background);
-  background: radial-gradient(circle at center, #001a80 0%, #000040 100%);
-  color: var(--foreground);
+  background-color: #F0F0F0;
+  color: #000000;
   overflow-x: hidden;
-  font-family: var(--font-share-tech), monospace;
 }
 
-/* Marquee Animation */
 @keyframes marquee {
   0% {
-    transform: translateX(0);
+    transform: translateX(0%);
   }
-
   100% {
     transform: translateX(-50%);
   }
 }
 
-@keyframes pulse-fast {
-
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.7;
-  }
+.animate-marquee {
+  display: flex;
+  width: 200%;
+  animation: marquee 20s linear infinite;
 }
 
-/* Aggressive Glitch Effect */
-@keyframes glitch {
-  0% {
-    transform: translate(0);
-    text-shadow: -2px 0 var(--secondary), 2px 0 var(--primary);
-  }
-
-  25% {
-    transform: translate(-2px, 2px);
-    text-shadow: -2px -2px var(--secondary), 2px 2px var(--primary);
-  }
-
-  50% {
-    transform: translate(2px, -2px);
-    text-shadow: 2px -2px var(--secondary), -2px 2px var(--primary);
-  }
-
-  75% {
-    transform: translate(-2px, -2px);
-    text-shadow: -2px 2px var(--secondary), 2px -2px var(--primary);
-  }
-
-  100% {
-    transform: translate(0);
-    text-shadow: -2px 0 var(--secondary), 2px 0 var(--primary);
-  }
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0px) rotate(0deg);
-  }
-
-  50% {
-    transform: translateY(-15px) rotate(1deg);
-  }
-
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-}
-
-.text-stroke-primary {
-  -webkit-text-stroke: 1px var(--primary);
-  color: transparent;
-}
-
-.text-stroke-white {
-  -webkit-text-stroke: 1px white;
-  color: transparent;
-}
-
-.glitch-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.glitch-wrapper::before,
-.glitch-wrapper::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.8;
-}
-
-.glitch-wrapper::before {
-  color: var(--secondary);
-  z-index: -1;
-  animation: glitch-anim-1 2s infinite linear alternate-reverse;
-}
-
-.glitch-wrapper::after {
-  color: var(--primary);
-  z-index: -2;
-  animation: glitch-anim-2 2s infinite linear alternate-reverse;
-}
-
-@keyframes glitch-anim-1 {
-  0% {
-    clip-path: inset(20% 0 80% 0);
-    transform: translate(-2px, 0);
-  }
-
-  20% {
-    clip-path: inset(60% 0 10% 0);
-    transform: translate(2px, 0);
-  }
-
-  40% {
-    clip-path: inset(40% 0 50% 0);
-    transform: translate(-2px, 0);
-  }
-
-  60% {
-    clip-path: inset(80% 0 5% 0);
-    transform: translate(2px, 0);
-  }
-
-  80% {
-    clip-path: inset(10% 0 70% 0);
-    transform: translate(-1px, 0);
-  }
-
-  100% {
-    clip-path: inset(30% 0 20% 0);
-    transform: translate(1px, 0);
-  }
-}
-
-@keyframes glitch-anim-2 {
-  0% {
-    clip-path: inset(10% 0 60% 0);
-    transform: translate(2px, 0);
-  }
-
-  20% {
-    clip-path: inset(30% 0 10% 0);
-    transform: translate(-2px, 0);
-  }
-
-  40% {
-    clip-path: inset(80% 0 5% 0);
-    transform: translate(2px, 0);
-  }
-
-  60% {
-    clip-path: inset(15% 0 50% 0);
-    transform: translate(-2px, 0);
-  }
-
-  80% {
-    clip-path: inset(55% 0 20% 0);
-    transform: translate(1px, 0);
-  }
-
-  100% {
-    clip-path: inset(40% 0 80% 0);
-    transform: translate(-1px, 0);
-  }
+.animate-marquee:hover {
+  animation-play-state: paused;
 }
