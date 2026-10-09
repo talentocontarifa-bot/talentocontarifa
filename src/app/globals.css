@@ -38,3 +38,23 @@ body {
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
+/* Foco visible y brutal para navegación con teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 4px solid #FF0055;
+  outline-offset: 3px;
+}
+
+/* Respeta a quien pidió menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee,
+  .animate-ping {
+    animation: none !important;
+  }
+}

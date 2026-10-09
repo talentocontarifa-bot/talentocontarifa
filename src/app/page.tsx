@@ -1,9 +1,4 @@
-import Image from "next/image";
-
-// Configuración centralizada de WhatsApp
-const WHATSAPP_NUMBER = "525644982624";
-const DEFAULT_MSG = "Hola. Llegué por curiosidad. Quiero ver qué tan profundo llega el agujero del conejo.";
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEFAULT_MSG)}`;
+import { CONTACT_EMAIL, EMAIL_URL, WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/contact";
 
 export default function Home() {
   return (
@@ -23,9 +18,12 @@ export default function Home() {
 
           {/* Botón Nav Directo */}
           <div className="flex items-center gap-4">
-            <span className="hidden lg:inline-block font-mono font-bold text-xs uppercase bg-black text-[#CCFF00] px-3 py-1 border-2 border-black transform rotate-1">
-              ACCESO DIRECTO // SIN FORMULARIOS
-            </span>
+            <a
+              href={EMAIL_URL}
+              className="hidden lg:inline-block font-mono font-bold text-xs uppercase bg-white text-black px-3 py-1.5 border-2 border-black transform rotate-1 hover:rotate-0 hover:bg-black hover:text-[#CCFF00] shadow-[3px_3px_0px_0px_#000] transition-all"
+            >
+              ✉ {CONTACT_EMAIL}
+            </a>
 
             <a
               href={WHATSAPP_URL}
@@ -402,36 +400,142 @@ export default function Home() {
             </div>
           </div>
         </section>
+        {/* SECTION: CANALES DE CONTACTO (WhatsApp vs Correo) */}
+        <section id="contacto" className="py-24 px-4 sm:px-6 bg-[#FAFAFA] border-t-4 border-black relative scroll-mt-24">
+          <div className="max-w-7xl mx-auto space-y-12">
+            <div className="space-y-4 max-w-3xl">
+              <div className="inline-block bg-black text-[#CCFF00] px-4 py-1.5 font-mono font-bold text-xs uppercase transform -rotate-1 border-2 border-black shadow-[4px_4px_0px_0px_#CCFF00]">
+                CANALES ABIERTOS // ELIGE TU PUERTA
+              </div>
+              <h2 className="text-4xl sm:text-6xl font-black text-black leading-none uppercase tracking-tight">
+                DOS PUERTAS. <br />
+                <span className="bg-[#CCFF00] px-2 border-4 border-black inline-block mt-2 transform -rotate-1">MISMO AGUJERO.</span>
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Puerta 1: WhatsApp */}
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group bg-black text-white border-4 border-black p-8 sm:p-10 shadow-[8px_8px_0px_0px_#CCFF00] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_0px_#CCFF00] transition-all flex flex-col justify-between gap-8 min-h-[280px]"
+              >
+                <div className="flex justify-between items-start gap-4">
+                  <span className="font-mono text-xs uppercase font-black bg-[#CCFF00] text-black px-3 py-1 border-2 border-black">
+                    PUERTA 01 // RÁPIDA
+                  </span>
+                  <span className="font-mono text-xs uppercase font-black text-[#CCFF00]">&lt; 15 SEG</span>
+                </div>
+                <div className="space-y-3">
+                  <h3 className="text-3xl sm:text-4xl font-black uppercase leading-none">WhatsApp</h3>
+                  <p className="font-bold text-gray-300 text-base sm:text-lg leading-relaxed">
+                    Te contesta el bot al instante. Lo mismo que le instalaríamos a tu negocio, en vivo.
+                  </p>
+                </div>
+                <div className="flex items-center justify-between border-t-2 border-[#CCFF00]/40 pt-5">
+                  <span className="font-mono font-black text-lg sm:text-xl text-[#CCFF00]">{WHATSAPP_DISPLAY}</span>
+                  <span aria-hidden className="text-3xl font-black text-[#CCFF00] transition-transform group-hover:translate-x-2">→</span>
+                </div>
+              </a>
+
+              {/* Puerta 2: Correo */}
+              <a
+                href={EMAIL_URL}
+                className="group bg-white text-black border-4 border-black p-8 sm:p-10 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all flex flex-col justify-between gap-8 min-h-[280px] md:rotate-1 hover:rotate-0"
+              >
+                <div className="flex justify-between items-start gap-4">
+                  <span className="font-mono text-xs uppercase font-black bg-black text-[#CCFF00] px-3 py-1 border-2 border-black">
+                    PUERTA 02 // FORMAL
+                  </span>
+                  <span className="font-mono text-xs uppercase font-black text-[#FF0055]">PROPUESTAS · ALIANZAS</span>
+                </div>
+                <div className="space-y-3">
+                  <h3 className="text-3xl sm:text-4xl font-black uppercase leading-none">Correo</h3>
+                  <p className="font-bold text-gray-800 text-base sm:text-lg leading-relaxed">
+                    ¿Brief largo, RFP, alianza o factura? Escríbenos. Lo lee un humano (sí, todavía tenemos uno).
+                  </p>
+                </div>
+                <div className="flex items-center justify-between gap-4 border-t-2 border-black pt-5">
+                  <span className="font-mono font-black text-base sm:text-xl break-all underline decoration-4 decoration-[#CCFF00] underline-offset-4">
+                    {CONTACT_EMAIL}
+                  </span>
+                  <span aria-hidden className="text-3xl font-black transition-transform group-hover:translate-x-2">→</span>
+                </div>
+              </a>
+            </div>
+
+            <p className="font-mono text-xs sm:text-sm font-black uppercase text-gray-700 text-center">
+              ¿Prefieres dejarnos todo por escrito?{" "}
+              <a href="/form" className="text-black underline decoration-4 decoration-[#FF0055] underline-offset-4 hover:bg-[#CCFF00]">
+                Llena el formulario rápido
+              </a>
+            </p>
+          </div>
+        </section>
       </main>
 
       {/* Footer Neobrutalista Oficial (#CCFF00 con borde negro de 4px) */}
-      <footer className="bg-[#CCFF00] border-t-4 border-black py-12 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-black p-1">
-              <img src="/icon.svg" alt="Talento con Tarifa" className="w-full h-full object-contain" />
+      <footer className="bg-[#CCFF00] border-t-4 border-black pt-14 pb-28 sm:pb-14 px-6">
+        <div className="max-w-7xl mx-auto grid gap-10 md:grid-cols-3 items-start">
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-black p-1.5 border-2 border-black shadow-[3px_3px_0px_0px_#000]">
+                <img src="/icon.svg" alt="" aria-hidden className="w-full h-full object-contain" />
+              </div>
+              <span className="font-black text-xl tracking-tight text-black">TALENTO CON TARIFA</span>
             </div>
-            <span className="font-black text-xl tracking-tight text-black">
-              TALENTO CON TARIFA © {new Date().getFullYear()}
-            </span>
+            <p className="font-mono font-bold text-sm text-black max-w-xs">
+              NO BUSCAMOS VOLUMEN. CONECTAMOS CON LOS CORRECTOS.
+            </p>
           </div>
-          <p className="font-mono font-bold text-sm text-black">
-            NO BUSCAMOS VOLUMEN. CONECTAMOS CON LOS CORRECTOS.
-          </p>
+
+          <div className="space-y-3">
+            <span className="font-mono text-xs uppercase font-black bg-black text-[#CCFF00] px-2 py-0.5 inline-block">CONTACTO</span>
+            <ul className="space-y-2 font-bold text-black">
+              <li>
+                <a href={EMAIL_URL} className="break-all hover:underline decoration-4 underline-offset-4">
+                  ✉ {CONTACT_EMAIL}
+                </a>
+              </li>
+              <li>
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hover:underline decoration-4 underline-offset-4">
+                  ☎ {WHATSAPP_DISPLAY} (WhatsApp)
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div className="space-y-3">
+            <span className="font-mono text-xs uppercase font-black bg-black text-[#CCFF00] px-2 py-0.5 inline-block">ATAJOS</span>
+            <ul className="space-y-2 font-bold text-black">
+              <li><a href="#contacto" className="hover:underline decoration-4 underline-offset-4">→ Canales de contacto</a></li>
+              <li><a href="/form" className="hover:underline decoration-4 underline-offset-4">→ Formulario rápido</a></li>
+              <li><a href="/identidad" className="hover:underline decoration-4 underline-offset-4">→ Brief de identidad</a></li>
+            </ul>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto mt-10 pt-6 border-t-2 border-black font-mono text-xs font-black uppercase text-black flex flex-col sm:flex-row justify-between gap-2">
+          <span>© {new Date().getFullYear()} TALENTOCONTARIFA.LAT</span>
+          <span>HECHO POR HUMANOS · OPERADO POR BOTS</span>
         </div>
       </footer>
 
-      {/* Floating Brutalist WhatsApp CTA */}
-      <div className="fixed bottom-6 right-6 z-50">
+      {/* Floating Brutalist WhatsApp CTA (compacto en móvil) */}
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
         <a
           href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex items-center gap-3 bg-black text-[#CCFF00] px-5 py-3.5 font-bold text-sm uppercase tracking-wider border-4 border-black shadow-[6px_6px_0px_0px_#000] hover:bg-[#CCFF00] hover:text-black hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
-          aria-label="Abrir WhatsApp"
+          className="group flex items-center gap-3 bg-black text-[#CCFF00] px-4 py-3 sm:px-5 sm:py-3.5 font-bold text-sm uppercase tracking-wider border-4 border-black shadow-[6px_6px_0px_0px_#000] hover:bg-[#CCFF00] hover:text-black hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
+          aria-label="Abrir WhatsApp: háblame, platicamos"
         >
-          <span className="w-3 h-3 bg-[#CCFF00] group-hover:bg-black rounded-full animate-ping"></span>
-          <span>HÁBLAME, PLATICAMOS</span>
+          <span className="relative flex w-3 h-3">
+            <span className="absolute inline-flex w-full h-full bg-[#CCFF00] group-hover:bg-black rounded-full animate-ping opacity-75"></span>
+            <span className="relative inline-flex w-3 h-3 bg-[#CCFF00] group-hover:bg-black rounded-full"></span>
+          </span>
+          <span className="hidden sm:inline">HÁBLAME, PLATICAMOS</span>
+          <span className="sm:hidden">WHATSAPP</span>
         </a>
       </div>
     </>

@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { CONTACT_EMAIL, EMAIL_URL, PHONE_URL, WHATSAPP_DISPLAY, whatsappUrl } from '@/lib/contact';
 
 // --- CONFIGURACIÓN DE ESTILO NEO-BRUTALIST ---
 const THEME = {
@@ -113,7 +114,7 @@ export default function ContactForm() {
 ${formData.pain}
 ----------------------------------------`.trim();
 
-        return `https://wa.me/5215644982624?text=${encodeURIComponent(message)}`;
+        return whatsappUrl(message);
     };
 
     if (!mounted) return null;
@@ -151,14 +152,14 @@ ${formData.pain}
                     </p>
 
                     <div className="space-y-4 pt-8">
-                        <div className="flex items-center gap-3 font-bold">
-                            <div className="bg-black text-[#CCFF00] p-2"><Mail size={20} /></div>
-                            <span>talentocontarifa@gmail.com</span>
-                        </div>
-                        <div className="flex items-center gap-3 font-bold">
-                            <div className="bg-black text-[#CCFF00] p-2"><Phone size={20} /></div>
-                            <span>+52 1 564 498 2624</span>
-                        </div>
+                        <a href={EMAIL_URL} className="flex items-center gap-3 font-bold break-all hover:underline decoration-4 decoration-[#CCFF00]">
+                            <div className="bg-black text-[#CCFF00] p-2 shrink-0"><Mail size={20} aria-hidden /></div>
+                            <span>{CONTACT_EMAIL}</span>
+                        </a>
+                        <a href={PHONE_URL} className="flex items-center gap-3 font-bold hover:underline decoration-4 decoration-[#CCFF00]">
+                            <div className="bg-black text-[#CCFF00] p-2 shrink-0"><Phone size={20} aria-hidden /></div>
+                            <span>{WHATSAPP_DISPLAY}</span>
+                        </a>
                     </div>
                 </div>
 
