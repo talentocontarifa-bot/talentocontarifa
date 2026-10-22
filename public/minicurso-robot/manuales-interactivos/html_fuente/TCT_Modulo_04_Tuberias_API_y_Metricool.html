@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Módulo 04 — Las Tuberías: API Directa vs. Metricool Gratis | Talento con Tarifa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-void: #08090B;
+      --bg-surface: #111318;
+      --bg-card: #171A21;
+      --brand-lime: #CCFF00;
+      --brand-pink: #FF0055;
+      --brand-cyan: #00E5FF;
+      --text-white: #F4F4F6;
+      --text-Gray: #A1A1AA;
+      --shadow-lime: 5px 5px 0px #CCFF00;
+      --shadow-pink: 5px 5px 0px #FF0055;
+      --shadow-cyan: 5px 5px 0px #00E5FF;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-mono: 'Share Tech Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #050507;
+      color: var(--text-white);
+      font-family: var(--font-display);
+      line-height: 1.4;
+      font-size: 13.5px;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 3px solid var(--brand-lime) !important;
+      outline-offset: 2px;
+    }
+
+    .print-only {
+      display: none !important;
+    }
+
+    .web-nav {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(8, 9, 11, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 3px solid var(--brand-lime);
+      padding: 8px 20px 11px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .web-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-aula-btn {
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 12px;
+      background: #000;
+      color: var(--brand-lime);
+      border: 1.5px solid var(--brand-lime);
+      padding: 4px 10px;
+      white-space: nowrap;
+    }
+
+    .nav-aula-btn:hover {
+      background: var(--brand-lime);
+      color: #000;
+    }
+
+    .web-nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--brand-lime);
+      font-size: 13.5px;
+    }
+
+    .mod-switcher {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #0D0F14;
+      border: 1.5px solid #3F3F46;
+      padding: 2px 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .mod-switcher span {
+      color: var(--text-Gray);
+      margin-right: 2px;
+    }
+
+    .mod-switcher a {
+      text-decoration: none;
+      color: var(--text-white);
+      padding: 2px 6px;
+      border: 1px solid transparent;
+    }
+
+    .mod-switcher a:hover {
+      border-color: var(--brand-lime);
+      color: var(--brand-lime);
+    }
+
+    .mod-switcher a[aria-current="page"] {
+      background: var(--brand-lime);
+      color: #000;
+      font-weight: 800;
+    }
+
+    .web-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .nav-group-label {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--brand-cyan);
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      margin-left: 4px;
+    }
+
+    .nav-group-sep {
+      color: #3F3F46;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      margin: 0 2px;
+    }
+
+    .web-nav-links a {
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-white);
+      background: var(--bg-card);
+      border: 1.5px solid #3F3F46;
+      padding: 5px 10px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .web-nav-links a:hover,
+    .web-nav-links a[aria-current="true"] {
+      background: var(--brand-lime);
+      color: #000;
+      border-color: #FFF;
+      font-weight: 800;
+      transform: translate(-1px, -1px);
+      box-shadow: 2px 2px 0px #FFF;
+    }
+
+    .mobile-slide-select {
+      display: none;
+      width: 100%;
+      background: var(--bg-card);
+      color: var(--brand-lime);
+      border: 2px solid var(--brand-lime);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 7px 10px;
+    }
+
+    .web-nav-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #181B24;
+    }
+
+    .web-nav-progress-bar {
+      height: 100%;
+      width: 16.66%;
+      background: var(--brand-cyan);
+      transition: width 0.2s ease;
+    }
+
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+
+    .slide {
+      width: 297mm;
+      height: 210mm;
+      margin: 22px auto;
+      scroll-margin-top: 74px;
+      padding: 10mm 13mm 9mm 13mm;
+      background-color: var(--bg-void);
+      background-image:
+        radial-gradient(rgba(204, 255, 0, 0.12) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(17, 19, 24, 0.9) 0%, rgba(8, 9, 11, 0.98) 100%);
+      background-size: 20px 20px, 100% 100%;
+      border: 3px solid #27272A;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+      break-after: page;
+      overflow: hidden;
+    }
+
+    .slide-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-surface);
+      border: 2.5px solid var(--text-white);
+      box-shadow: 4px 4px 0px var(--brand-lime);
+      padding: 7px 14px;
+      margin-bottom: 10px;
+      flex-shrink: 0;
+      gap: 10px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tct-pill {
+      background: var(--brand-lime);
+      color: #000;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 14px;
+      padding: 3px 10px;
+      border: 2px solid #000;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .header-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--brand-lime);
+      letter-spacing: 0.4px;
+    }
+
+    .header-sub {
+      font-family: var(--font-mono);
+      font-size: 10.8px;
+      color: var(--text-Gray);
+    }
+
+    .slide-badge {
+      background: #000;
+      color: var(--brand-lime);
+      border: 2px solid var(--brand-lime);
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 4px 12px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .slide-footer {
+      border-top: 2px solid #27272A;
+      padding-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 10.8px;
+      color: var(--text-Gray);
+      flex-shrink: 0;
+      gap: 8px;
+    }
+
+    .footer-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .footer-nav a {
+      text-decoration: none;
+      background: #181B24;
+      color: var(--brand-lime);
+      border: 1.5px solid var(--brand-lime);
+      padding: 2px 9px;
+      font-weight: 700;
+      font-size: 10.5px;
+    }
+
+    .footer-nav a.footer-btn-primary {
+      background: var(--brand-lime);
+      color: #000;
+      border: 2px solid #FFF;
+      font-weight: 800;
+    }
+
+    .footer-page {
+      background: var(--brand-lime);
+      color: #000;
+      font-weight: 800;
+      padding: 2px 10px;
+    }
+
+    .slide-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--brand-lime);
+      color: #000;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 11px;
+      padding: 3px 10px;
+      text-transform: uppercase;
+      border: 2px solid #FFF;
+      width: fit-content;
+    }
+
+    .card-dark {
+      background: var(--bg-card);
+      border: 2.5px solid var(--text-white);
+      box-shadow: var(--shadow-lime);
+      padding: 11px 13px;
+      position: relative;
+    }
+
+    .card-dark.pink {
+      box-shadow: var(--shadow-pink);
+      border-color: var(--brand-pink);
+    }
+
+    .card-dark.cyan {
+      box-shadow: var(--shadow-cyan);
+      border-color: var(--brand-cyan);
+    }
+
+    .icon-box {
+      width: 36px;
+      height: 36px;
+      background: var(--brand-lime);
+      color: #000;
+      border: 2px solid #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .icon-box.pink {
+      background: var(--brand-pink);
+      color: #FFF;
+    }
+
+    .icon-box.cyan {
+      background: var(--brand-cyan);
+      color: #000;
+    }
+
+    code.tag {
+      font-family: var(--font-mono);
+      background: #000;
+      color: var(--brand-lime);
+      border: 1px solid #3F3F46;
+      padding: 1px 5px;
+      font-size: 11px;
+    }
+
+    .copy-btn {
+      cursor: pointer;
+      background: var(--brand-lime);
+      color: #000;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 11.5px;
+      padding: 6px 12px;
+      border: 2px solid #FFF;
+      box-shadow: 3px 3px 0px #FFF;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+      transition: all 0.12s ease;
+    }
+
+    .copy-btn:hover {
+      background: #FFF;
+      color: #000;
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0px var(--brand-lime);
+    }
+
+    .copy-btn.copied {
+      background: #10B981;
+      color: #FFF;
+      border-color: #FFF;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .hero-main {
+      background: var(--bg-card);
+      border: 3px solid var(--text-white);
+      box-shadow: 7px 7px 0px var(--brand-pink);
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .hero-title {
+      font-size: 29px;
+      font-weight: 800;
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: -0.8px;
+      margin: 6px 0 8px 0;
+    }
+
+    .hero-title span {
+      color: var(--brand-lime);
+      text-decoration: underline;
+      text-decoration-thickness: 3px;
+    }
+
+    .hero-side {
+      background: var(--bg-surface);
+      border: 3px solid var(--brand-lime);
+      box-shadow: 7px 7px 0px var(--brand-cyan);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+    }
+
+    .avatars-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .avatar-frame {
+      width: 110px;
+      height: 110px;
+      border: 3px solid var(--brand-lime);
+      box-shadow: 4px 4px 0px #FFF;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .avatar-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cerebro-badge {
+      width: 86px;
+      height: 86px;
+      border: 3px solid #FFF;
+      background: var(--brand-lime);
+      box-shadow: 4px 4px 0px var(--brand-pink);
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cerebro-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .goals-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .goal-item {
+      background: var(--bg-surface);
+      border: 2px solid #3F3F46;
+      border-left: 6px solid var(--brand-lime);
+      padding: 9px 11px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .exceptions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .dark-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-card);
+      border: 2.5px solid var(--text-white);
+      box-shadow: var(--shadow-lime);
+      font-size: 11.3px;
+    }
+
+    .dark-table th {
+      background: #000;
+      color: var(--brand-lime);
+      font-family: var(--font-mono);
+      text-align: left;
+      padding: 5px 9px;
+      border: 1.5px solid #3F3F46;
+      text-transform: uppercase;
+    }
+
+    .dark-table td {
+      padding: 5px 9px;
+      border: 1.5px solid #27272A;
+      color: #E4E4E7;
+    }
+
+    .prompts-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .terminal-card {
+      background: #0D0F14;
+      border: 3px solid var(--brand-lime);
+      box-shadow: 6px 6px 0px #FFF;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .terminal-head {
+      background: #181B24;
+      border-bottom: 2px solid var(--brand-lime);
+      padding: 7px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .terminal-pre {
+      padding: 10px 13px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.4;
+      color: #F4F4F6;
+      white-space: pre-wrap;
+      user-select: all;
+    }
+
+    .terminal-pre span.hl {
+      color: var(--brand-lime);
+      font-weight: 700;
+    }
+
+    .yt-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .yt-visual-card {
+      background: var(--bg-card);
+      border: 2.5px solid var(--text-white);
+      box-shadow: 5px 5px 0px var(--brand-lime);
+      padding: 9px 11px;
+      display: grid;
+      grid-template-columns: 124px 1fr;
+      gap: 11px;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text-white);
+      transition: transform 0.12s ease;
+    }
+
+    .yt-visual-card:hover {
+      transform: translate(-2px, -2px);
+      border-color: var(--brand-lime);
+    }
+
+    .yt-thumb {
+      width: 124px;
+      height: 74px;
+      border: 2px solid var(--brand-lime);
+      position: relative;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .yt-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .yt-play-pill {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      background: #FF0033;
+      color: #FFF;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border: 1px solid #FFF;
+    }
+
+    .yt-credit-pill {
+      display: inline-block;
+      background: var(--brand-lime);
+      color: #000;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 1px 6px;
+      margin-bottom: 2px;
+    }
+
+    .yt-meta-pill {
+      display: inline-block;
+      background: #181B24;
+      color: var(--brand-cyan);
+      border: 1px solid var(--brand-cyan);
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 1px 5px;
+      margin-bottom: 3px;
+      margin-left: 4px;
+    }
+
+    .yt-watch-btn {
+      margin-top: 4px;
+      display: inline-block;
+      background: #000;
+      color: var(--brand-lime);
+      border: 1.5px solid var(--brand-lime);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+    }
+
+    @media print {
+      body {
+        background: var(--bg-void);
+        font-size: 13px;
+      }
+      .web-nav,
+      .screen-only {
+        display: none !important;
+      }
+      .print-only {
+        display: inline-flex !important;
+      }
+      .slide {
+        margin: 0 !important;
+        border: none !important;
+        width: 297mm !important;
+        height: 210mm !important;
+        overflow: hidden !important;
+        page-break-after: always !important;
+        break-after: page !important;
+      }
+    }
+
+    @media screen {
+      body {
+        font-size: 15.5px;
+        line-height: 1.5;
+      }
+
+      .slide {
+        width: min(297mm, calc(100% - 24px));
+        height: auto;
+        min-height: auto;
+        margin: 18px auto;
+        padding: 20px 24px;
+        overflow: visible;
+        justify-content: flex-start;
+        gap: 16px;
+      }
+
+      .slide-content {
+        flex: 0 1 auto;
+        justify-content: flex-start;
+        gap: 16px;
+      }
+
+      .header-title {
+        font-size: 16px;
+      }
+      .header-sub {
+        font-size: 12.5px;
+      }
+      .card-dark h3,
+      .card-dark h4 {
+        font-size: 18px !important;
+        line-height: 1.25 !important;
+      }
+      .card-dark p,
+      .card-dark li,
+      .goal-item div {
+        font-size: 15px !important;
+        line-height: 1.5 !important;
+      }
+      .terminal-pre {
+        font-size: 14px !important;
+        line-height: 1.55 !important;
+      }
+      code.tag {
+        font-size: 13px !important;
+      }
+      .dark-table {
+        font-size: 14px;
+      }
+
+      .footer-nav a {
+        min-height: 40px;
+        padding: 8px 14px;
+        font-size: 13px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .footer-page {
+        min-height: 40px;
+        padding: 8px 12px;
+        font-size: 13px;
+        display: inline-flex;
+        align-items: center;
+      }
+    }
+
+        /* ==================== LAPTOP 1280x720 (RX-N2: LÁMINA COMPLETA Y NAV EN 1 RENGLÓN) ==================== */
+    @media screen and (min-width: 901px) and (max-width: 1366px) {
+      .web-nav {
+        padding: 5px 12px;
+        gap: 6px;
+        flex-wrap: nowrap;
+      }
+      .web-nav-left {
+        gap: 6px;
+        flex-shrink: 0;
+      }
+      .web-nav-brand {
+        font-size: 12px;
+        white-space: nowrap;
+      }
+      .aula-back-btn {
+        padding: 4px 8px;
+        font-size: 11px;
+        white-space: nowrap;
+      }
+      .mod-switcher {
+        padding: 2px 5px;
+        gap: 2px;
+      }
+      .mod-switcher a {
+        padding: 2px 5px;
+        font-size: 10.5px;
+      }
+      .web-nav-links {
+        gap: 4px;
+        flex-wrap: nowrap;
+      }
+      .nav-group-label {
+        font-size: 9.5px;
+        margin-left: 2px;
+        white-space: nowrap;
+      }
+      .web-nav-links a {
+        padding: 4px 7px;
+        font-size: 11px;
+        white-space: nowrap;
+      }
+    }
+
+    @media screen and (min-width: 901px) and (max-height: 780px) {
+      .slide {
+        margin: 8px auto;
+        padding: 10px 18px;
+        gap: 8px;
+      }
+      .slide-header {
+        padding: 5px 12px;
+        margin-bottom: 2px;
+      }
+      .slide-content {
+        gap: 8px;
+      }
+      .hero-card {
+        padding: 12px 16px;
+      }
+      .hero-title {
+        font-size: 25px !important;
+        line-height: 1.05 !important;
+        margin-bottom: 4px !important;
+      }
+      .hero-lead {
+        font-size: 13.5px !important;
+        line-height: 1.32 !important;
+        margin-bottom: 6px !important;
+      }
+      .goal-item {
+        padding: 8px 11px;
+        gap: 8px;
+      }
+      .goal-item div {
+        font-size: 12.8px !important;
+        line-height: 1.32 !important;
+      }
+      .slide-footer {
+        padding-top: 4px;
+      }
+      .footer-nav a,
+      .footer-page {
+        min-height: 36px;
+        padding: 5px 12px;
+        font-size: 12px;
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      html, body {
+        overflow-x: hidden;
+        max-width: 100vw;
+      }
+
+      .web-nav {
+        position: relative;
+        padding: 10px 12px 14px 12px;
+        gap: 8px;
+      }
+
+      .web-nav-links {
+        display: none;
+      }
+
+      .mobile-slide-select {
+        display: block;
+      }
+
+      .slide {
+        width: calc(100% - 16px);
+        margin: 12px auto;
+        padding: 14px 12px;
+      }
+
+      .slide-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 12px;
+      }
+
+      .header-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .tct-pill,
+      .slide-badge {
+        white-space: normal;
+        font-size: 12px;
+      }
+
+      .hero-title {
+        font-size: 24px;
+      }
+
+      .hero-grid,
+      .prompts-grid,
+      .exceptions-grid,
+      .yt-cards-grid,
+      .goals-strip {
+        grid-template-columns: 1fr !important;
+      }
+
+      .yt-visual-card {
+        grid-template-columns: 1fr !important;
+      }
+
+      .yt-thumb {
+        width: 100% !important;
+        height: 150px !important;
+      }
+
+      .dark-table {
+        display: block;
+        overflow-x: auto;
+        max-width: 100%;
+      }
+
+      .slide-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .footer-nav {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .terminal-pre,
+      code.tag,
+      a {
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN WEB -->
+  <nav class="web-nav" aria-label="Navegación del manual">
+    <div class="web-nav-left">
+      <a href="/minicurso-robot/aula" class="nav-aula-btn">◀ AULA</a>
+      <div class="web-nav-brand">
+        <span>⚡ MÓDULO 04</span>
+      </div>
+      <div class="mod-switcher" aria-label="Cambiar de módulo">
+        <span>MÓDULOS:</span>
+        <a href="TCT_Modulo_01_Mapa_y_Obrero_IA.html">01</a>
+        <a href="TCT_Modulo_02_Fabrica_Videos_Gratis.html">02</a>
+        <a href="TCT_Modulo_03_Robot_GitHub_Actions.html">03</a>
+        <a href="TCT_Modulo_04_Tuberias_API_y_Metricool.html" aria-current="page">04</a>
+      </div>
+    </div>
+
+    <select class="mobile-slide-select" aria-label="Ir a lámina" onchange="if(this.value) location.hash=this.value;">
+      <option value="#lamina-1">ENTIENDE ➔ 01. Portada</option>
+      <option value="#lamina-2">HAZ ➔ 02. Vía A: API Directa</option>
+      <option value="#lamina-3">HAZ ➔ 03. Vía B: Metricool Gratis</option>
+      <option value="#lamina-4">HAZ ➔ 04. Pega los Prompts</option>
+      <option value="#lamina-5">SI ALGO FALLA ➔ 05. Escudo Anti-Bloqueos</option>
+      <option value="#lamina-6">APRENDE MÁS ➔ 06. Videoteca YouTube</option>
+    </select>
+
+    <div class="web-nav-links">
+      <span class="nav-group-label">ENTIENDE:</span>
+      <a href="#lamina-1" data-slide="lamina-1" aria-current="true">01. Portada</a>
+      <span class="nav-group-sep">|</span>
+      <span class="nav-group-label">HAZ:</span>
+      <a href="#lamina-2" data-slide="lamina-2">02. Vía A: API</a>
+      <a href="#lamina-3" data-slide="lamina-3">03. Vía B: Metricool</a>
+      <a href="#lamina-4" data-slide="lamina-4" id="nav-link-4">04. Pega los prompts</a>
+      <span class="nav-group-sep">|</span>
+      <span class="nav-group-label">SI ALGO FALLA:</span>
+      <a href="#lamina-5" data-slide="lamina-5">05. Errores</a>
+      <span class="nav-group-label">APRENDE MÁS:</span>
+      <a href="#lamina-6" data-slide="lamina-6">06. Videos</a>
+    </div>
+
+    <div class="web-nav-progress" aria-hidden="true">
+      <div class="web-nav-progress-bar" id="nav-progress-bar"></div>
+    </div>
+  </nav>
+
+  <!-- =========================================================================================
+       LÁMINA 01: PORTADA DEL MÓDULO 04 — LAS TUBERÍAS DE PUBLICACIÓN
+       ========================================================================================= -->
+  <section class="slide" id="lamina-1">
+    <header class="slide-header">
+      <div class="header-left">
+        <span class="tct-pill">⚡ TCT ACADEMY</span>
+        <div>
+          <div class="header-title">MÓDULO 04: LAS TUBERÍAS — API DIRECTA VS. METRICOOL GRATIS + PUENTE TIKTOK</div>
+          <div class="header-sub">ELIGE TU CAMINO: CONEXIÓN OFICIAL POR API DESDE EL RUNNER O PUENTE VISUAL SIN TOKENS</div>
+        </div>
+      </div>
+      <div class="slide-badge">MÓDULO 04 // LÁMINA 01 DE 06</div>
+    </header>
+
+    <div class="slide-content">
+      <div class="hero-grid">
+        <div class="hero-main">
+          <div>
+            <span class="kicker" style="background:var(--brand-pink);color:#FFF;">★ LA CONEXIÓN FINAL A TUS REDES SOCIALES ★</span>
+            <h1 class="hero-title">CONECTA TUS REDES: <span>API DIRECTA O METRICOOL GRATIS</span></h1>
+            <p style="font-size:13.4px;color:#E4E4E7;line-height:1.44;margin-bottom:10px;">
+              Llegamos al último eslabón. Ya tienes tus videos <code class="tag">.mp4</code> creados con HyperFrames y la API de ElevenLabs, y tu robot en GitHub Actions listo para despertar. Ahora te damos <strong>2 caminos para conectar tus redes sociales con los planes gratuitos vigentes a oct-2026</strong>: la <strong>Vía A (API Directa desde GitHub)</strong> o la <strong>Vía B (Metricool Gratis para quienes no quieren lidiar con tokens de desarrollador)</strong>.
+            </p>
+          </div>
+
+          <!-- C10: publish_social.js en lugar de publish_meta_yt.js -->
+          <div style="background:#0B0D12;border:2px solid var(--brand-lime);padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+            <div style="flex:1;min-width:220px;">
+              <div style="font-family:var(--font-mono);color:var(--brand-lime);font-size:11.5px;font-weight:700;">🎁 ¿TIENES EL PASE PRO BUILDER ($5 USD)?</div>
+              <div style="font-size:11.5px;color:#D4D4D8;">Descarga tu <code class="tag">starter-kit-robot-tct.zip</code> con el script <code class="tag">scripts/publish_social.js</code> y el generador CSV para Metricool.</div>
+            </div>
+            <a href="#lamina-2" style="text-decoration:none;background:var(--brand-lime);color:#000;font-family:var(--font-mono);font-weight:800;font-size:11.5px;padding:8px 12px;border:2px solid #FFF;white-space:nowrap;">VER LAS 2 VÍAS ➔</a>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <span class="kicker" style="background:var(--brand-lime);color:#000;">2 CAMINOS • TÚ ELIGES</span>
+          <div class="avatars-row">
+            <div class="avatar-frame">
+              <img src="../assets/avatar_neobrutalista.jpg" alt="Avatar Neobrutalista TCT" />
+            </div>
+            <div class="cerebro-badge">
+              <img src="../cerebro.webp" alt="Mascota Cerebro TCT" />
+            </div>
+          </div>
+          <div>
+            <div style="font-weight:800;font-size:15px;color:var(--brand-lime);text-transform:uppercase;">CONSEJO DE AMIGO</div>
+            <div style="font-family:var(--font-mono);font-size:11.2px;color:#D4D4D8;margin-top:2px;">"Si eres principiante total, arranca hoy con Metricool Gratis en 5 minutos; luego activas la API directa."</div>
+          </div>
+          <div style="width:100%;background:#000;border:1.5px solid var(--brand-lime);padding:6px;font-family:var(--font-mono);font-size:11px;color:var(--brand-lime);">
+            ⚡ TALENTOCONTARIFA.LAT
+          </div>
+        </div>
+      </div>
+
+      <div class="goals-strip">
+        <div class="goal-item">
+          <div class="icon-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:800;font-size:12.5px;color:var(--brand-lime);text-transform:uppercase;">1. Vía A: API Directa (Meta)</div>
+            <!-- C11 + D2 -->
+            <!-- PENDIENTE D2 -->
+            <div style="font-size:11.5px;color:#D4D4D8;">El runner publica video en tu Página de Facebook e Instagram Reels (YouTube Shorts opcional / requiere auditoría).</div>
+          </div>
+        </div>
+        <div class="goal-item">
+          <div class="icon-box cyan">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:800;font-size:12.5px;color:var(--brand-cyan);text-transform:uppercase;">2. Vía B: Metricool Plan Gratis</div>
+            <!-- PENDIENTE D3 -->
+            <div style="font-size:11.5px;color:#D4D4D8;">Conecta tus cuentas con usuario y contraseña normal en el plan gratuito de Metricool (verifica límite mensual vigente).</div>
+          </div>
+        </div>
+        <div class="goal-item">
+          <div class="icon-box pink">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:800;font-size:12.5px;color:var(--brand-pink);text-transform:uppercase;">3. La Verdad sobre TikTok y YT API</div>
+            <div style="font-size:11.5px;color:#D4D4D8;">Por qué las apps nuevas de TikTok y Google Cloud sin auditoría salen en privado y cómo resolverlo.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="slide-footer">
+      <span>TALENTOCONTARIFA.LAT // MÓDULO 04: LAS TUBERÍAS — API DIRECTA VS. METRICOOL GRATIS</span>
+      <div class="footer-nav">
+        <span class="footer-page">LÁMINA 01 / 06</span>
+        <a href="#lamina-2">SIGUIENTE LÁMINA ▶</a>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =========================================================================================
+       LÁMINA 02: VÍA A (AVANZADA) — CONEXIÓN POR API DIRECTA DESDE GITHUB ACTIONS
+       ========================================================================================= -->
+  <section class="slide" id="lamina-2">
+    <header class="slide-header">
+      <div class="header-left">
+        <span class="tct-pill">🚀 VÍA A: API DIRECTA</span>
+        <div>
+          <div class="header-title">PUBLICACIÓN AUTOMÁTICA DESDE EL RUNNER (META GRAPH API + YOUTUBE OPCIONAL)</div>
+          <div class="header-sub">PASO 0 EN META FOR DEVELOPERS, LISTA COMPLETA DE PERMISOS Y AVISO DE YOUTUBE API</div>
+        </div>
+      </div>
+      <div class="slide-badge">MÓDULO 04 // LÁMINA 02 DE 06</div>
+    </header>
+
+    <div class="slide-content">
+      <!-- C14: Paso 0 para crear app en Meta y vincular IG Business <-> Página -->
+      <div style="background:#0D0F14;border:1.5px solid var(--brand-lime);padding:6px 10px;font-family:var(--font-mono);font-size:10.8px;color:#E4E4E7;">
+        <strong style="color:var(--brand-lime);">PASO 0 EN META:</strong> 1) Convierte tu Instagram en cuenta Profesional (Creador/Empresa) y vincúlala a tu Página de Facebook · 2) En <code class="tag">developers.facebook.com</code> crea una App tipo <strong>Empresa (Business)</strong>.
+      </div>
+
+      <div class="exceptions-grid">
+        <!-- Meta Graph API (C11, C12) -->
+        <div class="card-dark">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+            <span class="kicker">PÁGINA DE FACEBOOK + INSTAGRAM REELS</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--brand-lime);">META GRAPH API V21.0</span>
+          </div>
+          <h3 style="font-size:14.5px;font-weight:800;color:var(--brand-lime);text-transform:uppercase;margin-bottom:4px;">El Secreto del Token Permanente (Lista Completa de Permisos)</h3>
+          <p style="font-size:11.2px;color:#E4E4E7;margin-bottom:5px;">
+            1. En Graph API Explorer selecciona tu App y asigna estos permisos exactos: <code class="tag">pages_show_list</code>, <code class="tag">pages_read_engagement</code>, <code class="tag">pages_manage_posts</code>, <code class="tag">instagram_basic</code>, <code class="tag">instagram_content_publish</code> (y <code class="tag">business_management</code> si tu Página está en un Business Manager).<br/>
+            2. Canjéalo por un token de usuario de 60 días y consulta <code class="tag">me/accounts</code>: el <strong>Token de Página</strong> resultante no caduca.
+          </p>
+          <div style="background:#000;border:1.5px solid var(--brand-lime);padding:4px 8px;font-family:var(--font-mono);font-size:10.3px;color:var(--brand-lime);">
+            💡 Nuestro runner sube el video a tu Página de Facebook (<code class="tag">/{page}/videos</code>) y publica tu Instagram Reel usando la URL Raw de tu repo público.
+          </div>
+        </div>
+
+        <!-- YouTube Data API v3 (C4 + D2) -->
+        <div class="card-dark cyan">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+            <span class="kicker" style="background:var(--brand-cyan);">YOUTUBE SHORTS (OPCIONAL)</span>
+            <span style="font-family:var(--font-mono);font-size:10px;color:var(--brand-cyan);">GOOGLE CLOUD CONSOLE</span>
+          </div>
+          <!-- PENDIENTE D2 -->
+          <h3 style="font-size:14.5px;font-weight:800;color:var(--brand-cyan);text-transform:uppercase;margin-bottom:4px;">Cómo funciona YouTube API y sus 2 restricciones</h3>
+          <p style="font-size:11.2px;color:#E4E4E7;margin-bottom:5px;">
+            En <code class="tag">console.cloud.google.com</code> puedes habilitar <strong>YouTube Data API v3</strong> y obtener <code class="tag">YT_CLIENT_ID</code>, <code class="tag">YT_CLIENT_SECRET</code> y <code class="tag">YT_REFRESH_TOKEN</code> (<code class="tag">youtube.upload</code>).<br/>
+            <strong style="color:#FF80AA;">⚠️ Importante (Auditoría de Google):</strong> Los proyectos nuevos de Google Cloud sin auditoría suben los videos bloqueados en <strong>Privado</strong>, y mientras la pantalla OAuth esté en modo <em>"Testing"</em> el <code class="tag">refresh_token</code> caduca cada <strong>7 días</strong>.
+          </p>
+          <div style="background:#000;border:1.5px solid var(--brand-cyan);padding:4px 8px;font-family:var(--font-mono);font-size:10.3px;color:var(--brand-cyan);">
+            💡 Si quieres publicar YouTube Shorts en Público sin auditoría de Google, usa la Vía B (Metricool Gratis).
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla de Secrets para la Vía A -->
+      <table class="dark-table">
+        <thead>
+          <tr>
+            <th>Nombre del Secret en GitHub</th>
+            <th>Red Social</th>
+            <th>Qué valor debes pegar ahí</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code class="tag">FB_PAGE_ID</code> y <code class="tag">META_PAGE_TOKEN</code></td>
+            <td><strong>Video en Página de Facebook</strong></td>
+            <td>ID numérico de tu Fan Page + Token de Página permanente obtenido en <code class="tag">me/accounts</code>.</td>
+          </tr>
+          <tr>
+            <td><code class="tag">IG_USER_ID</code></td>
+            <td><strong>Instagram Reels (Business / Creator)</strong></td>
+            <td>ID de tu cuenta profesional de Instagram vinculada a tu Fan Page de Facebook.</td>
+          </tr>
+          <tr>
+            <td><code class="tag">YT_CLIENT_ID</code>, <code class="tag">YT_CLIENT_SECRET</code>, <code class="tag">YT_REFRESH_TOKEN</code></td>
+            <td><strong>YouTube Shorts (Opcional)</strong></td>
+            <td>Credenciales OAuth 2.0 de Google Cloud (requiere pasar app a producción/auditoría para salir en Público).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer class="slide-footer">
+      <span>TALENTOCONTARIFA.LAT // MÓDULO 04: LAS TUBERÍAS — API DIRECTA VS. METRICOOL GRATIS</span>
+      <div class="footer-nav">
+        <a href="#lamina-1">◀ ANTERIOR</a>
+        <span class="footer-page">LÁMINA 02 / 06</span>
+        <a href="#lamina-3">SIGUIENTE LÁMINA ▶</a>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =========================================================================================
+       LÁMINA 03: VÍA B (PARA DUMMIES) — EL ATAJO CON METRICOOL GRATIS
+       ========================================================================================= -->
+  <section class="slide" id="lamina-3">
+    <header class="slide-header">
+      <div class="header-left">
+        <span class="tct-pill" style="background:var(--brand-cyan);">✨ VÍA B: METRICOOL GRATIS</span>
+        <div>
+          <div class="header-title">¿NO QUIERES TRAMITAR TOKENS DE API? USA EL ATAJO DE METRICOOL GRATIS</div>
+          <div class="header-sub">CONECTA TIKTOK, INSTAGRAM, FACEBOOK Y YOUTUBE EN 2 MINUTOS SIN AUDITORÍAS DE DESARROLLADOR</div>
+        </div>
+      </div>
+      <div class="slide-badge">MÓDULO 04 // LÁMINA 03 DE 06</div>
+    </header>
+
+    <div class="slide-content">
+      <div class="exceptions-grid">
+        <div class="card-dark cyan">
+          <span class="kicker" style="background:var(--brand-cyan);margin-bottom:8px;">POR QUÉ AMAMOS ESTE ATAJO</span>
+          <!-- PENDIENTE D3 -->
+          <h3 style="font-size:15.5px;font-weight:800;color:var(--brand-cyan);text-transform:uppercase;margin-bottom:6px;">Qué te incluye el Plan Gratis de Metricool</h3>
+          <p style="font-size:11.8px;color:#E4E4E7;margin-bottom:8px;">
+            Si apenas vas empezando y no quieres entrar a Meta for Developers, <strong>Metricool (<code class="tag">metricool.com</code>)</strong> ofrece un plan gratuito que te permite conectar las redes de una marca dando clic en "Iniciar sesión":
+          </p>
+          <div style="font-size:11.5px;color:#E4E4E7;display:flex;flex-direction:column;gap:5px;">
+            <div>✅ <strong>Plan gratuito mensual sin tarjeta</strong> (verifica la cuota mensual vigente de publicaciones en <code class="tag">metricool.com/es/precios</code>).</div>
+            <div>✅ <strong>Publica directo en TikTok y YouTube Shorts en Público</strong> (porque Metricool ya es partner oficial auditado).</div>
+            <div>✅ Incluye Instagram Reels, Facebook, TikTok, YouTube Shorts, Pinterest y Google Business.</div>
+          </div>
+        </div>
+
+        <div class="card-dark">
+          <span class="kicker" style="margin-bottom:8px;">CÓMO LO COMBINAS CON TU ROBOT</span>
+          <h3 style="font-size:15.5px;font-weight:800;color:var(--brand-lime);text-transform:uppercase;margin-bottom:6px;">El Flujo Híbrido (Antigravity + Metricool)</h3>
+          <p style="font-size:11.8px;color:#E4E4E7;margin-bottom:8px;">
+            En lugar de subir video por video a mano, tu agente de Antigravity te prepara todo el lote de la semana en segundos:
+          </p>
+          <div style="background:#0B0D12;border:1.5px solid var(--brand-lime);padding:8px 11px;margin-bottom:7px;">
+            <div style="font-family:var(--font-mono);font-size:11.2px;color:var(--brand-lime);font-weight:800;">PASO 1: FABRICAS TUS VIDEOS CON HYPERFRAMES + ELEVENLABS</div>
+            <div style="font-size:11.2px;color:#D4D4D8;">Creas tus videos de la semana en la carpeta <code class="tag">videos/</code> de tu PC.</div>
+          </div>
+          <div style="background:#0B0D12;border:1.5px solid var(--brand-cyan);padding:8px 11px;">
+            <div style="font-family:var(--font-mono);font-size:11.2px;color:var(--brand-cyan);font-weight:800;">PASO 2: GENERAS TUS COPYS Y PLANIFICAS TU SEMANA</div>
+            <div style="font-size:11.2px;color:#D4D4D8;">Con el Prompt #08 el agente te genera el archivo <code class="tag">calendario_metricool.csv</code> y los textos listos para programar tu calendario.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="slide-footer">
+      <span>TALENTOCONTARIFA.LAT // MÓDULO 04: LAS TUBERÍAS — API DIRECTA VS. METRICOOL GRATIS</span>
+      <div class="footer-nav">
+        <a href="#lamina-2">◀ ANTERIOR</a>
+        <span class="footer-page">LÁMINA 03 / 06</span>
+        <a href="#lamina-4">SIGUIENTE LÁMINA ▶</a>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =========================================================================================
+       LÁMINA 04: CENTRO DE PROMPTS DEL MÓDULO 04 (COPIAR EN 1 CLIC)
+       ========================================================================================= -->
+  <section class="slide" id="lamina-4">
+    <header class="slide-header">
+      <div class="header-left">
+        <span class="tct-pill">⚡ PROMPTS COPIAR Y PEGAR</span>
+        <div>
+          <div class="header-title">TUS 2 PROMPTS: COPIA Y PEGA EN TU AGENTE</div>
+          <div class="header-sub">ELIGE VÍA A (API DIRECTA) O VÍA B (METRICOOL GRATIS) Y PÉGALO EN TU AGENTE</div>
+        </div>
+      </div>
+      <div class="slide-badge">MÓDULO 04 // LÁMINA 04 DE 06</div>
+    </header>
+
+    <div class="slide-content">
+      <div class="prompts-grid">
+        <!-- Prompt #07 (Vía A: API Directa - RX-12, C1, C11, D2) -->
+        <div class="terminal-card">
+          <div>
+            <div class="terminal-head">
+              <span style="font-family:var(--font-mono);font-size:11px;color:var(--brand-lime);font-weight:700;">PROMPT #07 // CONECTAR API DIRECTA (META GRAPH API + YOUTUBE OPCIONAL)</span>
+              <button type="button" class="copy-btn screen-only" onclick="copyPrompt('p7-text', this)">
+                📋 COPIAR PROMPT #07 EN 1 CLIC
+              </button>
+              <a href="https://talentocontarifa.lat/minicurso-robot/aula" target="_blank" class="copy-btn print-only" style="text-decoration:none;">
+                🌐 Abre la versión web para copiar en 1 clic
+              </a>
+            </div>
+            <div class="terminal-pre" id="p7-text">Usando la Skill <span class="hl">github-actions-publisher</span>, crea en mi proyecto el script <span class="hl">scripts/publish_social.js</span> y conéctalo a mi workflow <span class="hl">.github/workflows/robot_publicador.yml</span> para que en cada turno:
+1. Seleccione el siguiente video <span class="hl">.mp4</span> de la carpeta <span class="hl">videos/</span> y genere su copy viral con <span class="hl">Gemini API (plan gratuito)</span> o plantilla de respaldo.
+2. Si existen los Secrets <span class="hl">META_PAGE_TOKEN</span>, <span class="hl">FB_PAGE_ID</span> e <span class="hl">IG_USER_ID</span>, publique automáticamente el video en mi Página de Facebook y como Instagram Reel vía Graph API v21.0.
+3. (Opcional) Si existen <span class="hl">YT_CLIENT_ID</span>, <span class="hl">YT_CLIENT_SECRET</span> y <span class="hl">YT_REFRESH_TOKEN</span>, incluya el módulo opcional para subirlo a YouTube Shorts.</div>
+          </div>
+          <div style="background:#141820;border-top:2px solid #27272A;padding:7px 12px;font-size:11px;color:#A1A1AA;">
+            💡 <strong style="color:#FFF;">Tip Pro:</strong> Si solo configuras Facebook e Instagram, el script detecta qué llaves pusiste y salta las demás sin dar error.
+          </div>
+        </div>
+
+        <!-- Prompt #08 (Vía B: Metricool) + Checklist Final -->
+        <div style="display:flex;flex-direction:column;justify-content:space-between;gap:10px;">
+          <div class="terminal-card">
+            <div class="terminal-head">
+              <span style="font-family:var(--font-mono);font-size:11px;color:var(--brand-cyan);font-weight:700;">PROMPT #08 // GENERADOR DE LOTE PARA METRICOOL GRATIS</span>
+              <button type="button" class="copy-btn screen-only" onclick="copyPrompt('p8-text', this)">
+                📋 COPIAR PROMPT #08 EN 1 CLIC
+              </button>
+              <a href="https://talentocontarifa.lat/minicurso-robot/aula" target="_blank" class="copy-btn print-only" style="text-decoration:none;">
+                🌐 Abre la versión web para copiar en 1 clic
+              </a>
+            </div>
+            <div class="terminal-pre" id="p8-text" style="font-size:10.8px;">Analiza todos los videos <span class="hl">.mp4</span> que tengo en mi carpeta <span class="hl">videos/</span> y genérame un archivo <span class="hl">calendario_metricool.csv</span> junto con un resumen de textos persuasivos y hashtags optimizados para TikTok, Instagram Reels y YouTube Shorts listos para programar mi semana en el plan gratuito de Metricool.</div>
+          </div>
+
+          <div class="card-dark" style="padding:10px 13px;background:#101912;">
+            <div style="font-family:var(--font-mono);font-size:11.5px;color:var(--brand-lime);font-weight:800;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center;">
+              <span>🏆 CHECKLIST DE GRADUACIÓN:</span>
+              <span id="checklist-status" style="background:#000;color:var(--brand-lime);padding:1px 7px;border:1px solid var(--brand-lime);font-size:10.5px;">0/3 listos</span>
+            </div>
+            <div style="font-size:11.5px;color:#E4E4E7;line-height:1.55;display:flex;flex-direction:column;gap:5px;">
+              <label style="cursor:pointer;display:flex;align-items:flex-start;gap:8px;">
+                <input type="checkbox" class="tct-check" data-check="tct-m04-check-1" style="accent-color:#CCFF00;width:16px;height:16px;margin-top:2px;flex-shrink:0;"/>
+                <span>Tengo mis 3 Skills o Prompts configurados en Antigravity o Claude Code.</span>
+              </label>
+              <label style="cursor:pointer;display:flex;align-items:flex-start;gap:8px;">
+                <input type="checkbox" class="tct-check" data-check="tct-m04-check-2" style="accent-color:#CCFF00;width:16px;height:16px;margin-top:2px;flex-shrink:0;"/>
+                <span>Mi fábrica local genera videos con API de ElevenLabs + HyperFrames.</span>
+              </label>
+              <label style="cursor:pointer;display:flex;align-items:flex-start;gap:8px;">
+                <input type="checkbox" class="tct-check" data-check="tct-m04-check-3" style="accent-color:#CCFF00;width:16px;height:16px;margin-top:2px;flex-shrink:0;"/>
+                <span>Mi robot de GitHub Actions o Metricool ya publica automáticamente.</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="slide-footer">
+      <span>TALENTOCONTARIFA.LAT // MÓDULO 04: LAS TUBERÍAS — API DIRECTA VS. METRICOOL GRATIS</span>
+      <div class="footer-nav">
+        <a href="#lamina-3">◀ ANTERIOR</a>
+        <span class="footer-page">LÁMINA 04 / 06</span>
+        <a href="#lamina-5">SIGUIENTE LÁMINA ▶</a>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =========================================================================================
+       LÁMINA 05: ESCUDO ANTI-BLOQUEOS DE APIS DE REDES SOCIALES
+       ========================================================================================= -->
+  <section class="slide" id="lamina-5">
+    <header class="slide-header">
+      <div class="header-left">
+        <span class="tct-pill" style="background:var(--brand-pink);color:#FFF;">🛡️ ESCUDO ANTI-BLOQUEOS</span>
+        <div>
+          <div class="header-title">4 EXCEPCIONES REALES EN TIKTOK, YOUTUBE, INSTAGRAM Y META</div>
+          <div class="header-sub">POR QUÉ TIKTOK Y YOUTUBE API SIN AUDITORÍA PUBLICAN EN PRIVADO Y CÓMO EVITARLO</div>
+        </div>
+      </div>
+      <div class="slide-badge">MÓDULO 04 // LÁMINA 05 DE 06</div>
+    </header>
+
+    <div class="slide-content">
+      <div class="exceptions-grid">
+        <!-- C4: TikTok API + YouTube API privado sin auditoría y refresh token de 7 días en Testing -->
+        <div class="card-dark pink">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:5px;">
+            <div class="icon-box pink" style="width:30px;height:30px;font-family:var(--font-mono);font-weight:800;">01</div>
+            <h4 style="font-size:13.3px;font-weight:800;color:var(--brand-lime);text-transform:uppercase;">¿Por qué TikTok API y YouTube API salen en Privado?</h4>
+          </div>
+          <p style="font-size:11.4px;color:#E4E4E7;margin-bottom:5px;">
+            <strong>La verdad:</strong> Las apps nuevas en <code class="tag">developers.tiktok.com</code> y los proyectos de Google Cloud sin auditoría oficial fuerzan que los videos suban en <strong>Privado</strong> (además, en Google Cloud en modo <em>"Testing"</em> el <code class="tag">refresh_token</code> caduca a los <strong>7 días</strong>).
+          </p>
+          <div style="background:#000;border:1.5px solid var(--brand-lime);padding:5px 8px;font-family:var(--font-mono);font-size:10.8px;color:var(--brand-lime);">
+            ✓ SOLUCIÓN: Para TikTok y YouTube sin auditoría usa <strong>Metricool Gratis</strong> (que ya es partner auditado y publica en Público) o pasa tu pantalla OAuth de Google a Producción.
+          </div>
+        </div>
+
+        <div class="card-dark cyan">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:5px;">
+            <div class="icon-box cyan" style="width:30px;height:30px;font-family:var(--font-mono);font-weight:800;">02</div>
+            <h4 style="font-size:13.3px;font-weight:800;color:var(--brand-cyan);text-transform:uppercase;">Instagram devuelve "Media ID is not available"</h4>
+          </div>
+          <p style="font-size:11.4px;color:#E4E4E7;margin-bottom:5px;">
+            <strong>Qué pasa:</strong> Cuando creas el contenedor de un Reel en Instagram Graph API, los servidores de Meta tardan de 15 a 30 segundos en procesar el video antes de permitir publicarlo.
+          </p>
+          <div style="background:#000;border:1.5px solid var(--brand-cyan);padding:5px 8px;font-family:var(--font-mono);font-size:10.8px;color:var(--brand-cyan);">
+            ✓ SOLUCIÓN: Nuestro script <code class="tag">publish_social.js</code> espera automáticamente hasta que <code class="tag">status_code == "FINISHED"</code> antes de llamar a <code class="tag">media_publish</code>.
+          </div>
+        </div>
+
+        <div class="card-dark">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:5px;">
+            <div class="icon-box" style="width:30px;height:30px;font-family:var(--font-mono);font-weight:800;">03</div>
+            <h4 style="font-size:13.3px;font-weight:800;color:var(--brand-lime);text-transform:uppercase;">Mi cuenta de Instagram no aparece en Meta API</h4>
+          </div>
+          <p style="font-size:11.4px;color:#E4E4E7;margin-bottom:5px;">
+            <strong>Qué pasa:</strong> Las cuentas personales de Instagram no tienen acceso a la API de publicación automática, o faltó marcar permisos al generar el token.
+          </p>
+          <div style="background:#000;border:1.5px solid var(--brand-lime);padding:5px 8px;font-family:var(--font-mono);font-size:10.8px;color:var(--brand-lime);">
+            ✓ SOLUCIÓN: Cámbiala gratis a <strong>Cuenta de Creador o Empresa</strong>, vincúlala a tu Fan Page de Facebook e incluye <code class="tag">pages_show_list</code> y <code class="tag">business_management</code>.
+          </div>
+        </div>
+
+        <div class="card-dark pink">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:5px;">
+            <div class="icon-box pink" style="width:30px;height:30px;font-family:var(--font-mono);font-weight:800;">04</div>
+            <h4 style="font-size:13.3px;font-weight:800;color:#FF80AA;text-transform:uppercase;">Instagram rechaza la URL del video (Error de descarga)</h4>
+          </div>
+          <p style="font-size:11.4px;color:#E4E4E7;margin-bottom:5px;">
+            <strong>Qué pasa:</strong> Instagram Graph API necesita descargar el archivo <code class="tag">.mp4</code> desde una URL pública directa; si tu repositorio de GitHub está en Privado, los servidores de Meta reciben un 404.
+          </p>
+          <div style="background:#000;border:1.5px solid var(--brand-pink);padding:5px 8px;font-family:var(--font-mono);font-size:10.8px;color:#FF80AA;">
+            ✓ SOLUCIÓN: Asegúrate de que tu repositorio de GitHub sea <strong>Público</strong> (tus llaves siguen 100% ocultas dentro de GitHub Secrets).
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="slide-footer">
+      <span>TALENTOCONTARIFA.LAT // MÓDULO 04: LAS TUBERÍAS — API DIRECTA VS. METRICOOL GRATIS</span>
+      <div class="footer-nav">
+        <a href="#lamina-4">◀ ANTERIOR</a>
+        <span class="footer-page">LÁMINA 05 / 06</span>
+        <a href="#lamina-6">SIGUIENTE LÁMINA ▶</a>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =========================================================================================
+       LÁMINA 06: VIDEOTECA YOUTUBE DEL MÓDULO 04 CON MINIATURAS Y CRÉDITOS OFICIALES
+       ========================================================================================= -->
+  <section class="slide" id="lamina-6">
+    <header class="slide-header">
+      <div class="header-left">
+        <span class="tct-pill" style="background:#FF0033;color:#FFF;border-color:#FFF;">▶ VIDEOTECA DE APOYO</span>
+        <div>
+          <div class="header-title">TUTORIALES DE APOYO EN YOUTUBE: METRICOOL GRATIS Y TOKENS PERMANENTES DE META</div>
+          <div class="header-sub">RECONOCIMIENTO Y CRÉDITO COMPLETO A LOS AUTORES Y CANALES ORIGINALES</div>
+        </div>
+      </div>
+      <div class="slide-badge">MÓDULO 04 // LÁMINA 06 DE 06</div>
+    </header>
+
+    <div class="slide-content">
+      <p style="font-size:11.8px;color:#D4D4D8;">
+        ¿Quieres ver en video cómo programar Reels gratis en Metricool o cómo generar el Token Permanente en Meta for Developers? <strong>Todo el crédito y reconocimiento a sus autores oficiales:</strong>
+      </p>
+
+      <div class="yt-cards-grid">
+        <a class="yt-visual-card" href="https://www.youtube.com/watch?v=g8OOxwpoFI8" target="_blank" rel="noopener noreferrer">
+          <div class="yt-thumb">
+            <img src="https://i.ytimg.com/vi/g8OOxwpoFI8/hqdefault.jpg" alt="Tutorial Metricool Gratis Ligia Alvear" />
+            <span class="yt-play-pill">▶ YOUTUBE</span>
+          </div>
+          <div>
+            <span class="yt-credit-pill" style="background:var(--brand-cyan);">Autora y Canal: Ligia Alvear</span>
+            <span class="yt-meta-pill">⏱ ~14 min · Vía B Metricool</span>
+            <h5 style="font-size:12.5px;font-weight:800;line-height:1.22;margin-bottom:2px;">Programa tus REELS desde la PC con METRICOOL ¡GRATIS!</h5>
+            <div style="font-size:10.8px;color:#A1A1AA;">Guía súper amigable paso a paso para conectar tus cuentas y usar el plan gratuito de Metricool sin complicarte.</div>
+            <span class="yt-watch-btn">ABRIR EN YOUTUBE (youtu.be/g8OOxwpoFI8) ➔</span>
+          </div>
+        </a>
+
+        <a class="yt-visual-card" href="https://www.youtube.com/watch?v=wFlQf2TH9wU" target="_blank" rel="noopener noreferrer">
+          <div class="yt-thumb">
+            <img src="https://i.ytimg.com/vi/wFlQf2TH9wU/hqdefault.jpg" alt="Token Permanente Meta API Javier Vrandecic" />
+            <span class="yt-play-pill">▶ YOUTUBE</span>
+          </div>
+          <div>
+            <span class="yt-credit-pill">Autor y Canal: Javier Vrandecic</span>
+            <span class="yt-meta-pill">⏱ ~12 min · Vía A Meta API</span>
+            <h5 style="font-size:12.5px;font-weight:800;line-height:1.22;margin-bottom:2px;">Adiós Token de 24 Horas: Configura el Acceso Permanente en Meta</h5>
+            <div style="font-size:10.8px;color:#A1A1AA;">Explicación detallada en español de cómo obtener el token que no caduca dentro de Meta for Developers.</div>
+            <span class="yt-watch-btn">ABRIR EN YOUTUBE (youtu.be/wFlQf2TH9wU) ➔</span>
+          </div>
+        </a>
+
+        <a class="yt-visual-card" href="https://www.youtube.com/shorts/9kz9crekFzE" target="_blank" rel="noopener noreferrer">
+          <div class="yt-thumb">
+            <img src="https://i.ytimg.com/vi/9kz9crekFzE/hqdefault.jpg" alt="Token Permanente Meta API Ignacio Arruvito" />
+            <span class="yt-play-pill">▶ SHORT</span>
+          </div>
+          <div>
+            <span class="yt-credit-pill">Autor y Canal: Ignacio Arruvito</span>
+            <span class="yt-meta-pill">⏱ 60 seg · Repaso Rápido</span>
+            <h5 style="font-size:12.5px;font-weight:800;line-height:1.22;margin-bottom:2px;">Cómo CREAR un TOKEN PERMANENTE en META API (En 60s)</h5>
+            <div style="font-size:10.8px;color:#A1A1AA;">Resumen directo al grano en formato Short para verificar que asignaste bien los permisos de tu aplicación.</div>
+            <span class="yt-watch-btn">ABRIR EN YOUTUBE (shorts/9kz9crekFzE) ➔</span>
+          </div>
+        </a>
+
+        <a class="yt-visual-card" href="https://www.youtube.com/watch?v=-8haKKGc55Y" target="_blank" rel="noopener noreferrer">
+          <div class="yt-thumb">
+            <img src="https://i.ytimg.com/vi/-8haKKGc55Y/hqdefault.jpg" alt="GitHub Actions con Midudev" />
+            <span class="yt-play-pill">▶ YOUTUBE</span>
+          </div>
+          <div>
+            <span class="yt-credit-pill">Autores: Platzi &amp; Miguel Ángel Durán (Midudev)</span>
+            <span class="yt-meta-pill">⏱ ~25 min · Integración Runner</span>
+            <h5 style="font-size:12.5px;font-weight:800;line-height:1.22;margin-bottom:2px;">Aprende GitHub Actions con Midudev — Automatización Total</h5>
+            <div style="font-size:10.8px;color:#A1A1AA;">Para revisar cómo se conectan los Secrets de las APIs con los pasos de ejecución de tu runner en la nube.</div>
+            <span class="yt-watch-btn">ABRIR EN YOUTUBE (youtu.be/-8haKKGc55Y) ➔</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <footer class="slide-footer">
+      <span>DISEÑADO POR TALENTO CON TARIFA • TODOS LOS VIDEOS PERTENECEN A SUS AUTORES OFICIALES</span>
+      <div class="footer-nav">
+        <a href="#lamina-5">◀ ANTERIOR</a>
+        <a href="#lamina-1">⏫ INICIO MÓDULO 04</a>
+        <span class="footer-page">LÁMINA 06 / 06</span>
+        <a href="/minicurso-robot/aula" class="footer-btn-primary">🎓 FINALIZAR: VOLVER AL AULA OFICIAL ➔</a>
+      </div>
+    </footer>
+  </section>
+
+  <script>
+    function selectElementText(el) {
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+
+    function showCopyFeedback(btnElement, message, isSuccess) {
+      const originalText = btnElement.getAttribute('data-orig') || btnElement.innerHTML;
+      btnElement.setAttribute('data-orig', originalText);
+      if (isSuccess) btnElement.classList.add('copied');
+      btnElement.innerHTML = message;
+      setTimeout(() => {
+        btnElement.classList.remove('copied');
+        btnElement.innerHTML = originalText;
+      }, 3000);
+    }
+
+    function copyPrompt(elementId, btnElement) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const rawText = (el.innerText || el.textContent || '').trim();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(rawText).then(() => {
+          showCopyFeedback(btnElement, '✅ ¡COPIADO! PÉGALO EN EL CHAT DE TU AGENTE (Ctrl+V)', true);
+        }).catch(() => {
+          selectElementText(el);
+          showCopyFeedback(btnElement, '📋 Selecciona y copia con Ctrl+C', false);
+        });
+      } else {
+        selectElementText(el);
+        try {
+          document.execCommand('copy');
+          showCopyFeedback(btnElement, '✅ ¡COPIADO! PÉGALO EN EL CHAT DE TU AGENTE (Ctrl+V)', true);
+        } catch (e) {
+          showCopyFeedback(btnElement, '📋 Selecciona y copia con Ctrl+C', false);
+        }
+      }
+    }
+
+    (function initInteractiveManual() {
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const navLinks = Array.from(document.querySelectorAll('.web-nav-links a[data-slide]'));
+      const mobileSelect = document.querySelector('.mobile-slide-select');
+      const progressBar = document.getElementById('nav-progress-bar');
+
+      if ('IntersectionObserver' in window && slides.length) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.id;
+              const idx = slides.findIndex(s => s.id === id);
+              navLinks.forEach(link => {
+                if (link.getAttribute('data-slide') === id) {
+                  link.setAttribute('aria-current', 'true');
+                } else {
+                  link.removeAttribute('aria-current');
+                }
+              });
+              if (mobileSelect) mobileSelect.value = '#' + id;
+              if (progressBar && idx >= 0) {
+                progressBar.style.width = (((idx + 1) / slides.length) * 100).toFixed(1) + '%';
+              }
+            }
+          });
+        }, { threshold: 0.45 });
+        slides.forEach(s => observer.observe(s));
+      }
+
+      document.addEventListener('keydown', (e) => {
+        const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+        if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+
+        const currentLink = document.querySelector('.web-nav-links a[aria-current="true"]');
+        let currentIdx = currentLink ? slides.findIndex(s => s.id === currentLink.getAttribute('data-slide')) : 0;
+        if (currentIdx < 0) currentIdx = 0;
+
+        const nextIdx = e.key === 'ArrowRight'
+          ? Math.min(slides.length - 1, currentIdx + 1)
+          : Math.max(0, currentIdx - 1);
+
+        if (nextIdx !== currentIdx && slides[nextIdx]) {
+          e.preventDefault();
+          slides[nextIdx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.replaceState(null, '', '#' + slides[nextIdx].id);
+        }
+      });
+
+      const checks = Array.from(document.querySelectorAll('.tct-check'));
+      const statusEl = document.getElementById('checklist-status');
+      const navLink4 = document.getElementById('nav-link-4');
+
+      function updateChecklistSummary() {
+        const doneCount = checks.filter(c => c.checked).length;
+        if (statusEl) {
+          statusEl.textContent = doneCount + '/' + checks.length + ' listos';
+        }
+        if (navLink4) {
+          const baseText = '04. Pega los prompts';
+          navLink4.textContent = doneCount === checks.length ? baseText + ' ✓' : baseText;
+        }
+      }
+
+      checks.forEach((chk) => {
+        const key = chk.getAttribute('data-check');
+        if (key) {
+          try {
+            chk.checked = localStorage.getItem(key) === '1';
+          } catch (e) {}
+          chk.addEventListener('change', () => {
+            try {
+              localStorage.setItem(key, chk.checked ? '1' : '0');
+            } catch (e) {}
+            updateChecklistSummary();
+          });
+        }
+      });
+      updateChecklistSummary();
+    })();
+  </script>
+</body>
+</html>

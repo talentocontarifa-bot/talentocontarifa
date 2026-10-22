@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Módulo 03 — El Robot Fantasma en GitHub Actions + IA Gratis | Talento con Tarifa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-void: #08090B;
+      --bg-surface: #111318;
+      --bg-card: #171A21;
+      --brand-lime: #CCFF00;
+      --brand-pink: #FF0055;
+      --brand-cyan: #00E5FF;
+      --text-white: #F4F4F6;
+      --text-Gray: #A1A1AA;
+      --shadow-lime: 5px 5px 0px #CCFF00;
+      --shadow-pink: 5px 5px 0px #FF0055;
+      --shadow-cyan: 5px 5px 0px #00E5FF;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-mono: 'Share Tech Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #050507;
+      color: var(--text-white);
+      font-family: var(--font-display);
+      line-height: 1.4;
+      font-size: 13.5px;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 3px solid var(--brand-lime) !important;
+      outline-offset: 2px;
+    }
+
+    .print-only {
+      display: none !important;
+    }
+
+    .web-nav {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(8, 9, 11, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 3px solid var(--brand-lime);
+      padding: 8px 20px 11px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .web-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-aula-btn {
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 12px;
+      background: #000;
+      color: var(--brand-lime);
+      border: 1.5px solid var(--brand-lime);
+      padding: 4px 10px;
+      white-space: nowrap;
+    }
+
+    .nav-aula-btn:hover {
+      background: var(--brand-lime);
+      color: #000;
+    }
+
+    .web-nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--brand-lime);
+      font-size: 13.5px;
+    }
+
+    .mod-switcher {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #0D0F14;
+      border: 1.5px solid #3F3F46;
+      padding: 2px 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .mod-switcher span {
+      color: var(--text-Gray);
+      margin-right: 2px;
+    }
+
+    .mod-switcher a {
+      text-decoration: none;
+      color: var(--text-white);
+      padding: 2px 6px;
+      border: 1px solid transparent;
+    }
+
+    .mod-switcher a:hover {
+      border-color: var(--brand-lime);
+      color: var(--brand-lime);
+    }
+
+    .mod-switcher a[aria-current="page"] {
+      background: var(--brand-lime);
+      color: #000;
+      font-weight: 800;
+    }
+
+    .web-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .nav-group-label {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--brand-cyan);
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      margin-left: 4px;
+    }
+
+    .nav-group-sep {
+      color: #3F3F46;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      margin: 0 2px;
+    }
+
+    .web-nav-links a {
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-white);
+      background: var(--bg-card);
+      border: 1.5px solid #3F3F46;
+      padding: 5px 10px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .web-nav-links a:hover,
+    .web-nav-links a[aria-current="true"] {
+      background: var(--brand-lime);
+      color: #000;
+      border-color: #FFF;
+      font-weight: 800;
+      transform: translate(-1px, -1px);
+      box-shadow: 2px 2px 0px #FFF;
+    }
+
+    .mobile-slide-select {
+      display: none;
+      width: 100%;
+      background: var(--bg-card);
+      color: var(--brand-lime);
+      border: 2px solid var(--brand-lime);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 7px 10px;
+    }
+
+    .web-nav-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #181B24;
+    }
+
+    .web-nav-progress-bar {
+      height: 100%;
+      width: 16.66%;
+      background: var(--brand-cyan);
+      transition: width 0.2s ease;
+    }
+
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+
+    .slide {
+      width: 297mm;
+      height: 210mm;
+      margin: 22px auto;
+      scroll-margin-top: 74px;
+      padding: 10mm 13mm 9mm 13mm;
+      background-color: var(--bg-void);
+      background-image:
+        radial-gradient(rgba(204, 255, 0, 0.12) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(17, 19, 24, 0.9) 0%, rgba(8, 9, 11, 0.98) 100%);
+      background-size: 20px 20px, 100% 100%;
+      border: 3px solid #27272A;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+      break-after: page;
+      overflow: hidden;
+    }
+
+    .slide-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-surface);
+      border: 2.5px solid var(--text-white);
+      box-shadow: 4px 4px 0px var(--brand-lime);
+      padding: 7px 14px;
+      margin-bottom: 10px;
+      flex-shrink: 0;
+      gap: 10px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tct-pill {
+      background: var(--brand-lime);
+      color: #000;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 14px;
+      padding: 3px 10px;
+      border: 2px solid #000;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .header-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--brand-lime);
+      letter-spacing: 0.4px;
+    }
+
+    .header-sub {
+      font-family: var(--font-mono);
+      font-size: 10.8px;
+      color: var(--text-Gray);
+    }
+
+    .slide-badge {
+      background: #000;
+      color: var(--brand-lime);
+      border: 2px solid var(--brand-lime);
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 4px 12px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .slide-footer {
+      border-top: 2px solid #27272A;
+      padding-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 10.8px;
+      color: var(--text-Gray);
+      flex-shrink: 0;
+      gap: 8px;
+    }
+
+    .footer-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .footer-nav a {
+      text-decoration: none;
+      background: #181B24;
+      color: var(--brand-lime);
+      border: 1.5px solid var(--brand-lime);
+      padding: 2px 9px;
+      font-weight: 700;
+      font-size: 10.5px;
+    }
+
+    .footer-nav a.footer-btn-primary {
+      background: var(--brand-lime);
+      color: #000;
+      border: 2px solid #FFF;
+      font-weight: 800;
+    }
+
+    .footer-page {
+      background: var(--brand-lime);
+      color: #000;
+      font-weight: 800;
+      padding: 2px 10px;
+    }
+
+    .slide-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--brand-lime);
+      color: #000;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 11px;
+      padding: 3px 10px;
+      text-transform: uppercase;
+      border: 2px solid #FFF;
+      width: fit-content;
+    }
+
+    .card-dark {
+      background: var(--bg-card);
+      border: 2.5px solid var(--text-white);
+      box-shadow: var(--shadow-lime);
+      padding: 12px 14px;
+      position: relative;
+    }
+
+    .card-dark.pink {
+      box-shadow: var(--shadow-pink);
+      border-color: var(--brand-pink);
+    }
+
+    .card-dark.cyan {
+      box-shadow: var(--shadow-cyan);
+      border-color: var(--brand-cyan);
+    }
+
+    .icon-box {
+      width: 36px;
+      height: 36px;
+      background: var(--brand-lime);
+      color: #000;
+      border: 2px solid #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .icon-box.pink {
+      background: var(--brand-pink);
+      color: #FFF;
+    }
+
+    .icon-box.cyan {
+      background: var(--brand-cyan);
+      color: #000;
+    }
+
+    code.tag {
+      font-family: var(--font-mono);
+      background: #000;
+      color: var(--brand-lime);
+      border: 1px solid #3F3F46;
+      padding: 1px 5px;
+      font-size: 11px;
+    }
+
+    .copy-btn {
+      cursor: pointer;
+      background: var(--brand-lime);
+      color: #000;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 11.5px;
+      padding: 6px 12px;
+      border: 2px solid #FFF;
+      box-shadow: 3px 3px 0px #FFF;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+      transition: all 0.12s ease;
+    }
+
+    .copy-btn:hover {
+      background: #FFF;
+      color: #000;
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0px var(--brand-lime);
+    }
+
+    .copy-btn.copied {
+      background: #10B981;
+      color: #FFF;
+      border-color: #FFF;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .hero-main {
+      background: var(--bg-card);
+      border: 3px solid var(--text-white);
+      box-shadow: 7px 7px 0px var(--brand-lime);
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .hero-title {
+      font-size: 29px;
+      font-weight: 800;
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: -0.8px;
+      margin: 6px 0 8px 0;
+    }
+
+    .hero-title span {
+      color: var(--brand-lime);
+      text-decoration: underline;
+      text-decoration-thickness: 3px;
+    }
+
+    .hero-side {
+      background: var(--bg-surface);
+      border: 3px solid var(--brand-lime);
+      box-shadow: 7px 7px 0px var(--brand-cyan);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+    }
+
+    .avatars-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .avatar-frame {
+      width: 110px;
+      height: 110px;
+      border: 3px solid var(--brand-lime);
+      box-shadow: 4px 4px 0px #FFF;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .avatar-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cerebro-badge {
+      width: 86px;
+      height: 86px;
+      border: 3px solid #FFF;
+      background: var(--brand-lime);
+      box-shadow: 4px 4px 0px var(--brand-pink);
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cerebro-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .goals-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .goal-item {
+      background: var(--bg-surface);
+      border: 2px solid #3F3F46;
+      border-left: 6px solid var(--brand-lime);
+      padding: 9px 11px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .two-col-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .exceptions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .dark-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-card);
+      border: 2.5px solid var(--text-white);
+      box-shadow: var(--shadow-lime);
+      font-size: 11.4px;
+    }
+
+    .dark-table th {
+      background: #000;
+      color: var(--brand-lime);
+      font-family: var(--font-mono);
+      text-align: left;
+      padding: 5px 9px;
+      border: 1.5px solid #3F3F46;
+      text-transform: uppercase;
+    }
+
+    .dark-table td {
+      padding: 5px 9px;
+      border: 1.5px solid #27272A;
+      color: #E4E4E7;
+    }
+
+    .prompts-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .terminal-card {
+      background: #0D0F14;
+      border: 3px solid var(--brand-lime);
+      box-shadow: 6px 6px 0px #FFF;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .terminal-head {
+      background: #181B24;
+      border-bottom: 2px solid var(--brand-lime);
+      padding: 7px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .terminal-pre {
+      padding: 10px 13px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.4;
+      color: #F4F4F6;
+      white-space: pre-wrap;
+      user-select: all;
+    }
+
+    .terminal-pre span.hl {
+      color: var(--brand-lime);
+      font-weight: 700;
+    }
+
+    .yt-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .yt-visual-card {
+      background: var(--bg-card);
+      border: 2.5px solid var(--text-white);
+      box-shadow: 5px 5px 0px var(--brand-lime);
+      padding: 9px 11px;
+      display: grid;
+      grid-template-columns: 124px 1fr;
+      gap: 11px;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text-white);
+      transition: transform 0.12s ease;
+    }
+
+    .yt-visual-card:hover {
+      transform: translate(-2px, -2px);
+      border-color: var(--brand-lime);
+    }
+
+    .yt-thumb {
+      width: 124px;
+      height: 74px;
+      border: 2px solid var(--brand-lime);
+      position: relative;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .yt-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .yt-play-pill {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      background: #FF0033;
+      color: #FFF;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border: 1px solid #FFF;
+    }
+
+    .yt-credit-pill {
+      display: inline-block;
+      background: var(--brand-lime);
+      color: #000;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 1px 6px;
+      margin-bottom: 2px;
+    }
+
+    .yt-meta-pill {
+      display: inline-block;
+      background: #181B24;
+      color: var(--brand-cyan);
+      border: 1px solid var(--brand-cyan);
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 1px 5px;
+      margin-bottom: 3px;
+      margin-left: 4px;
+    }
+
+    .yt-watch-btn {
+      margin-top: 4px;
+      display: inline-block;
+      background: #000;
+      color: var(--brand-lime);
+      border: 1.5px solid var(--brand-lime);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+    }
+
+    @media print {
+      body {
+        background: var(--bg-void);
+        font-size: 13px;
+      }
+      .web-nav,
+      .screen-only {
+        display: none !important;
+      }
+      .print-only {
+        display: inline-flex !important;
+      }
+      .slide {
+        margin: 0 !important;
+        border: none !important;
+        width: 297mm !important;
+        height: 210mm !important;
+        overflow: hidden !important;
+        page-break-after: always !important;
+        break-after: page !important;
+      }
+    }
+
+    @media screen {
+      body {
+        font-size: 15.5px;
+        line-height: 1.5;
+      }
+
+      .slide {
+        width: min(297mm, calc(100% - 24px));
+        height: auto;
+        min-height: auto;
+        margin: 18px auto;
+        padding: 20px 24px;
+        overflow: visible;
+        justify-content: flex-start;
+        gap: 16px;
+      }
+
+      .slide-content {
+        flex: 0 1 auto;
+        justify-content: flex-start;
+        gap: 16px;
+      }
+
+      .header-title {
+        font-size: 16px;
+      }
+      .header-sub {
+        font-size: 12.5px;
+      }
+      .card-dark h3,
+      .card-dark h4 {
+        font-size: 18px !important;
+        line-height: 1.25 !important;
+      }
+      .card-dark p,
+      .card-dark li,
+      .goal-item div {
+        font-size: 15px !important;
+        line-height: 1.5 !important;
+      }
+      .terminal-pre {
+        font-size: 14px !important;
+        line-height: 1.55 !important;
+      }
+      code.tag {
+        font-size: 13px !important;
+      }
+      .dark-table {
+        font-size: 14px;
+      }
+
+      .footer-nav a {
+        min-height: 40px;
+        padding: 8px 14px;
+        font-size: 13px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .footer-page {
+        min-height: 40px;
+        padding: 8px 12px;
+        font-size: 13px;
+        display: inline-flex;
+        align-items: center;
+      }
+    }
+
+        /* ==================== LAPTOP 1280x720 (RX-N2: LÁMINA COMPLETA Y NAV EN 1 RENGLÓN) ==================== */
+    @media screen and (min-width: 901px) and (max-width: 1366px) {
+      .web-nav {
+        padding: 5px 12px;
+        gap: 6px;
+        flex-wrap: nowrap;
+      }
+      .web-nav-left {
+        gap: 6px;
+        flex-shrink: 0;
+      }
+      .web-nav-brand {
+        font-size: 12px;
+        white-space: nowrap;
+      }
+      .aula-back-btn {
+        padding: 4px 8px;
+        font-size: 11px;
+        white-space: nowrap;
+      }
+      .mod-switcher {
+        padding: 2px 5px;
+        gap: 2px;
+      }
+      .mod-switcher a {
+        padding: 2px 5px;
+        font-size: 10.5px;
+      }
+      .web-nav-links {
+        gap: 4px;
+        flex-wrap: nowrap;
+      }
+      .nav-group-label {
+        font-size: 9.5px;
+        margin-left: 2px;
+        white-space: nowrap;
+      }
+      .web-nav-links a {
+        padding: 4px 7px;
+        font-size: 11px;
+        white-space: nowrap;
+      }
+    }
+
+    @media screen and (min-width: 901px) and (max-height: 780px) {
+      .slide {
+        margin: 8px auto;
+        padding: 10px 18px;
+        gap: 8px;
+      }
+      .slide-header {
+        padding: 5px 12px;
+        margin-bottom: 2px;
+      }
+      .slide-content {
+        gap: 8px;
+      }
+      .hero-card {
+        padding: 12px 16px;
+      }
+      .hero-title {
+        font-size: 25px !important;
+        line-height: 1.05 !important;
+        margin-bottom: 4px !important;
+      }
+      .hero-lead {
+        font-size: 13.5px !important;
+        line-height: 1.32 !important;
+        margin-bottom: 6px !important;
+      }
+      .goal-item {
+        padding: 8px 11px;
+        gap: 8px;
+      }
+      .goal-item div {
+        font-size: 12.8px !important;
+        line-height: 1.32 !important;
+      }
+      .slide-footer {
+        padding-top: 4px;
+      }
+      .footer-nav a,
+      .footer-page {
+        min-height: 36px;
+        padding: 5px 12px;
+        font-size: 12px;
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      html, body {
+        overflow-x: hidden;
+        max-width: 100vw;
+      }
+
+      .web-nav {
+        position: relative;
+        padding: 10px 12px 14px 12px;
+        gap: 8px;
+      }
+
+      .web-nav-links {
+        display: none;
+      }
+
+      .mobile-slide-select {
+        display: block;
+      }
+
+      .slide {
+        width: calc(100% - 16px);
+        margin: 12px auto;
+        padding: 14px 12px;
+      }
+
+      .slide-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 12px;
+      }
+
+      .header-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .tct-pill,
+      .slide-badge {
+        white-space: normal;
+        font-size: 12px;
+      }
+
+      .hero-title {
+        font-size: 24px;
+      }
+
+      .hero-grid,
+      .two-col-grid,
+      .prompts-grid,
+      .exceptions-grid,
+      .yt-cards-grid,
+      .goals-strip {
+        grid-template-columns: 1fr !important;
+      }
+
+      .yt-visual-card {
+        grid-template-columns: 1fr !important;
+      }
+
+      .yt-thumb {
+        width: 100% !important;
+        height: 150px !important;
+      }
+
+      .dark-table {
+        display: block;
+        overflow-x: auto;
+        max-width: 100%;
+      }
+
+      .slide-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .footer-nav {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .terminal-pre,
+      code.tag,
+      a {
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN WEB -->
+  <nav class="web-nav" aria-label="Navegación del manual">
+    <div class="web-nav-left">
+      <a href="/minicurso-robot/aula" class="nav-aula-btn">◀ AULA</a>
+      <div class="web-nav-brand">
+        <span>⚡ MÓDULO 03</span>
+      </div>
+      <div class="mod-switcher" aria-label="Cambiar de módulo">
+        <span>MÓDULOS:</span>
+        <a href="TCT_Modulo_01_Mapa_y_Obrero_IA.html">01</a>
+        <a href="TCT_Modulo_02_Fabrica_Videos_Gratis.html">02</a>
+        <a href="TCT_Modulo_03_Robot_GitHub_Actions.html" aria-current="page">03</a>
+        <a href="TCT_Modulo_04_Tuberias_API_y_Metricool.html">04</a>
+      </div>
+    </div>
+
+    <select class="mobile-slide-select" aria-label="Ir a lámina" onchange="if(this.value) location.hash=this.value;">
+      <option value="#lamina-1">ENTIENDE ➔ 01. Portada</option>
+      <option value="#lamina-2">ENTIENDE ➔ 02. Reloj Cron UTC</option>
+      <option value="#lamina-3">HAZ ➔ 03. Secrets + Gemini API</option>
+      <option value="#lamina-4">HAZ ➔ 04. Pega los Prompts</option>
+      <option value="#lamina-5">SI ALGO FALLA ➔ 05. Escudo Anti-Pausa</option>
+      <option value="#lamina-6">APRENDE MÁS ➔ 06. Videoteca YouTube</option>
+    </select>
+
+    <div class="web-nav-links">
+      <span class="nav-group-label">ENTIENDE:</span>
+      <a href="#lamina-1" data-slide="lamina-1" aria-current="true">01. Portada</a>
+      <a href="#lamina-2" data-slide="lamina-2">02. Reloj Cron</a>
+      <span class="nav-group-sep">|</span>
+      <span class="nav-group-label">HAZ:</span>
+      <a href="#lamina-3" data-slide="lamina-3">03. Secrets + Gemini</a>
+      <a href="#lamina-4" data-slide="lamina-4" id="nav-link-4">04. Pega los prompts</a>
+      <span class="nav-group-sep">|</span>
+      <span class="nav-group-label">SI ALGO FALLA:</span>
+      <a href="#lamina-5" data-slide="lamina-5">05. Errores</a>
+      <span class="nav-group-label">APRENDE MÁS:</span>
+      <a href="#lamina-6" data-slide="lamina-6">06. Videos</a>
+    </div>
+
+    <div class="web-nav-progress" aria-hidden="true">
+      <div class="web-nav-progress-bar" id="nav-progress-bar"></div>
+    </div>
+  </nav>
+
+  <!-- =========================================================================================
+       LÁMINA 01: PORTADA DEL MÓDULO 03 — EL ROBOT FANTASMA EN GITHUB ACTIONS
+       ========================================================================================= -->
+  <section class="slide" id="lamina-1">
+    <header class="slide-header">
+      <div class="header-left">
+        <span class="tct-pill">⚡ TCT ACADEMY</span>
+        <div>
+          <div class="header-title">MÓDULO 03: EL ROBOT FANTASMA EN GITHUB ACTIONS + GEMINI API EN EL RUNNER</div>
+          <div class="header-sub">TU SERVIDOR UBUNTU EN LA NUBE QUE DESPIERTA SOLO CON TU PC APAGADA (REPO PÚBLICO)</div>
+        </div>
+      </div>
+      <div class="slide-badge">MÓDULO 03 // LÁMINA 01 DE 06</div>
+    </header>
+
+    <div class="slide-content">
+      <div class="hero-grid">
+        <div class="hero-main">
+          <div>
+            <span class="kicker">★ EL CORAZÓN DE LA AUTOMATIZACIÓN 24/7 ★</span>
+            <h1 class="hero-title">TU PROPIO ROBOT EN <span>GITHUB ACTIONS</span> CON GEMINI GRATIS</h1>
+            <p style="font-size:13.2px;color:#E4E4E7;line-height:1.42;margin-bottom:8px;">
+              ¿Cómo logramos que tus videos se publiquen a las 9:00 AM, 2:00 PM y 7:00 PM aunque tu computadora esté apagada y sin pagar un VPS? Usamos <strong>GitHub Actions en un repositorio público</strong>: GitHub te presta una máquina Linux (<code class="tag">ubuntu-latest</code>) sin costo que despierta por reloj (<code class="tag">cron</code>), redacta la descripción viral con <strong>Gemini API (plan gratuito)</strong> o plantilla de respaldo, y dispara tu video en menos de 45 segundos.
+            </p>
+            <!-- C14: Paso 0 para principiantes (crear cuenta de GitHub, repo público y gh auth login) -->
+            <div style="background:#0D0F14;border:1.5px solid var(--brand-cyan);padding:6px 10px;font-family:var(--font-mono);font-size:10.8px;color:#E4E4E7;">
+              <strong style="color:var(--brand-cyan);">PASO 0 (SI PARTES DE CERO):</strong> 1) Crea tu cuenta gratis en <code class="tag">github.com</code> · 2) Crea un repositorio <strong>Público</strong> llamado <code class="tag">mi-robot-videos</code> · 3) En tu agente ejecuta <code class="tag">gh auth login</code> para vincular tu PC.
+            </div>
+          </div>
+
+          <!-- PENDIENTE D1 -->
+          <div style="background:#0B0D12;border:2px solid var(--brand-lime);padding:9px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+            <div style="flex:1;min-width:220px;">
+              <div style="font-family:var(--font-mono);color:var(--brand-lime);font-size:11.5px;font-weight:700;">📂 ¿CÓMO ACTIVAR LA SKILL #03 HOY?</div>
+              <div style="font-size:11.3px;color:#D4D4D8;">Copia <code class="tag">github-actions-publisher/SKILL.md</code> en <code class="tag">.gemini/skills/</code> o <code class="tag">.claude/skills/</code> (o usa directo los Prompts #05 y #06 en la Lámina 04).</div>
+            </div>
+            <a href="#lamina-2" style="text-decoration:none;background:var(--brand-lime);color:#000;font-family:var(--font-mono);font-weight:800;font-size:11.5px;padding:8px 12px;border:2px solid #FFF;white-space:nowrap;">VER RELOJ CRON ➔</a>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <span class="kicker" style="background:var(--brand-cyan);color:#000;">REPO PÚBLICO • MINUTOS GRATIS</span>
+          <div class="avatars-row">
+            <div class="avatar-frame">
+              <img src="../assets/avatar_neobrutalista.jpg" alt="Avatar Neobrutalista TCT" />
+            </div>
+            <div class="cerebro-badge">
+              <img src="../cerebro.webp" alt="Mascota Cerebro TCT" />
+            </div>
+          </div>
+          <div>
+            <div style="font-weight:800;font-size:15px;color:var(--brand-lime);text-transform:uppercase;">POR QUÉ REPO PÚBLICO</div>
+            <div style="font-family:var(--font-mono);font-size:11px;color:#D4D4D8;margin-top:2px;">"En un repositorio público los minutos de GitHub Actions son gratuitos y Meta puede descargar tus MP4 vía URL raw."</div>
+          </div>
+          <div style="width:100%;background:#000;border:1.5px solid var(--brand-lime);padding:6px;font-family:var(--font-mono);font-size:11px;color:var(--brand-lime);">
+            ⚡ TALENTOCONTARIFA.LAT
+          </div>
+        </div>
+      </div>
+
+      <div class="goals-strip">
+        <div class="goal-item">
+          <div class="icon-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:800;font-size:12.5px;color:var(--brand-lime);text-transform:uppercase;">1. Reloj Cron + Botón Manual</div>
+            <div style="font-size:11.5px;color:#D4D4D8;">Programa 3 turnos diarios en tu zona horaria (en el minuto <code class="tag">7</code>) y prueba con <code class="tag">workflow_dispatch</code>.</div>
+          </div>
+        </div>
+        <div class="goal-item">
+          <div class="icon-box cyan">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:800;font-size:12.5px;color:var(--brand-cyan);text-transform:uppercase;">2. Bóveda GitHub Secrets</div>
+            <div style="font-size:11.5px;color:#D4D4D8;">Tus llaves viven cifradas en <code class="tag">Settings ➔ Secrets</code>: nadie puede verlas aunque tu repositorio sea público.</div>
+          </div>
+        </div>
+        <div class="goal-item">
+          <div class="icon-box pink">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 12 2.1 10.5"/><path d="m12 12 7.5 6.5"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:800;font-size:12.5px;color:var(--brand-pink);text-transform:uppercase;">3. Gemini API (Plan Gratuito)</div>
+            <!-- C1: Solo Gemini API plan gratuito + plantilla de respaldo -->
+            <div style="font-size:11.5px;color:#D4D4D8;">Usa <strong>Gemini API (plan gratuito)</strong> para inventar títulos y hashtags nuevos cada día, con plantilla de respaldo.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="slide-footer">
+      <span>TALENTOCONTARIFA.LAT // MÓDULO 03: EL ROBOT FANTASMA EN GITHUB ACTIONS</span>
+      <div class="footer-nav">
+        <span class="footer-page">LÁMINA 01 / 06</span>
+        <a href="#lamina-2">SIGUIENTE LÁMINA ▶</a>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =========================================================================================
+       LÁMINA 02: EL ARCHIVO .YML Y LA TABLA DE HORARIOS CRON POR PAÍS
+       ========================================================================================= -->
+  <section class="slide" id="lamina-2">
+    <header class="slide-header">
+      <div class="header-left">
+        <span class="tct-pill">⏰ RELOJ CRON + WORKFLOW</span>
+        <div>
+          <div class="header-title">ANATOMÍA DE .GITHUB/WORKFLOWS/ROBOT_PUBLICADOR.YML Y TABLA HORARIA</div>
+          <div class="header-sub">GITHUB TRABAJA EN HORA UTC: USA EL MINUTO 7 PARA EVITAR COLAS EN HORAS PICO</div>
+        </div>
+      </div>
+      <div class="slide-badge">MÓDULO 03 // LÁMINA 02 DE 06</div>
+    </header>
+
+    <div class="slide-content">
+      <div class="two-col-grid">
+        <!-- Código comentado del workflow (C1: sin models: read; C5: minuto 7) -->
+        <div class="terminal-card">
+          <div class="terminal-head">
+            <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--brand-lime);font-weight:700;">.github/workflows/robot_publicador.yml (EXPLICADO)</span>
+            <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--brand-cyan);">UBUNTU-LATEST</span>
+          </div>
+          <div class="terminal-pre" style="font-size:10.8px;line-height:1.36;">name: Robot Publicador 24/7
+on:
+  schedule:
+    - cron: <span class="hl">'7 15 * * *'</span>  # Turno Mañana (9:07 AM CDMX)
+    - cron: <span class="hl">'7 20 * * *'</span>  # Turno Tarde  (2:07 PM CDMX)
+    - cron: <span class="hl">'7 1 * * *'</span>   # Turno Noche  (7:07 PM CDMX)
+  workflow_dispatch:       # Botón "Run workflow" para probar a mano
+
+permissions:
+  contents: write          # Permite actualizar estado_rotacion.json</div>
+        </div>
+
+        <!-- Qué hacen las 3 piezas del YAML -->
+        <div style="display:flex;flex-direction:column;justify-content:space-between;gap:8px;">
+          <div class="card-dark" style="padding:8px 12px;">
+            <div style="font-family:var(--font-mono);font-size:11px;color:var(--brand-lime);font-weight:800;">1. SCHEDULE CRON EN MINUTO 7 (EVITA FILAS)</div>
+            <div style="font-size:11.3px;color:#E4E4E7;">Los 5 campos son: <code class="tag">Minuto Hora DíaMes Mes DíaSemana</code>. Usamos el minuto <code class="tag">7</code> (ej. <code class="tag">7 15 * * *</code>) en lugar de <code class="tag">0</code> para evitar el cuello de botella mundial de las horas en punto.</div>
+          </div>
+          <div class="card-dark cyan" style="padding:8px 12px;">
+            <div style="font-family:var(--font-mono);font-size:11px;color:var(--brand-cyan);font-weight:800;">2. WORKFLOW_DISPATCH (TU BOTÓN DE PRUEBA)</div>
+            <div style="font-size:11.3px;color:#E4E4E7;">Agrega el botón <strong>"Run workflow"</strong> en la pestaña Actions de tu GitHub para disparar una publicación de prueba cuando quieras sin esperar al reloj.</div>
+          </div>
+          <div class="card-dark pink" style="padding:8px 12px;">
+            <div style="font-family:var(--font-mono);font-size:11px;color:#FF80AA;font-weight:800;">3. PERMISSIONS: CONTENTS: WRITE (ROTACIÓN VIVA)</div>
+            <div style="font-size:11.3px;color:#E4E4E7;">Permite que el robot guarde qué video acaba de publicar en <code class="tag">estado_rotacion.json</code> y mantenga el repositorio activo contra la pausa de 60 días.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- C5: Tabla de conversión UTC con minuto 7 y notas de horario de verano -->
+      <table class="dark-table">
+        <thead>
+          <tr>
+            <th>País / Zona Horaria (y Horario de Verano DST)</th>
+            <th>Turno Mañana (~9:07 AM)</th>
+            <th>Turno Tarde (~2:07 PM)</th>
+            <th>Turno Noche (~7:07 PM)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>🇲🇽 México Centro (CDMX, UTC-6 fijo sin horario de verano)</strong></td>
+            <td><code class="tag">cron: '7 15 * * *'</code></td>
+            <td><code class="tag">cron: '7 20 * * *'</code></td>
+            <td><code class="tag">cron: '7 1 * * *'</code></td>
+          </tr>
+          <tr>
+            <td><strong>🇨🇴 Colombia / 🇵🇪 Perú (UTC-5 fijo) · 🇺🇸 Miami (UTC-5 invierno / UTC-4 verano*)</strong></td>
+            <td><code class="tag">cron: '7 14 * * *'</code></td>
+            <td><code class="tag">cron: '7 19 * * *'</code></td>
+            <td><code class="tag">cron: '7 0 * * *'</code></td>
+          </tr>
+          <tr>
+            <td><strong>🇦🇷 Argentina (UTC-3 fijo) · 🇨🇱 Chile (UTC-4 invierno / UTC-3 verano*)</strong></td>
+            <td><code class="tag">cron: '7 12 * * *'</code></td>
+            <td><code class="tag">cron: '7 17 * * *'</code></td>
+            <td><code class="tag">cron: '7 22 * * *'</code></td>
+          </tr>
+          <tr>
+            <td><strong>🇪🇸 España Peninsular (UTC+1 invierno / UTC+2 verano*: se recorre +1h en verano)</strong></td>
+            <td><code class="tag">cron: '7 8 * * *'</code></td>
+            <td><code class="tag">cron: '7 13 * * *'</code></td>
+            <td><code class="tag">cron: '7 18 * * *'</code></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="font-family:var(--font-mono);font-size:10.5px;color:#A1A1AA;">
+        *Nota Horario de Verano (DST): UTC nunca cambia. En países con horario de verano (Miami, Chile, España), el disparo local se desplaza 1 hora durante los meses de verano (ej. en España `7 8 * * *` publica a las 9:07 AM en invierno y a las 10:07 AM en verano).
+      </div>
+    </div>
+
+    <footer class="slide-footer">
+      <span>TALENTOCONTARIFA.LAT // MÓDULO 03: EL ROBOT FANTASMA EN GITHUB ACTIONS</span>
+      <div class="footer-nav">
+        <a href="#lamina-1">◀ ANTERIOR</a>
+        <span class="footer-page">LÁMINA 02 / 06</span>
+        <a href="#lamina-3">SIGUIENTE LÁMINA ▶</a>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =========================================================================================
+       LÁMINA 03: BÓVEDA GITHUB SECRETS + GEMINI API DENTRO DEL RUNNER
+       ========================================================================================= -->
+  <section class="slide" id="lamina-3">
+    <header class="slide-header">
+      <div class="header-left">
+        <span class="tct-pill">🔐 SECRETS + GEMINI GRATIS</span>
+        <div>
+          <div class="header-title">DÓNDE GUARDAR TUS LLAVES EN GITHUB SECRETS Y CÓMO GENERAR COPYS CON GEMINI</div>
+          <div class="header-sub">SEGURIDAD CIFRADA + REDACCIÓN AUTOMÁTICA CON GEMINI API (PLAN GRATUITO) Y PLANTILLA DE RESPALDO</div>
+        </div>
+      </div>
+      <div class="slide-badge">MÓDULO 03 // LÁMINA 03 DE 06</div>
+    </header>
+
+    <div class="slide-content">
+      <div class="exceptions-grid">
+        <!-- Ruta visual de GitHub Secrets -->
+        <div class="card-dark">
+          <span class="kicker" style="margin-bottom:8px;">PASO A PASO • BÓVEDA CIFRADA DE GITHUB</span>
+          <h3 style="font-size:15.5px;font-weight:800;color:var(--brand-lime);text-transform:uppercase;margin-bottom:6px;">Dónde se cargan los Secrets en tu Repositorio</h3>
+          <p style="font-size:11.8px;color:#E4E4E7;margin-bottom:8px;">
+            En tu computadora las llaves viven en tu archivo <code class="tag">.env</code> (que nunca sube a GitHub). Para que el robot en la nube las use de forma 100% invisible dentro de tu repo público, entra a tu repositorio en <code class="tag">github.com</code> y sigue esta ruta:
+          </p>
+          <div style="background:#0B0D12;border:2px solid var(--brand-lime);padding:9px 11px;font-family:var(--font-mono);font-size:11.3px;color:#FFF;margin-bottom:8px;">
+            ⚙️ Settings ➔ 🔐 Secrets and variables ➔ ⚡ Actions ➔ <span style="background:var(--brand-lime);color:#000;padding:1px 6px;font-weight:800;">New repository secret</span>
+          </div>
+          <div style="font-size:11.4px;color:#D4D4D8;display:flex;flex-direction:column;gap:4px;">
+            <div>• <code class="tag">GEMINI_API_KEY</code> (La obtienes gratis en <strong style="color:var(--brand-lime);">aistudio.google.com</strong>)</div>
+            <div>• <code class="tag">META_PAGE_TOKEN</code>, <code class="tag">FB_PAGE_ID</code>, <code class="tag">IG_USER_ID</code> (Las veremos en el Módulo 04)</div>
+            <div>• <strong style="color:var(--brand-cyan);">ATAJO CON GH CLI:</strong> Tras hacer <code class="tag">gh auth login</code>, tu agente puede subir tus secrets por ti con <code class="tag">gh secret set NOMBRE</code>.</div>
+          </div>
+        </div>
+
+        <!-- Cómo funciona la IA Gratis dentro del Runner (C1, C6: Gemini API plan gratuito + plantilla de respaldo) -->
+        <div class="card-dark cyan">
+          <span class="kicker" style="background:var(--brand-cyan);margin-bottom:8px;">CEREBRO DEL RUNNER • GEMINI + RESPALDO</span>
+          <h3 style="font-size:15.5px;font-weight:800;color:var(--brand-cyan);text-transform:uppercase;margin-bottom:6px;">Gemini API (Plan Gratuito) + Plantilla de Respaldo</h3>
+          <p style="font-size:11.8px;color:#E4E4E7;margin-bottom:8px;">
+            No subas tus videos con el mismo texto repetido. Nuestro script <code class="tag">scripts/generate_caption.js</code> lee el nombre del archivo (ej. <code class="tag">01_oferta_2x1.mp4</code>) y redacta un copy persuasivo nuevo en cada turno:
+          </p>
+          <div style="background:#0B0D12;border:1.5px solid var(--brand-lime);padding:8px 10px;margin-bottom:7px;">
+            <div style="font-family:var(--font-mono);font-size:11.2px;color:var(--brand-lime);font-weight:800;">MOTOR PRINCIPAL: GOOGLE GEMINI API (PLAN GRATUITO)</div>
+            <div style="font-size:11.2px;color:#D4D4D8;">Con tu <code class="tag">GEMINI_API_KEY</code> de Google AI Studio, llama a <code class="tag">gemini-2.5-flash</code> (cuota diaria gratuita suficiente para tus 3 publicaciones al día).</div>
+          </div>
+          <div style="background:#0B0D12;border:1.5px solid var(--brand-cyan);padding:8px 10px;">
+            <div style="font-family:var(--font-mono);font-size:11.2px;color:var(--brand-cyan);font-weight:800;">MOTOR DE RESPALDO: PLANTILLA INTELIGENTE LOCAL</div>
+            <div style="font-size:11.2px;color:#D4D4D8;">Si aún no configuras <code class="tag">GEMINI_API_KEY</code> o la API tarda en responder, el script genera automáticamente un copy limpio con hashtags a partir del título del video para que la publicación jamás falle.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="slide-footer">
+      <span>TALENTOCONTARIFA.LAT // MÓDULO 03: EL ROBOT FANTASMA EN GITHUB ACTIONS</span>
+      <div class="footer-nav">
+        <a href="#lamina-2">◀ ANTERIOR</a>
+        <span class="footer-page">LÁMINA 03 / 06</span>
+        <a href="#lamina-4">SIGUIENTE LÁMINA ▶</a>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =========================================================================================
+       LÁMINA 04: CENTRO DE PROMPTS DEL MÓDULO 03 (COPIAR EN 1 CLIC)
+       ========================================================================================= -->
+  <section class="slide" id="lamina-4">
+    <header class="slide-header">
+      <div class="header-left">
+        <span class="tct-pill">⚡ PROMPTS COPIAR Y PEGAR</span>
+        <div>
+          <div class="header-title">TUS 2 PROMPTS: COPIA Y PEGA EN TU AGENTE</div>
+          <div class="header-sub">PEGA ESTOS PROMPTS EN ANTIGRAVITY IDE O CLAUDE CODE PARA ARMAR Y SUBIR TU ROBOT</div>
+        </div>
+      </div>
+      <div class="slide-badge">MÓDULO 03 // LÁMINA 04 DE 06</div>
+    </header>
+
+    <div class="slide-content">
+      <div class="prompts-grid">
+        <!-- Prompt #05 (C1, C5, C10) -->
+        <div class="terminal-card">
+          <div>
+            <div class="terminal-head">
+              <span style="font-family:var(--font-mono);font-size:11.3px;color:var(--brand-lime);font-weight:700;">PROMPT #05 // CREAR MI WORKFLOW GITHUB ACTIONS + IA GRATIS</span>
+              <button type="button" class="copy-btn screen-only" onclick="copyPrompt('p5-text', this)">
+                📋 COPIAR PROMPT #05 EN 1 CLIC
+              </button>
+              <a href="https://talentocontarifa.lat/minicurso-robot/aula" target="_blank" class="copy-btn print-only" style="text-decoration:none;">
+                🌐 Abre la versión web para copiar en 1 clic
+              </a>
+            </div>
+            <div class="terminal-pre" id="p5-text">Usando la Skill <span class="hl">github-actions-publisher</span>, construye en mi proyecto el robot publicador completo para GitHub Actions:
+1. Crea <span class="hl">.github/workflows/robot_publicador.yml</span> programado con <span class="hl">cron</span> (usando minuto 7 para evitar colas pico) para publicar 3 veces al día en mi zona horaria (<span class="hl">[ESCRIBE TU PAÍS, EJ: MÉXICO CDMX]</span>) más el botón manual <span class="hl">workflow_dispatch</span> y permisos <span class="hl">contents: write</span>.
+2. Crea <span class="hl">scripts/generate_caption.js</span> que tome el video en turno de la carpeta <span class="hl">videos/</span> y redacte un título y hashtags virales usando <span class="hl">Gemini API (plan gratuito con GEMINI_API_KEY)</span> y una plantilla de respaldo automática si no hay llave configurada.
+3. Incluye protección anti-inactividad de 60 días actualizando <span class="hl">estado_rotacion.json</span> para que el reloj cron nunca se pause.</div>
+          </div>
+          <!-- C10: starter-kit-robot-tct/ -->
+          <div style="background:#141820;border-top:2px solid #27272A;padding:7px 12px;font-size:11px;color:#A1A1AA;">
+            💡 <strong style="color:#FFF;">Tip Pro:</strong> Si compraste el <strong>Pase Pro Builder ($5 USD)</strong>, estos archivos ya vienen listos dentro de tu carpeta descomprimida <code class="tag">starter-kit-robot-tct/</code>.
+          </div>
+        </div>
+
+        <!-- Prompt #06 + Checklist -->
+        <div style="display:flex;flex-direction:column;justify-content:space-between;gap:10px;">
+          <div class="terminal-card">
+            <div class="terminal-head">
+              <span style="font-family:var(--font-mono);font-size:11px;color:var(--brand-cyan);font-weight:700;">PROMPT #06 // SUBIR REPO PÚBLICO A GITHUB Y HACER TEST</span>
+              <button type="button" class="copy-btn screen-only" onclick="copyPrompt('p6-text', this)">
+                📋 COPIAR PROMPT #06 EN 1 CLIC
+              </button>
+              <a href="https://talentocontarifa.lat/minicurso-robot/aula" target="_blank" class="copy-btn print-only" style="text-decoration:none;">
+                🌐 Abre la versión web para copiar en 1 clic
+              </a>
+            </div>
+            <div class="terminal-pre" id="p6-text" style="font-size:10.8px;">Verifica primero que mi archivo <span class="hl">.env</span> esté dentro de <span class="hl">.gitignore</span> para no exponer llaves. Luego ayúdame a autenticarme con GitHub (<span class="hl">gh auth login</span>), inicializar Git, crear o conectar mi repositorio público en GitHub, subir mis carpetas <span class="hl">videos/</span>, <span class="hl">scripts/</span> y <span class="hl">.github/workflows/</span> y dime cómo presionar el botón <span class="hl">Run workflow</span> para ver mi primera ejecución en verde.</div>
+          </div>
+
+          <div class="card-dark" style="padding:10px 13px;background:#101912;">
+            <div style="font-family:var(--font-mono);font-size:11.5px;color:var(--brand-lime);font-weight:800;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center;">
+              <span>✅ CHECKLIST DEL MÓDULO 03:</span>
+              <span id="checklist-status" style="background:#000;color:var(--brand-lime);padding:1px 7px;border:1px solid var(--brand-lime);font-size:10.5px;">0/3 listos</span>
+            </div>
+            <div style="font-size:11.5px;color:#E4E4E7;line-height:1.55;display:flex;flex-direction:column;gap:5px;">
+              <label style="cursor:pointer;display:flex;align-items:flex-start;gap:8px;">
+                <input type="checkbox" class="tct-check" data-check="tct-m03-check-1" style="accent-color:#CCFF00;width:16px;height:16px;margin-top:2px;flex-shrink:0;"/>
+                <span>Creé mi archivo <code class="tag">.github/workflows/robot_publicador.yml</code>.</span>
+              </label>
+              <label style="cursor:pointer;display:flex;align-items:flex-start;gap:8px;">
+                <input type="checkbox" class="tct-check" data-check="tct-m03-check-2" style="accent-color:#CCFF00;width:16px;height:16px;margin-top:2px;flex-shrink:0;"/>
+                <span>Ajusté las 3 horas <code class="tag">cron</code> (minuto 7) a mi país con la tabla de la Lámina 02.</span>
+              </label>
+              <label style="cursor:pointer;display:flex;align-items:flex-start;gap:8px;">
+                <input type="checkbox" class="tct-check" data-check="tct-m03-check-3" style="accent-color:#CCFF00;width:16px;height:16px;margin-top:2px;flex-shrink:0;"/>
+                <span>Subí mi repo público y probé el botón <strong>Run workflow</strong> en la pestaña Actions.</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="slide-footer">
+      <span>TALENTOCONTARIFA.LAT // MÓDULO 03: EL ROBOT FANTASMA EN GITHUB ACTIONS</span>
+      <div class="footer-nav">
+        <a href="#lamina-3">◀ ANTERIOR</a>
+        <span class="footer-page">LÁMINA 04 / 06</span>
+        <a href="#lamina-5">SIGUIENTE LÁMINA ▶</a>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =========================================================================================
+       LÁMINA 05: ESCUDO ANTI-ERRORES DE GITHUB ACTIONS (4 SECRETOS QUE NADIE TE DICE)
+       ========================================================================================= -->
+  <section class="slide" id="lamina-5">
+    <header class="slide-header">
+      <div class="header-left">
+        <span class="tct-pill" style="background:var(--brand-pink);color:#FFF;">🛡️ ESCUDO ANTI-PAUSA</span>
+        <div>
+          <div class="header-title">4 EXCEPCIONES REALES DE GITHUB ACTIONS Y CÓMO BLINDAR TU ROBOT</div>
+          <div class="header-sub">REGLA DE 60 DÍAS, REPO PÚBLICO OBLIGATORIO, MINUTO 7 Y LÍMITE DE TAMAÑO DEL REPO</div>
+        </div>
+      </div>
+      <div class="slide-badge">MÓDULO 03 // LÁMINA 05 DE 06</div>
+    </header>
+
+    <div class="slide-content">
+      <div class="exceptions-grid">
+        <div class="card-dark pink">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:5px;">
+            <div class="icon-box pink" style="width:30px;height:30px;font-family:var(--font-mono);font-weight:800;">01</div>
+            <h4 style="font-size:13.5px;font-weight:800;color:var(--brand-lime);text-transform:uppercase;">La Trampa de los 60 Días sin Actividad</h4>
+          </div>
+          <p style="font-size:11.6px;color:#E4E4E7;margin-bottom:5px;">
+            <strong>Qué pasa:</strong> GitHub apaga automáticamente los relojes <code class="tag">schedule: cron</code> si un repositorio no registra actividad en 60 días seguidos.
+          </p>
+          <div style="background:#000;border:1.5px solid var(--brand-lime);padding:6px 9px;font-family:var(--font-mono);font-size:11px;color:var(--brand-lime);">
+            ✓ SOLUCIÓN: Nuestro workflow actualiza automáticamente <code class="tag">estado_rotacion.json</code> en cada corrida, manteniendo el repo activo.
+          </div>
+        </div>
+
+        <!-- C3: Repositorio público obligatorio -->
+        <div class="card-dark cyan">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:5px;">
+            <div class="icon-box cyan" style="width:30px;height:30px;font-family:var(--font-mono);font-weight:800;">02</div>
+            <h4 style="font-size:13.5px;font-weight:800;color:var(--brand-cyan);text-transform:uppercase;">Por qué tu Repositorio DEBE ser Público</h4>
+          </div>
+          <p style="font-size:11.6px;color:#E4E4E7;margin-bottom:5px;">
+            <strong>Qué pasa:</strong> El publicador le pasa a Meta la URL <code class="tag">raw.githubusercontent.com</code> del MP4; en un repo privado esa URL devuelve error <code class="tag">404</code>. Además, en repos públicos GitHub Actions es gratis.
+          </p>
+          <div style="background:#000;border:1.5px solid var(--brand-cyan);padding:6px 9px;font-family:var(--font-mono);font-size:11px;color:var(--brand-cyan);">
+            ✓ SOLUCIÓN: Tu repo debe ser público (o aloja los MP4 en GitHub Releases / Cloudflare R2). Nunca pongas llaves en el código; usa siempre GitHub Secrets.
+          </div>
+        </div>
+
+        <div class="card-dark">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:5px;">
+            <div class="icon-box" style="width:30px;height:30px;font-family:var(--font-mono);font-weight:800;">03</div>
+            <h4 style="font-size:13.5px;font-weight:800;color:var(--brand-lime);text-transform:uppercase;">El cron no disparó al segundo exacto</h4>
+          </div>
+          <p style="font-size:11.6px;color:#E4E4E7;margin-bottom:5px;">
+            <strong>Qué pasa:</strong> En horas en punto (<code class="tag">:00</code>), la cola mundial de GitHub puede tardar entre 3 y 15 minutos en asignar un runner.
+          </p>
+          <div style="background:#000;border:1.5px solid var(--brand-lime);padding:6px 9px;font-family:var(--font-mono);font-size:11px;color:var(--brand-lime);">
+            ✓ SOLUCIÓN: Por eso programamos nuestros crons en el minuto <code class="tag">7</code> (<code class="tag">7 15 * * *</code>) y para pruebas inmediatas usamos el botón <strong>Run workflow</strong>.
+          </div>
+        </div>
+
+        <!-- C15: Aviso 50 MB, bloqueo 100 MB, límite blando ~1 GB y borrar MP4 viejos -->
+        <div class="card-dark pink">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:5px;">
+            <div class="icon-box pink" style="width:30px;height:30px;font-family:var(--font-mono);font-weight:800;">04</div>
+            <h4 style="font-size:13.5px;font-weight:800;color:#FF80AA;text-transform:uppercase;">Límites de peso en GitHub (50 MB / 100 MB / ~1 GB)</h4>
+          </div>
+          <p style="font-size:11.6px;color:#E4E4E7;margin-bottom:5px;">
+            <strong>Qué pasa:</strong> GitHub lanza aviso desde <strong>50 MB</strong> por archivo, rechaza archivos <strong>&gt;100 MB</strong> y tiene un límite blando de <strong>~1 GB</strong> por repositorio total.
+          </p>
+          <div style="background:#000;border:1.5px solid var(--brand-pink);padding:6px 9px;font-family:var(--font-mono);font-size:11px;color:#FF80AA;">
+            ✓ SOLUCIÓN: Exporta tus Reels con <code class="tag">-crf 20</code> (pesan 4–12 MB) y borra periódicamente de <code class="tag">videos/</code> los MP4 viejos que ya fueron publicados.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="slide-footer">
+      <span>TALENTOCONTARIFA.LAT // MÓDULO 03: EL ROBOT FANTASMA EN GITHUB ACTIONS</span>
+      <div class="footer-nav">
+        <a href="#lamina-4">◀ ANTERIOR</a>
+        <span class="footer-page">LÁMINA 05 / 06</span>
+        <a href="#lamina-6">SIGUIENTE LÁMINA ▶</a>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =========================================================================================
+       LÁMINA 06: VIDEOTECA YOUTUBE DEL MÓDULO 03 CON MINIATURAS Y CRÉDITOS OFICIALES
+       ========================================================================================= -->
+  <section class="slide" id="lamina-6">
+    <header class="slide-header">
+      <div class="header-left">
+        <span class="tct-pill" style="background:#FF0033;color:#FFF;border-color:#FFF;">▶ VIDEOTECA DE APOYO</span>
+        <div>
+          <div class="header-title">TUTORIALES DE APOYO EN YOUTUBE: GITHUB ACTIONS Y FLUJO GIT DESDE CERO</div>
+          <div class="header-sub">RECONOCIMIENTO Y CRÉDITO COMPLETO A LOS AUTORES Y CANALES ORIGINALES</div>
+        </div>
+      </div>
+      <div class="slide-badge">MÓDULO 03 // LÁMINA 06 DE 06</div>
+    </header>
+
+    <div class="slide-content">
+      <p style="font-size:11.8px;color:#D4D4D8;">
+        ¿Quieres ver en pantalla cómo funcionan los runners de GitHub Actions y cómo manejar Git como profesional? <strong>Todo el crédito y agradecimiento a estos referentes de la comunidad hispana:</strong>
+      </p>
+
+      <div class="yt-cards-grid">
+        <a class="yt-visual-card" href="https://www.youtube.com/watch?v=-8haKKGc55Y" target="_blank" rel="noopener noreferrer">
+          <div class="yt-thumb">
+            <img src="https://i.ytimg.com/vi/-8haKKGc55Y/hqdefault.jpg" alt="Aprende GitHub Actions con Midudev" />
+            <span class="yt-play-pill">▶ YOUTUBE</span>
+          </div>
+          <div>
+            <span class="yt-credit-pill">Autores: Platzi &amp; Miguel Ángel Durán (Midudev)</span>
+            <span class="yt-meta-pill">⏱ ~25 min · Apoyo Lám. 02</span>
+            <h5 style="font-size:12.5px;font-weight:800;line-height:1.22;margin-bottom:2px;">Aprende GitHub Actions con Midudev desde CERO</h5>
+            <div style="font-size:10.8px;color:#A1A1AA;">Explicación súper clara de qué es un runner, cómo se disparan los eventos y cómo leer los logs en tiempo real.</div>
+            <span class="yt-watch-btn">ABRIR EN YOUTUBE (youtu.be/-8haKKGc55Y) ➔</span>
+          </div>
+        </a>
+
+        <a class="yt-visual-card" href="https://www.youtube.com/watch?v=KXHPO0Lgo-0" target="_blank" rel="noopener noreferrer">
+          <div class="yt-thumb">
+            <img src="https://i.ytimg.com/vi/KXHPO0Lgo-0/hqdefault.jpg" alt="Fundamentos de GitHub Actions Código Facilito" />
+            <span class="yt-play-pill">▶ YOUTUBE</span>
+          </div>
+          <div>
+            <span class="yt-credit-pill" style="background:var(--brand-cyan);">Autor y Canal: Código Facilito</span>
+            <span class="yt-meta-pill">⏱ 1 h · YAML y Secrets</span>
+            <h5 style="font-size:12.5px;font-weight:800;line-height:1.22;margin-bottom:2px;">Fundamentos de GitHub Actions en 1 Hora</h5>
+            <div style="font-size:10.8px;color:#A1A1AA;">Curso práctico en español sobre sintaxis YAML, jobs, steps, variables de entorno y secretos cifrados.</div>
+            <span class="yt-watch-btn">ABRIR EN YOUTUBE (youtu.be/KXHPO0Lgo-0) ➔</span>
+          </div>
+        </a>
+
+        <a class="yt-visual-card" href="https://www.youtube.com/watch?v=3GymExBkKjE" target="_blank" rel="noopener noreferrer">
+          <div class="yt-thumb">
+            <img src="https://i.ytimg.com/vi/3GymExBkKjE/hqdefault.jpg" alt="Curso Git y GitHub MoureDev" />
+            <span class="yt-play-pill">▶ YOUTUBE</span>
+          </div>
+          <div>
+            <span class="yt-credit-pill">Autor y Canal: MoureDev by Brais Moure</span>
+            <span class="yt-meta-pill">⏱ Primeros 25 min · Paso 0</span>
+            <h5 style="font-size:12.5px;font-weight:800;line-height:1.22;margin-bottom:2px;">Curso COMPLETO de GIT y GITHUB desde CERO</h5>
+            <div style="font-size:10.8px;color:#A1A1AA;">Ideal si nunca habías creado un repositorio en GitHub ni subido archivos desde tu computadora.</div>
+            <span class="yt-watch-btn">ABRIR EN YOUTUBE (youtu.be/3GymExBkKjE) ➔</span>
+          </div>
+        </a>
+
+        <a class="yt-visual-card" href="https://www.youtube.com/watch?v=niPExbK8lSw" target="_blank" rel="noopener noreferrer">
+          <div class="yt-thumb">
+            <img src="https://i.ytimg.com/vi/niPExbK8lSw/hqdefault.jpg" alt="Aprende Git y GitHub Midulive" />
+            <span class="yt-play-pill">▶ YOUTUBE</span>
+          </div>
+          <div>
+            <span class="yt-credit-pill">Autor: Miguel Ángel Durán — Canal: midulive</span>
+            <span class="yt-meta-pill">⏱ ~1.5 h · Flujo Git</span>
+            <h5 style="font-size:12.5px;font-weight:800;line-height:1.22;margin-bottom:2px;">Aprende Git y GitHub — Curso Práctico Paso a Paso</h5>
+            <div style="font-size:10.8px;color:#A1A1AA;">Repaso directo al grano sobre commits, push y buenas prácticas para mantener tu repositorio limpio.</div>
+            <span class="yt-watch-btn">ABRIR EN YOUTUBE (youtu.be/niPExbK8lSw) ➔</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <footer class="slide-footer">
+      <span>DISEÑADO POR TALENTO CON TARIFA • TODOS LOS VIDEOS PERTENECEN A SUS AUTORES OFICIALES</span>
+      <div class="footer-nav">
+        <a href="#lamina-5">◀ ANTERIOR</a>
+        <a href="/minicurso-robot/aula">◀ VOLVER AL AULA</a>
+        <span class="footer-page">LÁMINA 06 / 06</span>
+        <a href="TCT_Modulo_04_Tuberias_API_y_Metricool.html" class="footer-btn-primary">SIGUIENTE: MÓDULO 04 — TUBERÍAS API Y METRICOOL ➔</a>
+      </div>
+    </footer>
+  </section>
+
+  <script>
+    function selectElementText(el) {
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+
+    function showCopyFeedback(btnElement, message, isSuccess) {
+      const originalText = btnElement.getAttribute('data-orig') || btnElement.innerHTML;
+      btnElement.setAttribute('data-orig', originalText);
+      if (isSuccess) btnElement.classList.add('copied');
+      btnElement.innerHTML = message;
+      setTimeout(() => {
+        btnElement.classList.remove('copied');
+        btnElement.innerHTML = originalText;
+      }, 3000);
+    }
+
+    function copyPrompt(elementId, btnElement) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const rawText = (el.innerText || el.textContent || '').trim();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(rawText).then(() => {
+          showCopyFeedback(btnElement, '✅ ¡COPIADO! PÉGALO EN EL CHAT DE TU AGENTE (Ctrl+V)', true);
+        }).catch(() => {
+          selectElementText(el);
+          showCopyFeedback(btnElement, '📋 Selecciona y copia con Ctrl+C', false);
+        });
+      } else {
+        selectElementText(el);
+        try {
+          document.execCommand('copy');
+          showCopyFeedback(btnElement, '✅ ¡COPIADO! PÉGALO EN EL CHAT DE TU AGENTE (Ctrl+V)', true);
+        } catch (e) {
+          showCopyFeedback(btnElement, '📋 Selecciona y copia con Ctrl+C', false);
+        }
+      }
+    }
+
+    (function initInteractiveManual() {
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const navLinks = Array.from(document.querySelectorAll('.web-nav-links a[data-slide]'));
+      const mobileSelect = document.querySelector('.mobile-slide-select');
+      const progressBar = document.getElementById('nav-progress-bar');
+
+      if ('IntersectionObserver' in window && slides.length) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.id;
+              const idx = slides.findIndex(s => s.id === id);
+              navLinks.forEach(link => {
+                if (link.getAttribute('data-slide') === id) {
+                  link.setAttribute('aria-current', 'true');
+                } else {
+                  link.removeAttribute('aria-current');
+                }
+              });
+              if (mobileSelect) mobileSelect.value = '#' + id;
+              if (progressBar && idx >= 0) {
+                progressBar.style.width = (((idx + 1) / slides.length) * 100).toFixed(1) + '%';
+              }
+            }
+          });
+        }, { threshold: 0.45 });
+        slides.forEach(s => observer.observe(s));
+      }
+
+      document.addEventListener('keydown', (e) => {
+        const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+        if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+
+        const currentLink = document.querySelector('.web-nav-links a[aria-current="true"]');
+        let currentIdx = currentLink ? slides.findIndex(s => s.id === currentLink.getAttribute('data-slide')) : 0;
+        if (currentIdx < 0) currentIdx = 0;
+
+        const nextIdx = e.key === 'ArrowRight'
+          ? Math.min(slides.length - 1, currentIdx + 1)
+          : Math.max(0, currentIdx - 1);
+
+        if (nextIdx !== currentIdx && slides[nextIdx]) {
+          e.preventDefault();
+          slides[nextIdx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.replaceState(null, '', '#' + slides[nextIdx].id);
+        }
+      });
+
+      const checks = Array.from(document.querySelectorAll('.tct-check'));
+      const statusEl = document.getElementById('checklist-status');
+      const navLink4 = document.getElementById('nav-link-4');
+
+      function updateChecklistSummary() {
+        const doneCount = checks.filter(c => c.checked).length;
+        if (statusEl) {
+          statusEl.textContent = doneCount + '/' + checks.length + ' listos';
+        }
+        if (navLink4) {
+          const baseText = '04. Pega los prompts';
+          navLink4.textContent = doneCount === checks.length ? baseText + ' ✓' : baseText;
+        }
+      }
+
+      checks.forEach((chk) => {
+        const key = chk.getAttribute('data-check');
+        if (key) {
+          try {
+            chk.checked = localStorage.getItem(key) === '1';
+          } catch (e) {}
+          chk.addEventListener('change', () => {
+            try {
+              localStorage.setItem(key, chk.checked ? '1' : '0');
+            } catch (e) {}
+            updateChecklistSummary();
+          });
+        }
+      });
+      updateChecklistSummary();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Módulo 02 — La Fábrica de Videos Gratis (HyperFrames + Voces IA) | Talento con Tarifa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-void: #08090B;
+      --bg-surface: #111318;
+      --bg-card: #171A21;
+      --brand-lime: #CCFF00;
+      --brand-pink: #FF0055;
+      --brand-cyan: #00E5FF;
+      --text-white: #F4F4F6;
+      --text-Gray: #A1A1AA;
+      --shadow-lime: 5px 5px 0px #CCFF00;
+      --shadow-pink: 5px 5px 0px #FF0055;
+      --shadow-cyan: 5px 5px 0px #00E5FF;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-mono: 'Share Tech Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #050507;
+      color: var(--text-white);
+      font-family: var(--font-display);
+      line-height: 1.4;
+      font-size: 13.5px;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 3px solid var(--brand-lime) !important;
+      outline-offset: 2px;
+    }
+
+    .print-only {
+      display: none !important;
+    }
+
+    /* ==================== BARRA DE NAVEGACIÓN INTERACTIVA (SOLO WEB) ==================== */
+    .web-nav {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(8, 9, 11, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 3px solid var(--brand-lime);
+      padding: 8px 20px 11px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .web-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-aula-btn {
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 12px;
+      background: #000;
+      color: var(--brand-lime);
+      border: 1.5px solid var(--brand-lime);
+      padding: 4px 10px;
+      white-space: nowrap;
+    }
+
+    .nav-aula-btn:hover {
+      background: var(--brand-lime);
+      color: #000;
+    }
+
+    .web-nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--brand-lime);
+      font-size: 13.5px;
+    }
+
+    .mod-switcher {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #0D0F14;
+      border: 1.5px solid #3F3F46;
+      padding: 2px 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .mod-switcher span {
+      color: var(--text-Gray);
+      margin-right: 2px;
+    }
+
+    .mod-switcher a {
+      text-decoration: none;
+      color: var(--text-white);
+      padding: 2px 6px;
+      border: 1px solid transparent;
+    }
+
+    .mod-switcher a:hover {
+      border-color: var(--brand-lime);
+      color: var(--brand-lime);
+    }
+
+    .mod-switcher a[aria-current="page"] {
+      background: var(--brand-lime);
+      color: #000;
+      font-weight: 800;
+    }
+
+    .web-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .nav-group-label {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--brand-cyan);
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      margin-left: 4px;
+    }
+
+    .nav-group-sep {
+      color: #3F3F46;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      margin: 0 2px;
+    }
+
+    .web-nav-links a {
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-white);
+      background: var(--bg-card);
+      border: 1.5px solid #3F3F46;
+      padding: 5px 10px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .web-nav-links a:hover,
+    .web-nav-links a[aria-current="true"] {
+      background: var(--brand-lime);
+      color: #000;
+      border-color: #FFF;
+      font-weight: 800;
+      transform: translate(-1px, -1px);
+      box-shadow: 2px 2px 0px #FFF;
+    }
+
+    .mobile-slide-select {
+      display: none;
+      width: 100%;
+      background: var(--bg-card);
+      color: var(--brand-lime);
+      border: 2px solid var(--brand-lime);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 7px 10px;
+    }
+
+    .web-nav-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #181B24;
+    }
+
+    .web-nav-progress-bar {
+      height: 100%;
+      width: 16.66%;
+      background: var(--brand-cyan);
+      transition: width 0.2s ease;
+    }
+
+    /* ==================== CONFIGURACIÓN DE LÁMINAS HORIZONTALES (A4 LANDSCAPE) ==================== */
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+
+    .slide {
+      width: 297mm;
+      height: 210mm;
+      margin: 22px auto;
+      scroll-margin-top: 74px;
+      padding: 10mm 13mm 9mm 13mm;
+      background-color: var(--bg-void);
+      background-image:
+        radial-gradient(rgba(204, 255, 0, 0.12) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(17, 19, 24, 0.9) 0%, rgba(8, 9, 11, 0.98) 100%);
+      background-size: 20px 20px, 100% 100%;
+      border: 3px solid #27272A;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+      break-after: page;
+      overflow: hidden;
+    }
+
+    .slide-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-surface);
+      border: 2.5px solid var(--text-white);
+      box-shadow: 4px 4px 0px var(--brand-lime);
+      padding: 7px 14px;
+      margin-bottom: 10px;
+      flex-shrink: 0;
+      gap: 10px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tct-pill {
+      background: var(--brand-lime);
+      color: #000;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 14px;
+      padding: 3px 10px;
+      border: 2px solid #000;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .header-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--brand-lime);
+      letter-spacing: 0.4px;
+    }
+
+    .header-sub {
+      font-family: var(--font-mono);
+      font-size: 10.8px;
+      color: var(--text-Gray);
+    }
+
+    .slide-badge {
+      background: #000;
+      color: var(--brand-lime);
+      border: 2px solid var(--brand-lime);
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 4px 12px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .slide-footer {
+      border-top: 2px solid #27272A;
+      padding-top: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 10.8px;
+      color: var(--text-Gray);
+      flex-shrink: 0;
+      gap: 8px;
+    }
+
+    .footer-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .footer-nav a {
+      text-decoration: none;
+      background: #181B24;
+      color: var(--brand-lime);
+      border: 1.5px solid var(--brand-lime);
+      padding: 2px 9px;
+      font-weight: 700;
+      font-size: 10.5px;
+    }
+
+    .footer-nav a.footer-btn-primary {
+      background: var(--brand-lime);
+      color: #000;
+      border: 2px solid #FFF;
+      font-weight: 800;
+    }
+
+    .footer-page {
+      background: var(--brand-lime);
+      color: #000;
+      font-weight: 800;
+      padding: 2px 10px;
+    }
+
+    .slide-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--brand-lime);
+      color: #000;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 11px;
+      padding: 3px 10px;
+      text-transform: uppercase;
+      border: 2px solid #FFF;
+      width: fit-content;
+    }
+
+    .card-dark {
+      background: var(--bg-card);
+      border: 2.5px solid var(--text-white);
+      box-shadow: var(--shadow-lime);
+      padding: 12px 14px;
+      position: relative;
+    }
+
+    .card-dark.pink {
+      box-shadow: var(--shadow-pink);
+      border-color: var(--brand-pink);
+    }
+
+    .card-dark.cyan {
+      box-shadow: var(--shadow-cyan);
+      border-color: var(--brand-cyan);
+    }
+
+    .icon-box {
+      width: 36px;
+      height: 36px;
+      background: var(--brand-lime);
+      color: #000;
+      border: 2px solid #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .icon-box.pink {
+      background: var(--brand-pink);
+      color: #FFF;
+    }
+
+    .icon-box.cyan {
+      background: var(--brand-cyan);
+      color: #000;
+    }
+
+    code.tag {
+      font-family: var(--font-mono);
+      background: #000;
+      color: var(--brand-lime);
+      border: 1px solid #3F3F46;
+      padding: 1px 5px;
+      font-size: 11px;
+    }
+
+    .copy-btn {
+      cursor: pointer;
+      background: var(--brand-lime);
+      color: #000;
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 11.5px;
+      padding: 6px 12px;
+      border: 2px solid #FFF;
+      box-shadow: 3px 3px 0px #FFF;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+      transition: all 0.12s ease;
+    }
+
+    .copy-btn:hover {
+      background: #FFF;
+      color: #000;
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0px var(--brand-lime);
+    }
+
+    .copy-btn.copied {
+      background: #10B981;
+      color: #FFF;
+      border-color: #FFF;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .hero-main {
+      background: var(--bg-card);
+      border: 3px solid var(--text-white);
+      box-shadow: 7px 7px 0px var(--brand-cyan);
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .hero-title {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: -0.8px;
+      margin: 6px 0 8px 0;
+    }
+
+    .hero-title span {
+      color: var(--brand-lime);
+      text-decoration: underline;
+      text-decoration-thickness: 3px;
+    }
+
+    .hero-side {
+      background: var(--bg-surface);
+      border: 3px solid var(--brand-lime);
+      box-shadow: 7px 7px 0px var(--brand-pink);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+    }
+
+    .avatars-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .avatar-frame {
+      width: 110px;
+      height: 110px;
+      border: 3px solid var(--brand-lime);
+      box-shadow: 4px 4px 0px #FFF;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .avatar-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cerebro-badge {
+      width: 86px;
+      height: 86px;
+      border: 3px solid #FFF;
+      background: var(--brand-lime);
+      box-shadow: 4px 4px 0px var(--brand-pink);
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cerebro-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .goals-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .goal-item {
+      background: var(--bg-surface);
+      border: 2px solid #3F3F46;
+      border-left: 6px solid var(--brand-lime);
+      padding: 9px 11px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .two-col-grid {
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      gap: 14px;
+    }
+
+    .safezone-grid {
+      display: grid;
+      grid-template-columns: 245px 1fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .exceptions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .dark-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-card);
+      border: 2.5px solid var(--text-white);
+      box-shadow: var(--shadow-lime);
+      font-size: 11.5px;
+    }
+
+    .dark-table th {
+      background: #000;
+      color: var(--brand-lime);
+      font-family: var(--font-mono);
+      text-align: left;
+      padding: 6px 10px;
+      border: 1.5px solid #3F3F46;
+      text-transform: uppercase;
+    }
+
+    .dark-table td {
+      padding: 6px 10px;
+      border: 1.5px solid #27272A;
+      color: #E4E4E7;
+    }
+
+    .prompts-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 14px;
+      align-items: stretch;
+    }
+
+    .terminal-card {
+      background: #0D0F14;
+      border: 3px solid var(--brand-lime);
+      box-shadow: 6px 6px 0px #FFF;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .terminal-head {
+      background: #181B24;
+      border-bottom: 2px solid var(--brand-lime);
+      padding: 7px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .terminal-pre {
+      padding: 10px 13px;
+      font-family: var(--font-mono);
+      font-size: 11.2px;
+      line-height: 1.42;
+      color: #F4F4F6;
+      white-space: pre-wrap;
+      user-select: all;
+    }
+
+    .terminal-pre span.hl {
+      color: var(--brand-lime);
+      font-weight: 700;
+    }
+
+    .yt-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .yt-visual-card {
+      background: var(--bg-card);
+      border: 2.5px solid var(--text-white);
+      box-shadow: 5px 5px 0px var(--brand-lime);
+      padding: 9px 11px;
+      display: grid;
+      grid-template-columns: 124px 1fr;
+      gap: 11px;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text-white);
+      transition: transform 0.12s ease;
+    }
+
+    .yt-visual-card:hover {
+      transform: translate(-2px, -2px);
+      border-color: var(--brand-lime);
+    }
+
+    .yt-thumb {
+      width: 124px;
+      height: 74px;
+      border: 2px solid var(--brand-lime);
+      position: relative;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .yt-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .yt-play-pill {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      background: #FF0033;
+      color: #FFF;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border: 1px solid #FFF;
+    }
+
+    .yt-credit-pill {
+      display: inline-block;
+      background: var(--brand-lime);
+      color: #000;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 1px 6px;
+      margin-bottom: 2px;
+    }
+
+    .yt-meta-pill {
+      display: inline-block;
+      background: #181B24;
+      color: var(--brand-cyan);
+      border: 1px solid var(--brand-cyan);
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 1px 5px;
+      margin-bottom: 3px;
+      margin-left: 4px;
+    }
+
+    .yt-watch-btn {
+      margin-top: 4px;
+      display: inline-block;
+      background: #000;
+      color: var(--brand-lime);
+      border: 1.5px solid var(--brand-lime);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+    }
+
+    @media print {
+      body {
+        background: var(--bg-void);
+        font-size: 13px;
+      }
+      .web-nav,
+      .screen-only {
+        display: none !important;
+      }
+      .print-only {
+        display: inline-flex !important;
+      }
+      .slide {
+        margin: 0 !important;
+        border: none !important;
+        width: 297mm !important;
+        height: 210mm !important;
+        overflow: hidden !important;
+        page-break-after: always !important;
+        break-after: page !important;
+      }
+    }
+
+    @media screen {
+      body {
+        font-size: 15.5px;
+        line-height: 1.5;
+      }
+
+      .slide {
+        width: min(297mm, calc(100% - 24px));
+        height: auto;
+        min-height: auto;
+        margin: 18px auto;
+        padding: 20px 24px;
+        overflow: visible;
+        justify-content: flex-start;
+        gap: 16px;
+      }
+
+      .slide-content {
+        flex: 0 1 auto;
+        justify-content: flex-start;
+        gap: 16px;
+      }
+
+      .header-title {
+        font-size: 16px;
+      }
+      .header-sub {
+        font-size: 12.5px;
+      }
+      .card-dark h3,
+      .card-dark h4 {
+        font-size: 18px !important;
+        line-height: 1.25 !important;
+      }
+      .card-dark p,
+      .card-dark li,
+      .goal-item div {
+        font-size: 15px !important;
+        line-height: 1.5 !important;
+      }
+      .terminal-pre {
+        font-size: 14px !important;
+        line-height: 1.55 !important;
+      }
+      code.tag {
+        font-size: 13px !important;
+      }
+      .dark-table {
+        font-size: 14px;
+      }
+
+      .footer-nav a {
+        min-height: 40px;
+        padding: 8px 14px;
+        font-size: 13px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .footer-page {
+        min-height: 40px;
+        padding: 8px 12px;
+        font-size: 13px;
+        display: inline-flex;
+        align-items: center;
+      }
+    }
+
+        /* ==================== LAPTOP 1280x720 (RX-N2: LÁMINA COMPLETA Y NAV EN 1 RENGLÓN) ==================== */
+    @media screen and (min-width: 901px) and (max-width: 1366px) {
+      .web-nav {
+        padding: 5px 12px;
+        gap: 6px;
+        flex-wrap: nowrap;
+      }
+      .web-nav-left {
+        gap: 6px;
+        flex-shrink: 0;
+      }
+      .web-nav-brand {
+        font-size: 12px;
+        white-space: nowrap;
+      }
+      .aula-back-btn {
+        padding: 4px 8px;
+        font-size: 11px;
+        white-space: nowrap;
+      }
+      .mod-switcher {
+        padding: 2px 5px;
+        gap: 2px;
+      }
+      .mod-switcher a {
+        padding: 2px 5px;
+        font-size: 10.5px;
+      }
+      .web-nav-links {
+        gap: 4px;
+        flex-wrap: nowrap;
+      }
+      .nav-group-label {
+        font-size: 9.5px;
+        margin-left: 2px;
+        white-space: nowrap;
+      }
+      .web-nav-links a {
+        padding: 4px 7px;
+        font-size: 11px;
+        white-space: nowrap;
+      }
+    }
+
+    @media screen and (min-width: 901px) and (max-height: 780px) {
+      .slide {
+        margin: 8px auto;
+        padding: 10px 18px;
+        gap: 8px;
+      }
+      .slide-header {
+        padding: 5px 12px;
+        margin-bottom: 2px;
+      }
+      .slide-content {
+        gap: 8px;
+      }
+      .hero-card {
+        padding: 12px 16px;
+      }
+      .hero-title {
+        font-size: 25px !important;
+        line-height: 1.05 !important;
+        margin-bottom: 4px !important;
+      }
+      .hero-lead {
+        font-size: 13.5px !important;
+        line-height: 1.32 !important;
+        margin-bottom: 6px !important;
+      }
+      .goal-item {
+        padding: 8px 11px;
+        gap: 8px;
+      }
+      .goal-item div {
+        font-size: 12.8px !important;
+        line-height: 1.32 !important;
+      }
+      .slide-footer {
+        padding-top: 4px;
+      }
+      .footer-nav a,
+      .footer-page {
+        min-height: 36px;
+        padding: 5px 12px;
+        font-size: 12px;
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      html, body {
+        overflow-x: hidden;
+        max-width: 100vw;
+      }
+
+      .web-nav {
+        position: relative;
+        padding: 10px 12px 14px 12px;
+        gap: 8px;
+      }
+
+      .web-nav-links {
+        display: none;
+      }
+
+      .mobile-slide-select {
+        display: block;
+      }
+
+      .slide {
+        width: calc(100% - 16px);
+        margin: 12px auto;
+        padding: 14px 12px;
+      }
+
+      .slide-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 12px;
+      }
+
+      .header-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .tct-pill,
+      .slide-badge {
+        white-space: normal;
+        font-size: 12px;
+      }
+
+      .hero-title {
+        font-size: 24px;
+      }
+
+      .hero-grid,
+      .two-col-grid,
+      .safezone-grid,
+      .prompts-grid,
+      .exceptions-grid,
+      .yt-cards-grid,
+      .goals-strip {
+        grid-template-columns: 1fr !important;
+      }
+
+      .yt-visual-card {
+        grid-template-columns: 1fr !important;
+      }
+
+      .yt-thumb {
+        width: 100% !important;
+        height: 150px !important;
+      }
+
+      .dark-table {
+        display: block;
+        overflow-x: auto;
+        max-width: 100%;
+      }
+
+      .slide-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .footer-nav {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .terminal-pre,
+      code.tag,
+      a {
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN WEB -->
+  <nav class="web-nav" aria-label="Navegación del manual">
+    <div class="web-nav-left">
+      <a href="/minicurso-robot/aula" class="nav-aula-btn">◀ AULA</a>
+      <div class="web-nav-brand">
+        <span>⚡ MÓDULO 02</span>
+      </div>
+      <div class="mod-switcher" aria-label="Cambiar de módulo">
+        <span>MÓDULOS:</span>
+        <a href="TCT_Modulo_01_Mapa_y_Obrero_IA.html">01</a>
+        <a href="TCT_Modulo_02_Fabrica_Videos_Gratis.html" aria-current="page">02</a>
+        <a href="TCT_Modulo_03_Robot_GitHub_Actions.html">03</a>
+        <a href="TCT_Modulo_04_Tuberias_API_y_Metricool.html">04</a>
+      </div>
+    </div>
+
+    <select class="mobile-slide-select" aria-label="Ir a lámina" onchange="if(this.value) location.hash=this.value;">
+      <option value="#lamina-1">ENTIENDE ➔ 01. Portada</option>
+      <option value="#lamina-2">ENTIENDE ➔ 02. API ElevenLabs + Edge-TTS</option>
+      <option value="#lamina-3">HAZ ➔ 03. Estudio HyperFrames</option>
+      <option value="#lamina-4">HAZ ➔ 04. Pega los Prompts</option>
+      <option value="#lamina-5">SI ALGO FALLA ➔ 05. Errores comunes</option>
+      <option value="#lamina-6">APRENDE MÁS ➔ 06. Videoteca YouTube</option>
+    </select>
+
+    <div class="web-nav-links">
+      <span class="nav-group-label">ENTIENDE:</span>
+      <a href="#lamina-1" data-slide="lamina-1" aria-current="true">01. Portada</a>
+      <a href="#lamina-2" data-slide="lamina-2">02. Voces IA</a>
+      <span class="nav-group-sep">|</span>
+      <span class="nav-group-label">HAZ:</span>
+      <a href="#lamina-3" data-slide="lamina-3">03. HyperFrames</a>
+      <a href="#lamina-4" data-slide="lamina-4" id="nav-link-4">04. Pega los prompts</a>
+      <span class="nav-group-sep">|</span>
+      <span class="nav-group-label">SI ALGO FALLA:</span>
+      <a href="#lamina-5" data-slide="lamina-5">05. Errores</a>
+      <span class="nav-group-label">APRENDE MÁS:</span>
+      <a href="#lamina-6" data-slide="lamina-6">06. Videos</a>
+    </div>
+
+    <div class="web-nav-progress" aria-hidden="true">
+      <div class="web-nav-progress-bar" id="nav-progress-bar"></div>
+    </div>
+  </nav>
+
+  <!-- =========================================================================================
+       LÁMINA 01: PORTADA DEL MÓDULO 02 — LA FÁBRICA DE VIDEOS GRATIS EN LOCAL
+       ========================================================================================= -->
+  <section class="slide" id="lamina-1">
+    <header class="slide-header">
+      <div class="header-left">
+        <span class="tct-pill">⚡ TCT ACADEMY</span>
+        <div>
+          <div class="header-title">MÓDULO 02: LA FÁBRICA DE VIDEOS GRATIS (HYPERFRAMES + VOCES IA)</div>
+          <div class="header-sub">PRODUCE REELS Y SHORTS EN TU PC CON NODE.JS 22+, HYPERFRAMES Y API DE ELEVENLABS</div>
+        </div>
+      </div>
+      <div class="slide-badge">MÓDULO 02 // LÁMINA 01 DE 06</div>
+    </header>
+
+    <div class="slide-content">
+      <div class="hero-grid">
+        <div class="hero-main">
+          <div>
+            <span class="kicker" style="background:var(--brand-cyan);">★ TU PROPIO ESTUDIO DE PRODUCCIÓN AUTOMÁTICA ★</span>
+            <h1 class="hero-title">CREA VIDEOS MP4 CON <span>HYPERFRAMES Y VOCES IA</span></h1>
+            <p style="font-size:13.4px;color:#E4E4E7;line-height:1.45;margin-bottom:10px;">
+              ¿Por qué hacer videos con código desde Antigravity (o Claude Code) en lugar de usar editores tradicionales? Porque una vez que tu agente diseña tu plantilla visual con <strong>HyperFrames (HTML + GSAP sobre Node.js 22+)</strong>, puedes fabricar decenas de videos nuevos cambiando únicamente el tema, con animaciones fluidas y locución neuronal automática.
+            </p>
+          </div>
+
+          <!-- PENDIENTE D1 -->
+          <div style="background:#0B0D12;border:2px solid var(--brand-lime);padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+            <div style="flex:1;min-width:220px;">
+              <div style="font-family:var(--font-mono);color:var(--brand-lime);font-size:11.5px;font-weight:700;">📂 ¿CÓMO ACTIVAR LA SKILL #02 HOY?</div>
+              <div style="font-size:11.5px;color:#D4D4D8;">Si tienes el Starter Kit (<code class="tag">.zip</code>), copia <code class="tag">hyperframes-video-factory/SKILL.md</code> en <code class="tag">.gemini/skills/</code> (o <code class="tag">.claude/skills/</code>). Si tienes el Pase Básico, usa directo los Prompts #03 y #04 en la Lámina 04.</div>
+            </div>
+            <a href="#lamina-2" style="text-decoration:none;background:var(--brand-lime);color:#000;font-family:var(--font-mono);font-weight:800;font-size:11.5px;padding:8px 12px;border:2px solid #FFF;white-space:nowrap;">CONFIGURAR VOZ IA ➔</a>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <span class="kicker" style="background:var(--brand-pink);color:#FFF;">COCINA EN LOCAL (PLANES GRATIS)</span>
+          <div class="avatars-row">
+            <div class="avatar-frame">
+              <img src="../assets/avatar_neobrutalista.jpg" alt="Avatar Neobrutalista TCT" />
+            </div>
+            <div class="cerebro-badge">
+              <img src="../cerebro.webp" alt="Mascota Cerebro TCT" />
+            </div>
+          </div>
+          <div>
+            <div style="font-weight:800;font-size:15px;color:var(--brand-lime);text-transform:uppercase;">REGLA DE ORO DEL MÓDULO 02</div>
+            <div style="font-family:var(--font-mono);font-size:11.2px;color:#D4D4D8;margin-top:2px;">"Los videos pesados se cocinan en tu PC; a GitHub solo subimos los .mp4 listos para disparar."</div>
+          </div>
+          <div style="width:100%;background:#000;border:1.5px solid var(--brand-lime);padding:6px;font-family:var(--font-mono);font-size:11px;color:var(--brand-lime);">
+            ⚡ TALENTOCONTARIFA.LAT
+          </div>
+        </div>
+      </div>
+
+      <div class="goals-strip">
+        <div class="goal-item">
+          <div class="icon-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:800;font-size:12.5px;color:var(--brand-lime);text-transform:uppercase;">1. ElevenLabs Free + Caché</div>
+            <!-- C7: Licencia de ElevenLabs Free -->
+            <div style="font-size:11.5px;color:#D4D4D8;">Activa tu cuenta gratuita de ElevenLabs (uso no comercial con atribución) y ahorra créditos con caché SHA-256.</div>
+          </div>
+        </div>
+        <div class="goal-item">
+          <div class="icon-box cyan">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:800;font-size:12.5px;color:var(--brand-cyan);text-transform:uppercase;">2. Respaldo con Edge-TTS</div>
+            <!-- C8: Edge-TTS alternativa gratuita no oficial -->
+            <div style="font-size:11.5px;color:#D4D4D8;">Alternativa gratuita no oficial (sin garantía de disponibilidad) para generar voces en español sin API Key.</div>
+          </div>
+        </div>
+        <div class="goal-item">
+          <div class="icon-box pink">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:800;font-size:12.5px;color:var(--brand-pink);text-transform:uppercase;">3. Render MP4 con HyperFrames</div>
+            <div style="font-size:11.5px;color:#D4D4D8;">Tu agente sincroniza la voz con las escenas animadas y guarda el <code class="tag">.mp4</code> directo en <code class="tag">videos/</code>.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="slide-footer">
+      <span>TALENTOCONTARIFA.LAT // MÓDULO 02: LA FÁBRICA DE VIDEOS GRATIS</span>
+      <div class="footer-nav">
+        <span class="footer-page">LÁMINA 01 / 06</span>
+        <a href="#lamina-2">SIGUIENTE LÁMINA ▶</a>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =========================================================================================
+       LÁMINA 02: PASO A PASO — CÓMO CONFIGURAR Y USAR LA API DE ELEVENLABS (+ RESPALDO GRATIS)
+       ========================================================================================= -->
+  <section class="slide" id="lamina-2">
+    <header class="slide-header">
+      <div class="header-left">
+        <span class="tct-pill">🎙️ API ELEVENLABS PASO A PASO</span>
+        <div>
+          <div class="header-title">CÓMO CONECTAR LA API DE ELEVENLABS EN 3 CLICS (+ RESPALDO EDGE-TTS)</div>
+          <div class="header-sub">GUÍA FOR DUMMIES: DÓNDE SACAR TU XI-API-KEY, TU VOICE ID Y CÓMO OPTIMIZAR TUS CRÉDITOS</div>
+        </div>
+      </div>
+      <div class="slide-badge">MÓDULO 02 // LÁMINA 02 DE 06</div>
+    </header>
+
+    <div class="slide-content">
+      <div class="two-col-grid">
+        <!-- Guía Paso a Paso de la API de ElevenLabs (C7) -->
+        <div class="card-dark">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;flex-wrap:wrap;gap:4px;">
+            <span class="kicker">MOTOR PRINCIPAL • API REST V1 DE ELEVENLABS</span>
+            <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--brand-lime);">PLAN FREE = USO NO COMERCIAL CON ATRIBUCIÓN</span>
+          </div>
+          <h3 style="font-size:15px;font-weight:800;color:var(--brand-lime);text-transform:uppercase;margin-bottom:5px;">Los 3 Pasos para sacar tu API Key y Voice ID en ElevenLabs.io</h3>
+          <div style="font-size:11.6px;color:#E4E4E7;display:flex;flex-direction:column;gap:4px;margin-bottom:7px;">
+            <div><strong style="color:var(--brand-lime);">PASO 1 (Sacar API Key):</strong> Entra a <code class="tag">elevenlabs.io</code> ➔ clic en tu perfil (abajo a la izquierda) ➔ <strong>API Keys</strong> ➔ <strong>Create API Key</strong>. Activa el permiso <code class="tag">Text to Speech: Access</code> y copia tu llave (<code class="tag">sk_...</code>).</div>
+            <div><strong style="color:var(--brand-cyan);">PASO 2 (Copiar Voice ID):</strong> Ve al menú <strong>Voices</strong> ➔ elige tu voz favorita en español ➔ clic en los 3 puntitos <code class="tag">...</code> ➔ <strong>Copy Voice ID</strong> (ej. <code class="tag">pNInz6obpgDQGcFmaJgB</code>).</div>
+            <div><strong style="color:var(--brand-pink);">PASO 3 (Guardar en .env):</strong> Pega ambos datos en tu archivo <code class="tag">.env</code> privado para que tu script llame a <code class="tag">POST /v1/text-to-speech/{voice_id}</code> con el header <code class="tag">xi-api-key</code>.</div>
+          </div>
+          <div style="background:#000;border:1.5px solid var(--brand-lime);padding:5px 9px;font-family:var(--font-mono);font-size:10.5px;color:#D4D4D8;">
+            💡 <strong style="color:var(--brand-lime);">OPTIMIZACIÓN DE CRÉDITOS:</strong> <code class="tag">eleven_flash_v2_5</code> (~0.5 créditos/letra = ~20k gratis; verifica en <code class="tag">elevenlabs.io/pricing</code>, puede variar por plan) + caché <code class="tag">voice_cache/</code> SHA-256.
+          </div>
+        </div>
+
+        <!-- Archivo .env + Motor B Edge-TTS (C8) -->
+        <div class="card-dark cyan" style="display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
+              <span class="kicker" style="background:var(--brand-cyan);">TU ARCHIVO .ENV + RESPALDO</span>
+              <span style="font-family:var(--font-mono);font-size:10.5px;color:var(--brand-cyan);">FALLBACK AUTOMÁTICO</span>
+            </div>
+            <h3 style="font-size:15px;font-weight:800;color:var(--brand-cyan);text-transform:uppercase;margin-bottom:4px;">Así queda tu archivo .env local</h3>
+            <div style="background:#000;border:1.5px solid var(--brand-cyan);padding:6px 9px;font-family:var(--font-mono);font-size:10.8px;color:#F4F4F6;margin-bottom:7px;line-height:1.42;">
+              ELEVENLABS_API_KEY=sk_tu_llave_aqui<br/>
+              ELEVENLABS_VOICE_ID=pNInz6obpgDQGcFmaJgB<br/>
+              ELEVENLABS_MODEL_ID=eleven_flash_v2_5
+            </div>
+          </div>
+          <div style="background:#10151C;border:1.5px dashed var(--brand-cyan);padding:6px 9px;font-size:11px;color:#E4E4E7;">
+            <strong style="color:var(--brand-cyan);">¿Se acabaron tus créditos del mes?</strong> Nuestro script detecta el código <code class="tag">401/429</code> de ElevenLabs y salta automático a <strong>Edge-TTS</strong> (alternativa gratuita no oficial, sin garantía de disponibilidad).
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla de Modelos ElevenLabs API + Voces de Respaldo (C7, C8) -->
+      <table class="dark-table">
+        <thead>
+          <tr>
+            <th>Motor / Endpoint API</th>
+            <th>Model ID / Parámetro Exacto</th>
+            <th>Cuota y Licencia (planes oct-2026)</th>
+            <th>Cuándo usarlo en tu Fábrica de Videos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>⚡ ElevenLabs API Flash v2.5</strong></td>
+            <td><code class="tag">model_id: "eleven_flash_v2_5"</code></td>
+            <td><strong style="color:var(--brand-lime);">~0.5 créditos/letra (~20k gratis; verifica en elevenlabs.io/pricing)</strong></td>
+            <td>Recomendado para Reels diarios. Plan Free = uso no comercial con atribución (para uso comercial usa plan Starter).</td>
+          </tr>
+          <tr>
+            <td><strong>🎭 ElevenLabs API Multilingual v2</strong></td>
+            <td><code class="tag">model_id: "eleven_multilingual_v2"</code></td>
+            <td>1 crédito/letra (~10k/mes en plan Free no comercial)</td>
+            <td>Máxima expresividad emocional en español (<code class="tag">stability: 0.45</code>, <code class="tag">similarity_boost: 0.80</code>).</td>
+          </tr>
+          <tr>
+            <td><strong>🛡️ Respaldo Edge-TTS</strong></td>
+            <td><code class="tag">es-MX-JorgeNeural</code> / <code class="tag">es-MX-DaliaNeural</code></td>
+            <td><strong style="color:var(--brand-cyan);">Alternativa gratuita no oficial (sin garantía de disponibilidad)</strong></td>
+            <td>Entra en acción automáticamente cuando tu cuota mensual de ElevenLabs se agota o si no configuras llave.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer class="slide-footer">
+      <span>TALENTOCONTARIFA.LAT // MÓDULO 02: LA FÁBRICA DE VIDEOS GRATIS</span>
+      <div class="footer-nav">
+        <a href="#lamina-1">◀ ANTERIOR</a>
+        <span class="footer-page">LÁMINA 02 / 06</span>
+        <a href="#lamina-3">SIGUIENTE LÁMINA ▶</a>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =========================================================================================
+       LÁMINA 03: CÓMO FUNCIONA HYPERFRAMES POR DENTRO (MAPA VISUAL 1080x1920)
+       ========================================================================================= -->
+  <section class="slide" id="lamina-3">
+    <header class="slide-header">
+      <div class="header-left">
+        <span class="tct-pill">🎬 ESTUDIO HYPERFRAMES</span>
+        <div>
+          <div class="header-title">ANATOMÍA DE UN REEL EN HYPERFRAMES (Y EL SECRETO DE LAS ZONAS SEGURAS)</div>
+          <div class="header-sub">TU AGENTE DISEÑA EN HTML/GSAP (NODE.JS 22+) Y LO CONVIERTE EN UN ARCHIVO .MP4 HD</div>
+        </div>
+      </div>
+      <div class="slide-badge">MÓDULO 02 // LÁMINA 03 DE 06</div>
+    </header>
+
+    <div class="slide-content">
+      <div class="safezone-grid">
+        <!-- Mockup visual de un celular 9:16 con Safe Zones -->
+        <div style="background:#0B0D12;border:3px solid var(--brand-lime);box-shadow:5px 5px 0px #FFF;padding:10px;display:flex;flex-direction:column;justify-content:space-between;text-align:center;">
+          <div style="background:rgba(255,0,85,0.22);border:1.5px dashed var(--brand-pink);padding:5px;font-family:var(--font-mono);font-size:10px;color:#FF80AA;">
+            ⛔ ZONA SUPERIOR (180px)<br/>Hora / Batería / Buscador TikTok
+          </div>
+
+          <div style="background:#141821;border:2px solid var(--brand-lime);padding:12px 8px;margin:4px 0;">
+            <div style="font-family:var(--font-mono);font-size:10.5px;color:var(--brand-lime);font-weight:800;margin-bottom:4px;">✅ ZONA SEGURA ACTIVA</div>
+            <div style="background:var(--brand-lime);color:#000;font-weight:800;font-size:13px;padding:3px 6px;margin-bottom:5px;">TITULAR DE IMPACTO</div>
+            <div style="font-size:10.5px;color:#E4E4E7;margin-bottom:6px;">Tarjetas animadas GSAP + Personaje o Gráficos</div>
+            <div style="background:#000;border:1px solid var(--brand-cyan);color:var(--brand-cyan);font-family:var(--font-mono);font-size:10px;padding:3px;">
+              Subtítulos Sincronizados
+            </div>
+          </div>
+
+          <div style="background:rgba(255,0,85,0.22);border:1.5px dashed var(--brand-pink);padding:6px;font-family:var(--font-mono);font-size:10px;color:#FF80AA;">
+            ⛔ ZONA INFERIOR (320px)<br/>Descripción, Audio y Botones Like
+          </div>
+        </div>
+
+        <!-- Explicación de las 3 etapas que hace el agente por ti -->
+        <div style="display:flex;flex-direction:column;justify-content:space-between;gap:10px;">
+          <div class="card-dark" style="padding:11px 15px;">
+            <div style="font-family:var(--font-mono);font-size:11.5px;color:var(--brand-lime);font-weight:800;margin-bottom:3px;">ETAPA 1 // EL AGENTE GENERA PRIMERO LA VOZ Y MIDE LOS SEGUNDOS</div>
+            <p style="font-size:12px;color:#E4E4E7;">
+              Cuando le das un tema a tu agente, él divide el guion en <strong>4 o 5 escenas cortas</strong>, genera el archivo de voz de cada escena con ElevenLabs o Edge-TTS y mide cuánto dura exactamente cada audio (ej. Escena 1 = 4.2s, Escena 2 = 5.1s).
+            </p>
+          </div>
+
+          <div class="card-dark cyan" style="padding:11px 15px;">
+            <div style="font-family:var(--font-mono);font-size:11.5px;color:var(--brand-cyan);font-weight:800;margin-bottom:3px;">ETAPA 2 // COMPONE LAS ANIMACIONES CON HYPERFRAMES (HTML + GSAP)</div>
+            <p style="font-size:12px;color:#E4E4E7;">
+              Usando la duración exacta de la voz, el agente maqueta las tarjetas visuales sobre Node.js 22+ respetando las <strong>Zonas Seguras (Safe Zones)</strong> de la izquierda para que ningún texto quede tapado por la interfaz de Instagram, TikTok o Shorts.
+            </p>
+          </div>
+
+          <div class="card-dark" style="padding:11px 15px;background:#101912;">
+            <div style="font-family:var(--font-mono);font-size:11.5px;color:var(--brand-lime);font-weight:800;margin-bottom:3px;">ETAPA 3 // RENDERIZA EL ARCHIVO .MP4 DIRECTO A TU CARPETA /VIDEOS</div>
+            <p style="font-size:12px;color:#E4E4E7;">
+              Finalmente, el agente graba la composición y ejecuta <code class="tag">ffmpeg</code> para entregarte un archivo <code class="tag">videos/01_reel_automatico.mp4</code> (1080x1920, H.264 <code class="tag">yuv420p</code> + AAC) listo para subirse a tu robot de GitHub Actions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="slide-footer">
+      <span>TALENTOCONTARIFA.LAT // MÓDULO 02: LA FÁBRICA DE VIDEOS GRATIS</span>
+      <div class="footer-nav">
+        <a href="#lamina-2">◀ ANTERIOR</a>
+        <span class="footer-page">LÁMINA 03 / 06</span>
+        <a href="#lamina-4">SIGUIENTE LÁMINA ▶</a>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =========================================================================================
+       LÁMINA 04: CENTRO DE PROMPTS INTERACTIVOS DEL MÓDULO 02 (COPIAR EN 1 CLIC)
+       ========================================================================================= -->
+  <section class="slide" id="lamina-4">
+    <header class="slide-header">
+      <div class="header-left">
+        <span class="tct-pill">⚡ PROMPTS COPIAR Y PEGAR</span>
+        <div>
+          <div class="header-title">TUS 2 PROMPTS: COPIA Y PEGA EN TU AGENTE</div>
+          <div class="header-sub">ÚSALOS EN ANTIGRAVITY IDE O CLAUDE CODE PARA FABRICAR TUS VIDEOS EN MINUTOS</div>
+        </div>
+      </div>
+      <div class="slide-badge">MÓDULO 02 // LÁMINA 04 DE 06</div>
+    </header>
+
+    <div class="slide-content">
+      <div class="prompts-grid">
+        <!-- Prompt #03 -->
+        <div class="terminal-card">
+          <div>
+            <div class="terminal-head">
+              <span style="font-family:var(--font-mono);font-size:11.3px;color:var(--brand-lime);font-weight:700;">PROMPT #03 // CREAR MI REEL CON API DE ELEVENLABS + HYPERFRAMES</span>
+              <button type="button" class="copy-btn screen-only" onclick="copyPrompt('p3-text', this)">
+                📋 COPIAR PROMPT #03 EN 1 CLIC
+              </button>
+              <a href="https://talentocontarifa.lat/minicurso-robot/aula" target="_blank" class="copy-btn print-only" style="text-decoration:none;">
+                🌐 Abre la versión web para copiar en 1 clic
+              </a>
+            </div>
+            <div class="terminal-pre" id="p3-text">Usando la Skill <span class="hl">hyperframes-video-factory</span>, créame un video vertical completo (1080x1920 MP4) de 30 segundos sobre: <span class="hl">[ESCRIBE AQUÍ TU TEMA O NEGOCIO]</span>.
+Por favor haz todo el flujo por mí:
+1. Escribe un guion magnético dividido en 4 escenas cortas más un cierre de llamado a la acción.
+2. Genera la voz conectándote a la <span class="hl">API de ElevenLabs (POST /v1/text-to-speech/{voice_id})</span> leyendo mi <span class="hl">ELEVENLABS_API_KEY</span> y <span class="hl">ELEVENLABS_VOICE_ID</span> desde <span class="hl">.env</span> con caché SHA-256 en <span class="hl">voice_cache/</span> (y si no hay cuota, usa <span class="hl">edge-tts</span> de respaldo).
+3. Diseña la animación Neo-Brutalista en HyperFrames respetando las Safe Zones y sincronízala con la duración de cada audio.
+4. Renderiza el resultado final en <span class="hl">videos/01_reel_automatico.mp4</span> (H.264 yuv420p + AAC).</div>
+          </div>
+          <div style="background:#141820;border-top:2px solid #27272A;padding:7px 12px;font-size:11px;color:#A1A1AA;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
+            <span>💡 Cambia <code class="tag">[ESCRIBE AQUÍ TU TEMA O NEGOCIO]</code> por lo que vendas o enseñes.</span>
+            <span style="font-family:var(--font-mono);">¿Fallo de video/voz? ➔ <a href="#err-m2-01" style="color:var(--brand-lime);text-decoration:underline;">Error 01</a> · <a href="#err-m2-03" style="color:var(--brand-lime);text-decoration:underline;">Error 03</a></span>
+          </div>
+        </div>
+
+        <!-- Prompt #04 + Checklist -->
+        <div style="display:flex;flex-direction:column;justify-content:space-between;gap:10px;">
+          <div class="terminal-card">
+            <div class="terminal-head">
+              <span style="font-family:var(--font-mono);font-size:11px;color:var(--brand-cyan);font-weight:700;">PROMPT #04 // PROBAR CONEXIÓN A LA API DE ELEVENLABS</span>
+              <button type="button" class="copy-btn screen-only" onclick="copyPrompt('p4-text', this)">
+                📋 COPIAR PROMPT #04 EN 1 CLIC
+              </button>
+              <a href="https://talentocontarifa.lat/minicurso-robot/aula" target="_blank" class="copy-btn print-only" style="text-decoration:none;">
+                🌐 Abre la versión web para copiar en 1 clic
+              </a>
+            </div>
+            <div class="terminal-pre" id="p4-text" style="font-size:11px;">Revisa o completa mi archivo <span class="hl">.env</span> con <span class="hl">ELEVENLABS_API_KEY</span>, <span class="hl">ELEVENLABS_VOICE_ID</span> y <span class="hl">ELEVENLABS_MODEL_ID=eleven_flash_v2_5</span>, y haz una prueba rápida llamando al endpoint <span class="hl">https://api.elevenlabs.io/v1/text-to-speech/{voice_id}</span> con caché SHA-256 en <span class="hl">voice_cache/</span> y respaldo automático a <span class="hl">edge-tts</span> si devuelve error 401/429.</div>
+            <div style="background:#141820;border-top:2px solid #27272A;padding:5px 12px;font-size:10.5px;color:#A1A1AA;font-family:var(--font-mono);">
+              ¿Error 401/429 en ElevenLabs? ➔ <a href="#err-m2-02" style="color:var(--brand-cyan);text-decoration:underline;">Ver Error 02</a>
+            </div>
+          </div>
+
+          <div class="card-dark" style="padding:10px 13px;background:#101912;">
+            <div style="font-family:var(--font-mono);font-size:11.5px;color:var(--brand-lime);font-weight:800;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center;">
+              <span>✅ CHECKLIST DEL MÓDULO 02:</span>
+              <span id="checklist-status" style="background:#000;color:var(--brand-lime);padding:1px 7px;border:1px solid var(--brand-lime);font-size:10.5px;">0/3 listos</span>
+            </div>
+            <div style="font-size:11.5px;color:#E4E4E7;line-height:1.55;display:flex;flex-direction:column;gap:5px;">
+              <label style="cursor:pointer;display:flex;align-items:flex-start;gap:8px;">
+                <input type="checkbox" class="tct-check" data-check="tct-m02-check-1" style="accent-color:#CCFF00;width:16px;height:16px;margin-top:2px;flex-shrink:0;"/>
+                <span>Configuré mi <code class="tag">.env</code> o probé el <strong>Prompt #04</strong> con ElevenLabs / Edge-TTS.</span>
+              </label>
+              <label style="cursor:pointer;display:flex;align-items:flex-start;gap:8px;">
+                <input type="checkbox" class="tct-check" data-check="tct-m02-check-2" style="accent-color:#CCFF00;width:16px;height:16px;margin-top:2px;flex-shrink:0;"/>
+                <span>Pegué el <strong>Prompt #03</strong> y generé mi primer <code class="tag">.mp4</code> en <code class="tag">videos/</code>.</span>
+              </label>
+              <label style="cursor:pointer;display:flex;align-items:flex-start;gap:8px;">
+                <input type="checkbox" class="tct-check" data-check="tct-m02-check-3" style="accent-color:#CCFF00;width:16px;height:16px;margin-top:2px;flex-shrink:0;"/>
+                <span>Verifiqué que mi video se reproduce con audio claro en mi PC.</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="slide-footer">
+      <span>TALENTOCONTARIFA.LAT // MÓDULO 02: LA FÁBRICA DE VIDEOS GRATIS</span>
+      <div class="footer-nav">
+        <a href="#lamina-3">◀ ANTERIOR</a>
+        <span class="footer-page">LÁMINA 04 / 06</span>
+        <a href="#lamina-5">SIGUIENTE LÁMINA ▶</a>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =========================================================================================
+       LÁMINA 05: ESCUDO ANTI-ERRORES DE VIDEO Y AUDIO
+       ========================================================================================= -->
+  <section class="slide" id="lamina-5">
+    <header class="slide-header">
+      <div class="header-left">
+        <span class="tct-pill" style="background:var(--brand-pink);color:#FFF;">🛡️ ESCUDO ANTI-ERRORES</span>
+        <div>
+          <div class="header-title">4 EXCEPCIONES COMUNES AL RENDERIZAR VIDEOS Y VOCES (SOLUCIÓN RÁPIDA)</div>
+          <div class="header-sub">CÓMO RESOLVER CUALQUIER DETALLE DE AUDIO, FORMATO O CUOTA EN SEGUNDOS</div>
+        </div>
+      </div>
+      <div class="slide-badge">MÓDULO 02 // LÁMINA 05 DE 06</div>
+    </header>
+
+    <div class="slide-content">
+      <div class="exceptions-grid">
+        <div class="card-dark pink" id="err-m2-01">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div class="icon-box pink" style="width:30px;height:30px;font-family:var(--font-mono);font-weight:800;">01</div>
+              <h4 style="font-size:13.5px;font-weight:800;color:var(--brand-lime);text-transform:uppercase;">El MP4 se ve negro en iPhone o WhatsApp</h4>
+            </div>
+            <a href="#lamina-4" style="font-family:var(--font-mono);font-size:10.5px;color:var(--brand-lime);text-decoration:underline;white-space:nowrap;">◀ Volver al Prompt #03</a>
+          </div>
+          <p style="font-size:11.8px;color:#E4E4E7;margin-bottom:6px;">
+            <strong>Causa:</strong> A veces algunos contenedores exportan con formato de píxel <code class="tag">yuv444p</code> o códec <code class="tag">mp4v</code> que iOS e Instagram rechazan.
+          </p>
+          <div style="background:#000;border:1.5px solid var(--brand-lime);padding:6px 9px;font-family:var(--font-mono);font-size:11px;color:var(--brand-lime);">
+            ✓ SOLUCIÓN: Pídele al agente: "Recodifica mi MP4 con ffmpeg usando -c:v libx264 -pix_fmt yuv420p -c:a aac".
+          </div>
+        </div>
+
+        <div class="card-dark cyan" id="err-m2-02">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div class="icon-box cyan" style="width:30px;height:30px;font-family:var(--font-mono);font-weight:800;">02</div>
+              <h4 style="font-size:13.5px;font-weight:800;color:var(--brand-cyan);text-transform:uppercase;">ElevenLabs da error "Quota Exceeded / 401"</h4>
+            </div>
+            <a href="#lamina-4" style="font-family:var(--font-mono);font-size:10.5px;color:var(--brand-cyan);text-decoration:underline;white-space:nowrap;">◀ Volver al Prompt #04</a>
+          </div>
+          <p style="font-size:11.8px;color:#E4E4E7;margin-bottom:6px;">
+            <strong>Causa:</strong> Ya consumiste los créditos gratuitos del mes o copiaste tu API Key con un espacio en blanco al final.
+          </p>
+          <div style="background:#000;border:1.5px solid var(--brand-cyan);padding:6px 9px;font-family:var(--font-mono);font-size:11px;color:var(--brand-cyan);">
+            ✓ SOLUCIÓN: Con el Prompt #04 tu script salta automáticamente a Edge-TTS (alternativa gratuita no oficial) para no detener tu producción.
+          </div>
+        </div>
+
+        <div class="card-dark" id="err-m2-03">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div class="icon-box" style="width:30px;height:30px;font-family:var(--font-mono);font-weight:800;">03</div>
+              <h4 style="font-size:13.5px;font-weight:800;color:var(--brand-lime);text-transform:uppercase;">La voz pronuncia raro una sigla o web</h4>
+            </div>
+            <a href="#lamina-4" style="font-family:var(--font-mono);font-size:10.5px;color:var(--brand-lime);text-decoration:underline;white-space:nowrap;">◀ Volver al Prompt #03</a>
+          </div>
+          <p style="font-size:11.8px;color:#E4E4E7;margin-bottom:6px;">
+            <strong>Causa:</strong> Si escribes <code class="tag">talentocontarifa.lat</code> o <code class="tag">$0/mes</code> en el guion hablado, el lector puede deletrearlo raro.
+          </p>
+          <div style="background:#000;border:1.5px solid var(--brand-lime);padding:6px 9px;font-family:var(--font-mono);font-size:11px;color:var(--brand-lime);">
+            ✓ SOLUCIÓN: En el texto de voz escribe cómo suena ("talento con tarifa punto lat", "cero pesos al mes") y en pantalla deja el texto visual corto.
+          </div>
+        </div>
+
+        <div class="card-dark pink" id="err-m2-04">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div class="icon-box pink" style="width:30px;height:30px;font-family:var(--font-mono);font-weight:800;">04</div>
+              <h4 style="font-size:13.5px;font-weight:800;color:#FF80AA;text-transform:uppercase;">La música de fondo tapa mi voz</h4>
+            </div>
+            <a href="#lamina-4" style="font-family:var(--font-mono);font-size:10.5px;color:#FF80AA;text-decoration:underline;white-space:nowrap;">◀ Volver al Prompt #03</a>
+          </div>
+          <p style="font-size:11.8px;color:#E4E4E7;margin-bottom:6px;">
+            <strong>Causa:</strong> Si mezclas una pista musical al 100% de volumen junto con la locución, no se distingue el mensaje.
+          </p>
+          <div style="background:#000;border:1.5px solid var(--brand-pink);padding:6px 9px;font-family:var(--font-mono);font-size:11px;color:#FF80AA;">
+            ✓ SOLUCIÓN: Dile al agente: "Ajusta el volumen de la música de fondo (BGM) al 15% (0.15) y normaliza la voz a -14 LUFS".
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="slide-footer">
+      <span>TALENTOCONTARIFA.LAT // MÓDULO 02: LA FÁBRICA DE VIDEOS GRATIS</span>
+      <div class="footer-nav">
+        <a href="#lamina-4">◀ ANTERIOR</a>
+        <span class="footer-page">LÁMINA 05 / 06</span>
+        <a href="#lamina-6">SIGUIENTE LÁMINA ▶</a>
+      </div>
+    </footer>
+  </section>
+
+  <!-- =========================================================================================
+       LÁMINA 06: VIDEOTECA YOUTUBE DEL MÓDULO 02 CON MINIATURAS Y CRÉDITOS OFICIALES
+       ========================================================================================= -->
+  <section class="slide" id="lamina-6">
+    <header class="slide-header">
+      <div class="header-left">
+        <span class="tct-pill" style="background:#FF0033;color:#FFF;border-color:#FFF;">▶ VIDEOTECA DE APOYO</span>
+        <div>
+          <div class="header-title">TUTORIALES DE APOYO EN YOUTUBE: VOCES IA Y ANIMACIÓN CON CÓDIGO</div>
+          <div class="header-sub">RECONOCIMIENTO Y CRÉDITO COMPLETO A LOS AUTORES Y CANALES ORIGINALES</div>
+        </div>
+      </div>
+      <div class="slide-badge">MÓDULO 02 // LÁMINA 06 DE 06</div>
+    </header>
+
+    <div class="slide-content">
+      <p style="font-size:11.8px;color:#D4D4D8;">
+        ¿Quieres profundizar en cómo sacarle todo el jugo a ElevenLabs, escuchar cómo suena Edge-TTS o entender cómo GSAP mueve elementos en pantalla? <strong>Todo el mérito y reconocimiento a estos grandes creadores en español:</strong>
+      </p>
+
+      <div class="yt-cards-grid">
+        <a class="yt-visual-card" href="https://www.youtube.com/watch?v=q1Aly0QMjeI" target="_blank" rel="noopener noreferrer">
+          <div class="yt-thumb">
+            <img src="https://i.ytimg.com/vi/q1Aly0QMjeI/hqdefault.jpg" alt="ElevenLabs Tutorial Joanini IA" />
+            <span class="yt-play-pill">▶ YOUTUBE</span>
+          </div>
+          <div>
+            <span class="yt-credit-pill">Autor y Canal: Joanini IA</span>
+            <span class="yt-meta-pill">⏱ ~15 min · Apoyo Lám. 02</span>
+            <h5 style="font-size:12.5px;font-weight:800;line-height:1.22;margin-bottom:2px;">Cómo usar ElevenLabs en español | Tutorial completo</h5>
+            <div style="font-size:10.8px;color:#A1A1AA;">Recorrido paso a paso por el plan gratuito de ElevenLabs, biblioteca de voces en español y ajustes de estabilidad.</div>
+            <span class="yt-watch-btn">ABRIR EN YOUTUBE (youtu.be/q1Aly0QMjeI) ➔</span>
+          </div>
+        </a>
+
+        <a class="yt-visual-card" href="https://www.youtube.com/watch?v=cOZ9pgafaOU" target="_blank" rel="noopener noreferrer">
+          <div class="yt-thumb">
+            <img src="https://i.ytimg.com/vi/cOZ9pgafaOU/hqdefault.jpg" alt="ElevenLabs Paso a Paso Mari Fuentes" />
+            <span class="yt-play-pill">▶ YOUTUBE</span>
+          </div>
+          <div>
+            <span class="yt-credit-pill">Autora y Canal: Mari Fuentes</span>
+            <span class="yt-meta-pill">⏱ ~12 min · Voces realistas</span>
+            <h5 style="font-size:12.5px;font-weight:800;line-height:1.22;margin-bottom:2px;">Cómo usar Eleven Labs Paso a Paso — Crear voces realistas</h5>
+            <div style="font-size:10.8px;color:#A1A1AA;">Guía práctica orientada a creadores de contenido para lograr locuciones naturales que retengan a la audiencia.</div>
+            <span class="yt-watch-btn">ABRIR EN YOUTUBE (youtu.be/cOZ9pgafaOU) ➔</span>
+          </div>
+        </a>
+
+        <a class="yt-visual-card" href="https://www.youtube.com/shorts/3D7v0oJs_Hg" target="_blank" rel="noopener noreferrer">
+          <div class="yt-thumb">
+            <img src="https://i.ytimg.com/vi/3D7v0oJs_Hg/hqdefault.jpg" alt="Edge TTS Voces Gratis AI Tech Hoy" />
+            <span class="yt-play-pill">▶ SHORT</span>
+          </div>
+          <div>
+            <span class="yt-credit-pill" style="background:var(--brand-cyan);">Autor y Canal: AI Tech Hoy</span>
+            <span class="yt-meta-pill">⏱ 60 seg · Demo Edge-TTS</span>
+            <h5 style="font-size:12.5px;font-weight:800;line-height:1.22;margin-bottom:2px;">🎙️ Así suena Edge-TTS en Python</h5>
+            <div style="font-size:10.8px;color:#A1A1AA;">Demostración rápida de cómo suena la alternativa gratuita no oficial Edge-TTS desde Python.</div>
+            <span class="yt-watch-btn">ABRIR EN YOUTUBE (shorts/3D7v0oJs_Hg) ➔</span>
+          </div>
+        </a>
+
+        <a class="yt-visual-card" href="https://www.youtube.com/watch?v=ETmX8bHStAU" target="_blank" rel="noopener noreferrer">
+          <div class="yt-thumb">
+            <img src="https://i.ytimg.com/vi/ETmX8bHStAU/hqdefault.jpg" alt="GSAP Tutorial Español Black Wolf" />
+            <span class="yt-play-pill">▶ YOUTUBE</span>
+          </div>
+          <div>
+            <span class="yt-credit-pill">Autor y Canal: Black Wolf</span>
+            <span class="yt-meta-pill">⏱ ~20 min · Opcional (GSAP)</span>
+            <h5 style="font-size:12.5px;font-weight:800;line-height:1.22;margin-bottom:2px;">GSAP Tutorial en Español — Cómo crear animaciones web</h5>
+            <div style="font-size:10.8px;color:#A1A1AA;">Para curiosos que quieran entender cómo funciona por dentro el motor GSAP que utiliza HyperFrames.</div>
+            <span class="yt-watch-btn">ABRIR EN YOUTUBE (youtu.be/ETmX8bHStAU) ➔</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <footer class="slide-footer">
+      <span>DISEÑADO POR TALENTO CON TARIFA • TODOS LOS VIDEOS PERTENECEN A SUS AUTORES OFICIALES</span>
+      <div class="footer-nav">
+        <a href="#lamina-5">◀ ANTERIOR</a>
+        <a href="/minicurso-robot/aula">◀ VOLVER AL AULA</a>
+        <span class="footer-page">LÁMINA 06 / 06</span>
+        <a href="TCT_Modulo_03_Robot_GitHub_Actions.html" class="footer-btn-primary">SIGUIENTE: MÓDULO 03 — ROBOT GITHUB ACTIONS ➔</a>
+      </div>
+    </footer>
+  </section>
+
+  <script>
+    function selectElementText(el) {
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+
+    function showCopyFeedback(btnElement, message, isSuccess) {
+      const originalText = btnElement.getAttribute('data-orig') || btnElement.innerHTML;
+      btnElement.setAttribute('data-orig', originalText);
+      if (isSuccess) btnElement.classList.add('copied');
+      btnElement.innerHTML = message;
+      setTimeout(() => {
+        btnElement.classList.remove('copied');
+        btnElement.innerHTML = originalText;
+      }, 3000);
+    }
+
+    function copyPrompt(elementId, btnElement) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const rawText = (el.innerText || el.textContent || '').trim();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(rawText).then(() => {
+          showCopyFeedback(btnElement, '✅ ¡COPIADO! PÉGALO EN EL CHAT DE TU AGENTE (Ctrl+V)', true);
+        }).catch(() => {
+          selectElementText(el);
+          showCopyFeedback(btnElement, '📋 Selecciona y copia con Ctrl+C', false);
+        });
+      } else {
+        selectElementText(el);
+        try {
+          document.execCommand('copy');
+          showCopyFeedback(btnElement, '✅ ¡COPIADO! PÉGALO EN EL CHAT DE TU AGENTE (Ctrl+V)', true);
+        } catch (e) {
+          showCopyFeedback(btnElement, '📋 Selecciona y copia con Ctrl+C', false);
+        }
+      }
+    }
+
+    (function initInteractiveManual() {
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const navLinks = Array.from(document.querySelectorAll('.web-nav-links a[data-slide]'));
+      const mobileSelect = document.querySelector('.mobile-slide-select');
+      const progressBar = document.getElementById('nav-progress-bar');
+
+      if ('IntersectionObserver' in window && slides.length) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.id;
+              const idx = slides.findIndex(s => s.id === id);
+              navLinks.forEach(link => {
+                if (link.getAttribute('data-slide') === id) {
+                  link.setAttribute('aria-current', 'true');
+                } else {
+                  link.removeAttribute('aria-current');
+                }
+              });
+              if (mobileSelect) mobileSelect.value = '#' + id;
+              if (progressBar && idx >= 0) {
+                progressBar.style.width = (((idx + 1) / slides.length) * 100).toFixed(1) + '%';
+              }
+            }
+          });
+        }, { threshold: 0.45 });
+        slides.forEach(s => observer.observe(s));
+      }
+
+      document.addEventListener('keydown', (e) => {
+        const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+        if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+
+        const currentLink = document.querySelector('.web-nav-links a[aria-current="true"]');
+        let currentIdx = currentLink ? slides.findIndex(s => s.id === currentLink.getAttribute('data-slide')) : 0;
+        if (currentIdx < 0) currentIdx = 0;
+
+        const nextIdx = e.key === 'ArrowRight'
+          ? Math.min(slides.length - 1, currentIdx + 1)
+          : Math.max(0, currentIdx - 1);
+
+        if (nextIdx !== currentIdx && slides[nextIdx]) {
+          e.preventDefault();
+          slides[nextIdx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.replaceState(null, '', '#' + slides[nextIdx].id);
+        }
+      });
+
+      const checks = Array.from(document.querySelectorAll('.tct-check'));
+      const statusEl = document.getElementById('checklist-status');
+      const navLink4 = document.getElementById('nav-link-4');
+
+      function updateChecklistSummary() {
+        const doneCount = checks.filter(c => c.checked).length;
+        if (statusEl) {
+          statusEl.textContent = doneCount + '/' + checks.length + ' listos';
+        }
+        if (navLink4) {
+          const baseText = '04. Pega los prompts';
+          navLink4.textContent = doneCount === checks.length ? baseText + ' ✓' : baseText;
+        }
+      }
+
+      checks.forEach((chk) => {
+        const key = chk.getAttribute('data-check');
+        if (key) {
+          try {
+            chk.checked = localStorage.getItem(key) === '1';
+          } catch (e) {}
+          chk.addEventListener('change', () => {
+            try {
+              localStorage.setItem(key, chk.checked ? '1' : '0');
+            } catch (e) {}
+            updateChecklistSummary();
+          });
+        }
+      });
+      updateChecklistSummary();
+    })();
+  </script>
+</body>
+</html>
