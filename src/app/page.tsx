@@ -1,543 +1,615 @@
-import { CONTACT_EMAIL, EMAIL_URL, WHATSAPP_DISPLAY, WHATSAPP_URL } from "@/lib/contact";
+import {
+  CONTACT_EMAIL,
+  EMAIL_URL,
+  WHATSAPP_DISPLAY,
+  WHATSAPP_URL,
+  whatsappUrl,
+} from "@/lib/contact";
 
 export default function Home() {
   return (
-    <>
-      {/* Fixed Nav Bar Brutalista (#CCFF00 con borde negro de 4px) */}
-      <nav className="fixed top-0 left-0 w-full z-50 border-b-4 border-black bg-[#CCFF00] py-3.5 px-4 sm:px-8">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Logo & Icono Oficial */}
-          <a href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 bg-black border-2 border-black flex items-center justify-center transform -rotate-3 group-hover:rotate-0 transition-transform p-1.5 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
-              <img src="/icon.svg" alt="Icono Talento con Tarifa" className="w-full h-full object-contain" />
+    <div className="min-h-screen flex flex-col bg-[#F4F4F0] text-[#0A0A0A] selection:bg-[#0A0A0A] selection:text-[#CCFF00] overflow-x-hidden">
+      {/* =====================================================================
+          1. TOP NAVBAR (#CCFF00 + Logos Oficiales)
+         ===================================================================== */}
+      <header className="sticky top-0 z-50 w-full bg-[#CCFF00] border-b-2 border-black">
+        <div className="max-w-6xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between gap-4">
+          {/* Logo Oficial */}
+          <a href="/" className="flex items-center gap-2.5 shrink-0">
+            <div className="w-9 h-9 bg-black border-2 border-black flex items-center justify-center p-1.5 shadow-[2px_2px_0px_#000000]">
+              <img
+                src="/icon.svg"
+                alt="Icono Talento con Tarifa"
+                className="w-full h-full object-contain"
+              />
             </div>
-            <div className="relative w-44 h-7 sm:w-60 sm:h-9 ml-2">
-              <img src="/horizontal.svg" alt="Talento con Tarifa" className="w-full h-full object-contain" />
+            <div className="relative w-40 sm:w-52 h-7 sm:h-8">
+              <img
+                src="/horizontal.svg"
+                alt="Talento con Tarifa"
+                className="w-full h-full object-contain object-left"
+              />
             </div>
           </a>
 
-          {/* Botón Nav Directo */}
-          <div className="flex items-center gap-4">
-            <a
-              href={EMAIL_URL}
-              className="hidden lg:inline-block font-mono font-bold text-xs uppercase bg-white text-black px-3 py-1.5 border-2 border-black transform rotate-1 hover:rotate-0 hover:bg-black hover:text-[#CCFF00] shadow-[3px_3px_0px_0px_#000] transition-all"
-            >
-              ✉ {CONTACT_EMAIL}
+          {/* Navegación Limpia */}
+          <nav
+            aria-label="Navegación principal"
+            className="hidden lg:flex items-center gap-8 font-mono text-xs font-bold uppercase tracking-wider text-black"
+          >
+            <a href="#servicios" className="hover:underline underline-offset-4">
+              SERVICIOS
             </a>
+            <a href="#nosotros" className="hover:underline underline-offset-4">
+              NOSOTROS
+            </a>
+            <a href="#contacto" className="hover:underline underline-offset-4">
+              CONTACTO
+            </a>
+            <a
+              href="/minicurso-robot"
+              className="text-[#FF0055] font-black hover:underline underline-offset-4"
+            >
+              MINI-CURSO 1€
+            </a>
+            <a href="/form" className="hover:underline underline-offset-4">
+              FORMULARIO
+            </a>
+          </nav>
 
+          {/* CTA Derecha */}
+          <div className="flex items-center gap-3">
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-black text-[#CCFF00] hover:bg-white hover:text-black hover:border-black px-5 py-2 sm:px-6 sm:py-2.5 font-bold text-sm uppercase tracking-wider border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all flex items-center gap-2"
+              className="bg-black text-white font-mono text-xs font-bold uppercase tracking-wider px-5 py-2.5 border-2 border-black shadow-[3px_3px_0px_#000000] hover:bg-white hover:text-black transition-colors inline-flex items-center gap-2"
             >
-              <span>HÁBLAME, PLATICAMOS</span>
-              <svg className="w-4 h-4 text-[#CCFF00] group-hover:text-black" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12.004 2C6.479 2 2 6.48 2 12c0 1.89.525 3.66 1.438 5.178L2 22l4.974-1.39A9.957 9.957 0 0012.004 22C17.528 22 22 17.52 22 12c0-5.52-4.472-10-9.996-10zm5.837 14.223c-.244.686-1.42 1.309-1.983 1.393-.505.076-1.144.108-1.846-.118-.427-.137-.974-.316-1.673-.618-2.955-1.274-4.887-4.24-5.035-4.436-.148-.196-1.198-1.595-1.198-3.042 0-1.447.76-2.158 1.03-2.453.27-.294.59-.368.787-.368.196 0 .393.002.565.01.18.009.421-.069.66.505.244.587.835 2.036.908 2.184.074.148.123.321.025.518-.098.196-.148.318-.295.49-.148.173-.31.385-.443.518-.148.147-.302.308-.13.603.172.296.76 1.256 1.63 2.032 1.121 1.001 2.066 1.31 2.36 1.458.295.147.467.123.64-.074.172-.197.737-.858.934-1.152.196-.295.393-.246.66-.148.27.098 1.714.808 2.009.955.295.148.491.222.565.344.074.123.074.71-.17 1.396z"/>
-              </svg>
+              <span>HÁBLAME</span>
+              <span className="text-[#CCFF00]">→</span>
             </a>
+            <span
+              aria-hidden="true"
+              className="hidden sm:inline font-mono text-xl text-black/70 select-none"
+            >
+              +
+            </span>
           </div>
         </div>
-      </nav>
+      </header>
 
-      {/* Main Content Slot */}
-      <main className="relative z-10 w-full pt-[72px]">
-        {/* HERO SECTION (#CCFF00 AMARILLO CHILLANTE TOTAL) */}
-        <header className="pt-24 pb-20 md:pt-36 md:pb-28 px-4 sm:px-6 relative overflow-hidden bg-[#CCFF00] border-b-4 border-black">
-          {/* Halftone Dot Pattern */}
-          <div
-            className="absolute inset-0 opacity-15 pointer-events-none"
-            style={{
-              backgroundImage: "radial-gradient(circle, #000 2px, transparent 2px)",
-              backgroundSize: "24px 24px",
-            }}
-          ></div>
+      <main className="flex-1">
+        {/* ===================================================================
+            2. HERO SECTION (#CCFF00 — Directo y sin paja)
+           =================================================================== */}
+        <section className="bg-[#CCFF00] border-b-2 border-black py-14 md:py-20">
+          <div className="max-w-6xl mx-auto px-4 sm:px-8">
+            {/* Kicker Técnico */}
+            <div className="flex items-center gap-3 font-mono text-xs font-bold uppercase tracking-widest text-black/80 mb-6">
+              <span>AGENCIA DE IA Y AUTOMATIZACIÓN</span>
+              <span className="h-[1.5px] w-16 bg-black/50 inline-block"></span>
+            </div>
 
-          <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Column: The Statement / Manifesto (7 Cols) */}
-            <div className="lg:col-span-7 space-y-6">
-              {/* Badge Tilted */}
-              <div className="inline-block bg-black text-[#CCFF00] px-4 py-1.5 font-mono font-bold text-xs sm:text-sm tracking-widest uppercase transform -rotate-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]">
-                AGENCIA IRREVERENTE // STATEMENT 01
-              </div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+              {/* Columna Izquierda (7 Cols) */}
+              <div className="lg:col-span-7 space-y-6">
+                <h1 className="font-[family-name:var(--font-space-grotesk)] text-5xl sm:text-7xl font-black uppercase tracking-[-0.04em] leading-[0.92] text-black">
+                  SI LLEGASTE
+                  <br />
+                  AQUÍ
+                  <br />
+                  <span className="inline-block bg-white text-black px-4 py-1.5 border-[3px] border-black shadow-[6px_6px_0px_#000000] mt-2">
+                    TIENES
+                    <br />
+                    CURIOSIDAD.
+                  </span>
+                </h1>
 
-              {/* Main Headline */}
-              <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black leading-[0.92] tracking-tighter text-black uppercase">
-                SI LLEGASTE AQUÍ <br />
-                <span className="bg-white px-3 py-1 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] text-black inline-block transform rotate-1 my-2">
-                  TIENES CURIOSIDAD.
-                </span> <br />
-                <span className="text-transparent" style={{ WebkitTextStroke: "3px #000" }}>
-                  EL MUNDO ES VASTO.
-                </span>
-              </h1>
-
-              {/* Dorothy Quote / Offset Callout Box */}
-              <div className="bg-white border-4 border-black p-5 sm:p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transform -rotate-1 max-w-xl">
-                <p className="text-xl sm:text-2xl font-black italic text-black leading-snug">
-                  “Brinca al vacío, Dorothy. Háblame y veamos qué tan profundo llega el agujero del conejo.”
+                <p className="font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.28em] text-black pt-1">
+                  E L &nbsp; M U N D O &nbsp; E S &nbsp; V A S T O .
                 </p>
-              </div>
 
-              {/* Reality Punch */}
-              <p className="text-lg sm:text-xl font-bold text-black max-w-xl leading-relaxed">
-                Sigues haciendo a mano lo que tu competencia ya automatizó. No es que no sepas vender:{" "}
-                <strong className="underline decoration-4">estás haciendo trabajo de robot con manos de humano.</strong>
-              </p>
+                <p className="text-base sm:text-xl font-medium text-black max-w-md leading-relaxed">
+                  Brinca al vacío, Dorothy. Háblame y veamos qué tan profundo
+                  llega el agujero del conejo.{" "}
+                  <strong className="font-black">
+                    Deja de hacer trabajo de robot con manos de humano.
+                  </strong>
+                </p>
 
-              {/* CTA 1 (Hero) */}
-              <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto bg-black text-[#CCFF00] px-8 py-5 text-xl font-black border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:bg-white hover:text-black hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-2 active:translate-y-2 active:shadow-none transition-none flex items-center justify-center gap-3 group"
-                >
-                  <span>HÁBLAME, PLATICAMOS</span>
-                  <svg className="w-6 h-6 text-[#CCFF00] group-hover:text-black transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12.004 2C6.479 2 2 6.48 2 12c0 1.89.525 3.66 1.438 5.178L2 22l4.974-1.39A9.957 9.957 0 0012.004 22C17.528 22 22 17.52 22 12c0-5.52-4.472-10-9.996-10zm5.837 14.223c-.244.686-1.42 1.309-1.983 1.393-.505.076-1.144.108-1.846-.118-.427-.137-.974-.316-1.673-.618-2.955-1.274-4.887-4.24-5.035-4.436-.148-.196-1.198-1.595-1.198-3.042 0-1.447.76-2.158 1.03-2.453.27-.294.59-.368.787-.368.196 0 .393.002.565.01.18.009.421-.069.66.505.244.587.835 2.036.908 2.184.074.148.123.321.025.518-.098.196-.148.318-.295.49-.148.173-.31.385-.443.518-.148.147-.302.308-.13.603.172.296.76 1.256 1.63 2.032 1.121 1.001 2.066 1.31 2.36 1.458.295.147.467.123.64-.074.172-.197.737-.858.934-1.152.196-.295.393-.246.66-.148.27.098 1.714.808 2.009.955.295.148.491.222.565.344.074.123.074.71-.17 1.396z"/>
-                  </svg>
-                </a>
-              </div>
-
-              {/* Exclusivity Filter */}
-              <div className="inline-block bg-white text-black border-2 border-black px-3.5 py-1.5 font-mono text-xs font-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform -rotate-1">
-                <span className="text-[#FF0055]">⚠</span> NO NOS INTERESA TENER MUCHOS CLIENTES. NOS INTERESA CONECTAR CON LOS CORRECTOS.
-              </div>
-            </div>
-
-            {/* Right Column: Official Brain Asset with Cybernetic Status (5 Cols) */}
-            <div className="lg:col-span-5 flex justify-center relative py-6">
-              {/* Hard Shadow Disk */}
-              <div className="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-black -bottom-3 -right-3 hidden sm:block"></div>
-
-              {/* Brain Card Showcase Container */}
-              <div className="relative w-full max-w-sm sm:max-w-md bg-white border-4 border-black p-6 sm:p-7 shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] flex flex-col items-center">
-                {/* Brain Graphic Frame */}
-                <div className="w-full relative flex justify-center items-center p-4 bg-[#F5F5F5] border-2 border-black overflow-hidden group">
-                  <img
-                    src="/cerebro.webp"
-                    alt="Cerebro Agencial Talento con Tarifa"
-                    className="w-full max-w-[260px] sm:max-w-[300px] h-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-[#CCFF00] mix-blend-multiply opacity-15 pointer-events-none"></div>
+                <div className="pt-2">
+                  <a
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-black text-white px-7 py-4 font-[family-name:var(--font-space-grotesk)] text-base sm:text-lg font-black uppercase tracking-wider border-2 border-black shadow-[5px_5px_0px_#000000] hover:bg-white hover:text-black transition-colors inline-flex items-center gap-3"
+                  >
+                    <span>HÁBLAME, PLATICAMOS</span>
+                    <span className="text-[#CCFF00]">→</span>
+                  </a>
                 </div>
+              </div>
 
-                {/* Pink Warning Sticker Overlapping */}
-                <div className="transform -rotate-3 -mt-5 bg-[#FF0055] text-white font-mono text-xs sm:text-sm uppercase px-4 py-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] font-black z-20">
-                  DON&apos;T TOUCH THE BRAIN // 100% AUTOMATED
-                </div>
-
-                {/* Brutalist Status Ticker Inside Card */}
-                <div className="w-full mt-6 pt-4 border-t-2 border-black flex justify-between items-center text-left">
-                  <div>
-                    <span className="font-mono text-[10px] uppercase font-bold text-gray-600 block">CAPACIDAD MOTOR</span>
-                    <p className="font-mono text-lg sm:text-xl font-black text-black">4,800 MSG/MIN</p>
+              {/* Columna Derecha (5 Cols): Marco Polaroid Limpio con /cerebro.webp */}
+              <div className="lg:col-span-5 flex justify-center lg:justify-end">
+                <div className="w-full max-w-[390px] bg-white border-[3px] border-black shadow-[10px_10px_0px_#000000] p-5">
+                  <div className="bg-[#F8F8F6] border-2 border-black p-6 flex items-center justify-center min-h-[300px]">
+                    <img
+                      src="/cerebro.webp"
+                      alt="Cerebro Agencial Talento con Tarifa"
+                      className="w-full max-w-[250px] h-auto object-contain drop-shadow-[0_10px_15px_rgba(0,0,0,0.18)]"
+                    />
                   </div>
-                  <div className="transform rotate-2 bg-[#CCFF00] px-3 py-1 border-2 border-black font-mono text-[11px] font-black shadow-[3px_3px_0px_0px_#000]">
-                    ⚡ 24/7/365 SIN VACACIONES
+                  <div className="mt-4 flex items-center justify-between gap-2 font-mono text-[11px] font-bold uppercase">
+                    <span className="bg-black text-[#CCFF00] px-3 py-1.5">
+                      IDEAS AUTOMATIZADAS · RESULTADOS REALES ↗
+                    </span>
+                    <span className="bg-black text-white px-2.5 py-1.5 shrink-0">
+                      01 / 03
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
+
+            {/* Línea Técnica Inferior */}
+            <div className="mt-14 pt-4 border-t border-black/40 flex items-center justify-between gap-4 font-mono text-[11px] font-bold uppercase tracking-wider text-black">
+              <span>■ IA &nbsp;+&nbsp; AUTOMATIZACIÓN &nbsp;+&nbsp; TALENTO HUMANO</span>
+              <span className="hidden sm:block flex-1 border-b border-black/40 mx-4"></span>
+              <span>┫</span>
+            </div>
           </div>
-        </header>
+        </section>
 
-        {/* ROTATED MARQUEE TICKER TAPE */}
-        <div className="bg-black text-[#CCFF00] py-4 overflow-hidden border-y-4 border-black transform rotate-1 scale-105 z-20 relative shadow-[0_10px_20px_rgba(0,0,0,0.4)] select-none">
-          <div className="whitespace-nowrap animate-marquee flex gap-8 font-black text-2xl uppercase tracking-wider">
-            <span className="flex items-center gap-4">★ SE RENTA TALENTO CON TARIFA</span>
-            <span className="flex items-center gap-4">★ EL MUNDO ES VASTO</span>
-            <span className="flex items-center gap-4">★ BRINCA AL VACÍO, DOROTHY</span>
-            <span className="flex items-center gap-4">★ TRABAJO DE ROBOT PARA ROBOTS</span>
-            <span className="flex items-center gap-4">★ COTIZACIONES EN 15 SEGUNDOS</span>
-            <span className="flex items-center gap-4">★ CERO CORTESÍA CORPORATIVA</span>
-            <span className="flex items-center gap-4">★ 100% BOT ROUTED</span>
-            <span className="flex items-center gap-4">★ SE RENTA TALENTO CON TARIFA</span>
-            <span className="flex items-center gap-4">★ EL MUNDO ES VASTO</span>
-            <span className="flex items-center gap-4">★ BRINCA AL VACÍO, DOROTHY</span>
-            <span className="flex items-center gap-4">★ TRABAJO DE ROBOT PARA ROBOTS</span>
-            <span className="flex items-center gap-4">★ COTIZACIONES EN 15 SEGUNDOS</span>
-            <span className="flex items-center gap-4">★ CERO CORTESÍA CORPORATIVA</span>
-            <span className="flex items-center gap-4">★ 100% BOT ROUTED</span>
-          </div>
-        </div>
-
-        {/* SECTION: EL DOLOR SIN RODEOS (3 Direct Brutalist Feature Cards) */}
-        <section className="py-24 px-4 sm:px-6 bg-[#FAFAFA] border-b-4 border-black relative">
-          {/* Subtle Cross Pattern */}
-          <div
-            className="absolute inset-0 opacity-5 pointer-events-none"
-            style={{
-              backgroundImage: "linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)",
-              backgroundSize: "24px 24px",
-            }}
-          ></div>
-
-          <div className="max-w-7xl mx-auto space-y-16 relative z-10">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-              <div className="max-w-3xl space-y-4">
-                <div className="inline-block bg-[#CCFF00] text-black border-2 border-black px-3.5 py-1.5 font-mono text-xs font-black transform -rotate-1 shadow-[3px_3px_0px_0px_#000]">
-                  LA REALIDAD // BOTS DE IMPACTO INMEDIATO
-                </div>
-                <h2 className="text-4xl sm:text-6xl font-black text-black leading-none uppercase tracking-tight">
-                  TRES COSAS QUE TUS HUMANOS <br /><span className="bg-black text-white px-2">NO DEBERÍAN ESTAR HACIENDO</span>.
+        {/* ===================================================================
+            3. SECTION: LO QUE HACEMOS (3 Tarjetas al grano)
+           =================================================================== */}
+        <section
+          id="servicios"
+          className="py-20 md:py-24 bg-[#F4F4F0] border-b-2 border-black scroll-mt-20"
+        >
+          <div className="max-w-6xl mx-auto px-4 sm:px-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+              <div>
+                <span className="inline-block bg-[#CCFF00] text-black font-mono text-xs font-bold uppercase px-2.5 py-1 border border-black mb-3">
+                  LO QUE HACEMOS
+                </span>
+                <h2 className="font-[family-name:var(--font-space-grotesk)] text-4xl sm:text-5xl font-black uppercase tracking-[-0.03em] leading-[0.95] text-black max-w-xl">
+                  TRES COSAS QUE TUS
+                  <br />
+                  HUMANOS
+                  <br />
+                  NO DEBERÍAN ESTAR
+                  <br />
+                  HACIENDO.
                 </h2>
               </div>
-              <div className="font-mono text-xs font-black uppercase text-gray-700 max-w-xs border-l-4 border-black pl-4">
-                [MÓDULOS DE DISRUPCIÓN DE EMBUDO COMERCIAL]
-              </div>
-            </div>
 
-            {/* 3 Direct Brutalist Cards */}
-            <div className="grid md:grid-cols-3 gap-8">
-              {/* Card 1: Velocidad */}
-              <div className="bg-white border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all flex flex-col justify-between">
-                <div className="space-y-5">
-                  <div className="flex justify-between items-center">
-                    <span className="bg-black text-white font-mono text-xs px-3 py-1 uppercase font-bold">
-                      01 // VELOCIDAD
-                    </span>
-                    <span className="bg-[#CCFF00] text-black font-mono text-xs font-black px-2.5 py-1 border-2 border-black">
-                      ⚡ 15 SEGUNDOS
-                    </span>
-                  </div>
-                  <h3 className="text-2xl font-black uppercase text-black">Cotizaciones en 15 Segundos</h3>
-                  <p className="font-bold text-gray-800 text-base leading-relaxed">
-                    Tu prospecto pregunta a las 11:45 PM y en 15 segundos recibe una propuesta personalizada con cálculo exacto en PDF por WhatsApp. Tu competencia contesta al mediodía siguiente cuando el cliente ya olvidó su interés.
-                  </p>
-                </div>
-                <div className="pt-6 mt-6 border-t-2 border-black">
-                  <div className="bg-[#F0F0F0] p-3 border-2 border-black font-mono text-xs uppercase font-black flex items-center justify-between">
-                    <span>Resultado Directo</span>
-                    <span className="text-[#FF0055]">3.8x CIERRE EN FRÍO</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 2: Protagonista (Elevated Yellow) */}
-              <div className="bg-[#CCFF00] border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transform md:-translate-y-4 rotate-1 hover:rotate-0 hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all flex flex-col justify-between relative">
-                {/* Top Sticker */}
-                <div className="absolute -top-4 right-4 bg-[#FF0055] text-white font-mono text-xs uppercase px-3 py-1 font-black border-2 border-black transform rotate-3 shadow-[3px_3px_0px_0px_#000]">
-                  MÁS RENTABLE
-                </div>
-
-                <div className="space-y-5">
-                  <div className="flex justify-between items-center">
-                    <span className="bg-black text-[#CCFF00] font-mono text-xs px-3 py-1 uppercase font-black">
-                      02 // PROTAGONISTA
-                    </span>
-                    <span className="bg-white text-black font-mono text-xs font-black px-2.5 py-1 border-2 border-black">
-                      📈 +35% RECUPERADOS
-                    </span>
-                  </div>
-                  <h3 className="text-2xl font-black uppercase text-black">Seguimiento Implacable</h3>
-                  <p className="font-black text-black text-base leading-relaxed">
-                    El 80% de las ventas ocurren después del quinto contacto. Tus comerciales se rinden en el segundo o se les olvida. Nuestro bot nunca se cansa ni le da pena insistir con ángulos nuevos y valor real.
-                  </p>
-                </div>
-                <div className="pt-6 mt-6 border-t-2 border-black">
-                  <div className="bg-white p-3 border-2 border-black font-mono text-xs uppercase font-black flex items-center justify-between">
-                    <span>Estado de Leads</span>
-                    <span className="text-black underline decoration-2">CERO EN EL LIMBO</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card 3: Filtro Duro */}
-              <div className="bg-white border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all flex flex-col justify-between">
-                <div className="space-y-5">
-                  <div className="flex justify-between items-center">
-                    <span className="bg-black text-white font-mono text-xs px-3 py-1 uppercase font-bold">
-                      03 // CALIFICACIÓN
-                    </span>
-                    <span className="bg-[#CCFF00] text-black font-mono text-xs font-black px-2.5 py-1 border-2 border-black">
-                      🛡️ FILTRO DURO
-                    </span>
-                  </div>
-                  <h3 className="text-2xl font-black uppercase text-black">Filtro de Curiosos</h3>
-                  <p className="font-bold text-gray-800 text-base leading-relaxed">
-                    Deja de regalar videollamadas a gente sin presupuesto. El filtro detecta capacidad de pago, urgencia y seriedad técnica antes de si quiera tocar tu calendario o el de tus cerradores.
-                  </p>
-                </div>
-                <div className="pt-6 mt-6 border-t-2 border-black">
-                  <div className="bg-[#F0F0F0] p-3 border-2 border-black font-mono text-xs uppercase font-black flex items-center justify-between">
-                    <span>Calidad Calendario</span>
-                    <span className="text-[#FF0055]">SOLO HIGH-TICKET</span>
-                  </div>
+              <div className="flex items-center gap-3 font-mono text-xs font-bold uppercase tracking-wider text-black/80">
+                <span className="text-lg">+</span>
+                <div>
+                  <div>MÁS EFICIENCIA</div>
+                  <div>MENOS DRAMA</div>
+                  <div>MÁS RESULTADOS</div>
                 </div>
               </div>
             </div>
 
-            {/* Mid CTA 2 */}
-            <div className="border-4 border-black bg-[#CCFF00] p-8 sm:p-10 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="space-y-1 text-center md:text-left">
-                <h3 className="text-2xl sm:text-3xl font-black text-black uppercase">¿Quieres ver cómo funciona en tu negocio?</h3>
-                <p className="font-bold text-black/85 text-base sm:text-lg">Sin presentaciones aburridas. Una plática directa de 10 minutos.</p>
-              </div>
+            {/* 3 Tarjetas Limpias */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-7 items-stretch">
+              {/* 01 */}
+              <article className="bg-white border-[2.5px] border-black shadow-[7px_7px_0px_#000000] p-7 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-3 mb-5">
+                    <span className="w-8 h-8 bg-black text-white font-mono text-xs font-bold flex items-center justify-center">
+                      01
+                    </span>
+                    <span className="text-lg">⚡</span>
+                  </div>
+                  <h3 className="font-[family-name:var(--font-space-grotesk)] text-2xl font-black uppercase leading-tight text-black mb-3">
+                    COTIZACIONES
+                    <br />
+                    EN 15 SEGUNDOS
+                  </h3>
+                  <p className="text-sm sm:text-base text-black/80 leading-relaxed">
+                    Tus prospectos no tienen paciencia (y nosotros tampoco).
+                    Automatizamos la captura, cotización en PDF y respuesta en
+                    WhatsApp para que no se te escape ni una venta.
+                  </p>
+                </div>
+                <div className="pt-4 mt-8 border-t border-black/30 font-mono text-[11px] font-bold uppercase flex items-center justify-between text-black">
+                  <span>RÁPIDO &nbsp;/&nbsp; PRECISO &nbsp;/&nbsp; 24/7</span>
+                  <span>→</span>
+                </div>
+              </article>
+
+              {/* 02 */}
+              <article className="bg-[#CCFF00] border-[2.5px] border-black shadow-[7px_7px_0px_#000000] p-7 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-3 mb-5">
+                    <span className="w-8 h-8 bg-black text-[#CCFF00] font-mono text-xs font-bold flex items-center justify-center">
+                      02
+                    </span>
+                    <span className="text-lg">⊕</span>
+                  </div>
+                  <h3 className="font-[family-name:var(--font-space-grotesk)] text-2xl font-black uppercase leading-tight text-black mb-3">
+                    SEGUIMIENTO
+                    <br />
+                    IMPLACABLE
+                  </h3>
+                  <p className="text-sm sm:text-base text-black/90 font-medium leading-relaxed">
+                    Las oportunidades no se cierran solas. Creamos flujos que
+                    insisten con contexto, recuerdan cada detalle y convierten a
+                    los que te dejaron en visto.
+                  </p>
+                </div>
+                <div className="pt-4 mt-8 border-t border-black/40 font-mono text-[11px] font-bold uppercase flex items-center justify-between text-black">
+                  <span>
+                    AUTOMATIZA &nbsp;/&nbsp; ACOMPAÑA &nbsp;/&nbsp; CONVIERTE
+                  </span>
+                  <span>→</span>
+                </div>
+              </article>
+
+              {/* 03 */}
+              <article className="bg-white border-[2.5px] border-black shadow-[7px_7px_0px_#000000] p-7 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-3 mb-5">
+                    <span className="w-8 h-8 bg-black text-white font-mono text-xs font-bold flex items-center justify-center">
+                      03
+                    </span>
+                    <span className="text-lg">▽</span>
+                  </div>
+                  <h3 className="font-[family-name:var(--font-space-grotesk)] text-2xl font-black uppercase leading-tight text-black mb-3">
+                    FILTRO DE CURIOSOS
+                  </h3>
+                  <p className="text-sm sm:text-base text-black/80 leading-relaxed">
+                    No todos son clientes. Diseñamos agentes y filtros
+                    inteligentes que identifican quién tiene presupuesto real y
+                    le dan tu tiempo a quien sí importa.
+                  </p>
+                </div>
+                <div className="pt-4 mt-8 border-t border-black/30 font-mono text-[11px] font-bold uppercase flex items-center justify-between text-black">
+                  <span>
+                    CALIDAD &nbsp;/&nbsp; INTELIGENCIA &nbsp;/&nbsp; ENFOQUE
+                  </span>
+                  <span>→</span>
+                </div>
+              </article>
+            </div>
+
+            {/* Franja Amarilla Directa */}
+            <div className="mt-10 bg-[#CCFF00] border-[2.5px] border-black shadow-[6px_6px_0px_#000000] px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <p className="font-[family-name:var(--font-space-grotesk)] text-base sm:text-lg font-black uppercase text-black text-center sm:text-left">
+                AUTOMATIZAMOS LO REPETITIVO. PARA QUE TÚ TE ENFOQUES EN LO
+                IMPORTANTE.
+              </p>
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shrink-0 bg-black text-[#CCFF00] px-8 py-4 font-black text-lg border-2 border-black shadow-[4px_4px_0px_0px_#000] hover:bg-white hover:text-black hover:translate-x-1 hover:translate-y-1 hover:shadow-none active:translate-x-2 active:translate-y-2 transition-none uppercase tracking-wider"
+                className="shrink-0 bg-black text-white font-mono text-xs font-bold uppercase tracking-wider px-5 py-3 border-2 border-black hover:bg-white hover:text-black transition-colors inline-flex items-center gap-2"
               >
-                HÁBLAME, PLATICAMOS
+                <span>HÁBLAME, PLATICAMOS</span>
+                <span className="text-[#CCFF00]">→</span>
               </a>
             </div>
           </div>
         </section>
 
-        {/* SECTION: LA COHERENCIA & DOGFOODING (Black background, bold statement) */}
-        <section className="py-24 px-4 sm:px-6 bg-black text-white border-b-4 border-black relative overflow-hidden">
-          <div className="max-w-7xl mx-auto space-y-12">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div className="lg:col-span-8 space-y-8">
-                {/* Terminal Status Pill */}
-                <div className="font-mono text-xs text-[#CCFF00] bg-[#111118] border-2 border-[#CCFF00] px-4 py-1.5 inline-block uppercase font-bold shadow-[4px_4px_0px_0px_#CCFF00]">
-                  [SYS_STATUS: VERIFIED_IN_PRODUCTION // ZERO_HUMAN_INTERMEDIARIES]
-                </div>
+        {/* ===================================================================
+            4. SECTION: POR QUÉ NOSOTROS (#0A0A0A — Corto y contundente)
+           =================================================================== */}
+        <section
+          id="nosotros"
+          className="py-20 md:py-24 bg-[#0A0A0A] text-white border-b-2 border-black scroll-mt-20"
+        >
+          <div className="max-w-6xl mx-auto px-4 sm:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+              {/* Izquierda (7 Cols) */}
+              <div className="lg:col-span-7 space-y-5">
+                <span className="inline-block bg-[#CCFF00] text-black font-mono text-xs font-bold uppercase px-2.5 py-1">
+                  POR QUÉ NOSOTROS
+                </span>
 
-                {/* Monumental Authority Headline */}
-                <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-tight uppercase tracking-tight">
-                  NO VENDEMOS LO QUE <br />
-                  <span className="text-[#CCFF00] underline decoration-[#CCFF00] decoration-8 underline-offset-8">
-                    NO USAMOS NOSOTROS
-                  </span>.
+                <h2 className="font-[family-name:var(--font-space-grotesk)] text-4xl sm:text-5xl font-black uppercase tracking-[-0.03em] leading-[0.95]">
+                  NO VENDEMOS LO QUE
+                  <br />
+                  <span className="text-[#CCFF00]">NO USAMOS</span>
+                  <br />
+                  <span className="text-[#CCFF00]">NOSOTROS.</span>
                 </h2>
 
-                {/* Highlight Quote Box */}
-                <div className="border-l-8 border-[#CCFF00] pl-6 py-2 max-w-3xl">
-                  <p className="text-gray-300 text-lg sm:text-2xl font-bold leading-relaxed">
-                    “Nuestros propios bots te trajeron a esta pantalla. Operamos exactamente con los mismos motores que te instalamos. Cero llamadas en frío no deseadas, cero comerciales rogando por 5 minutos de tu tiempo.”
-                  </p>
-                </div>
+                <p className="text-sm sm:text-base text-white/80 leading-relaxed max-w-lg">
+                  En Talento con Tarifa no solo hablamos de IA y automatización:
+                  la vivimos. Desarrollamos, probamos y usamos cada herramienta
+                  en casa hasta que funciona.{" "}
+                  <strong className="text-white">
+                    Porque si no lo usamos nosotros, no te lo recomendamos.
+                  </strong>
+                </p>
+              </div>
 
-                {/* Brutalist Metric Blocks */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4 font-mono">
-                  <div className="border-2 border-[#CCFF00] p-5 bg-[#0A0A0F] shadow-[4px_4px_0px_0px_#CCFF00]">
-                    <span className="text-xs uppercase text-gray-400 block font-bold mb-1">EQUIPO COMERCIAL</span>
-                    <span className="text-3xl sm:text-4xl font-black text-white block">0 HUMANOS</span>
+              {/* Derecha (5 Cols): Tarjeta Rosa Dogfooding */}
+              <div className="lg:col-span-5 flex justify-center lg:justify-end">
+                <div className="w-full max-w-[380px] bg-[#FF0055] text-white border-2 border-white shadow-[7px_7px_0px_#CCFF00] p-6 flex items-center gap-5">
+                  <img
+                    src="/cerebro.webp"
+                    alt="Cerebro Agencial"
+                    className="w-24 h-24 object-contain shrink-0 drop-shadow-[0_8px_12px_rgba(0,0,0,0.4)]"
+                  />
+                  <div className="space-y-3">
+                    <h3 className="font-[family-name:var(--font-space-grotesk)] text-xl font-black uppercase leading-none">
+                      DOGFOODING
+                      <br />
+                      OBSESIVO
+                    </h3>
+                    <p className="text-xs sm:text-sm text-white/95 italic leading-snug">
+                      Primero lo probamos nosotros. Luego lo llevamos a tu
+                      negocio.
+                    </p>
+                    <a
+                      href={whatsappUrl(
+                        "Hola. Quiero probar su bot en vivo (Dogfooding Obsesivo)."
+                      )}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-[#CCFF00] text-black font-mono text-xs font-bold uppercase px-4 py-2 border border-black hover:bg-white transition-colors"
+                    >
+                      <span>PRUÉBALO EN VIVO</span>
+                      <span>→</span>
+                    </a>
                   </div>
-                  <div className="border-2 border-[#CCFF00] p-5 bg-[#0A0A0F] shadow-[4px_4px_0px_0px_#CCFF00]">
-                    <span className="text-xs uppercase text-gray-400 block font-bold mb-1">ENRUTAMIENTO</span>
-                    <span className="text-3xl sm:text-4xl font-black text-white block">100% BOTS</span>
+                </div>
+              </div>
+            </div>
+
+            {/* 3 Métricas Limpias */}
+            <div className="mt-14 pt-8 border-t border-white/15 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:divide-x sm:divide-white/15">
+              <div className="flex items-center gap-4">
+                <span className="text-[#CCFF00] text-2xl">●</span>
+                <div>
+                  <div className="font-[family-name:var(--font-space-grotesk)] text-3xl sm:text-4xl font-black text-white leading-none">
+                    0 <span className="text-base font-mono">HUMANOS</span>
                   </div>
-                  <div className="border-2 border-[#CCFF00] p-5 bg-[#0A0A0F] shadow-[4px_4px_0px_0px_#CCFF00]">
-                    <span className="text-xs uppercase text-gray-400 block font-bold mb-1">VELOCIDAD SLA</span>
-                    <span className="text-3xl sm:text-4xl font-black text-[#CCFF00] block">&lt; 15 SEG</span>
+                  <div className="text-xs text-white/60 mt-1">
+                    (en la parte aburrida)
                   </div>
                 </div>
               </div>
 
-              {/* Dogfooding Visual Tag / Terminal Badge */}
-              <div className="lg:col-span-4 flex flex-col items-center justify-center text-center">
-                <div className="transform rotate-2 bg-[#FF0055] text-white p-8 border-4 border-white shadow-[8px_8px_0px_0px_#CCFF00] w-full max-w-sm space-y-4">
-                  <div className="text-5xl">⚡</div>
-                  <h3 className="text-2xl font-black uppercase leading-tight">
-                    DOGFOODING OBSESIVO
-                  </h3>
-                  <p className="font-mono text-xs uppercase font-bold text-white/95 leading-relaxed">
-                    Pruébalo en vivo en menos de 2 minutos. Si no te convence cómo te atendemos, te quedas con la arquitectura.
-                  </p>
+              <div className="flex items-center gap-4 sm:pl-8">
+                <span className="text-[#CCFF00] text-2xl">⚡</span>
+                <div>
+                  <div className="font-[family-name:var(--font-space-grotesk)] text-3xl sm:text-4xl font-black text-[#CCFF00] leading-none">
+                    100% <span className="text-base font-mono text-white">BOTS</span>
+                  </div>
+                  <div className="text-xs text-white/60 mt-1">
+                    (en la parte repetitiva)
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 sm:pl-8">
+                <span className="text-[#CCFF00] text-2xl">⏱</span>
+                <div>
+                  <div className="font-[family-name:var(--font-space-grotesk)] text-3xl sm:text-4xl font-black text-white leading-none">
+                    &lt; 15 SEG
+                  </div>
+                  <div className="text-xs text-white/60 mt-1">
+                    (en la respuesta inicial)
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===================================================================
+            5. SECTION: ¿LISTO? BRINCA AL VACÍO (#CCFF00 — Limpio)
+           =================================================================== */}
+        <section className="py-16 md:py-20 bg-[#CCFF00] border-b-2 border-black">
+          <div className="max-w-6xl mx-auto px-4 sm:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+              <div className="lg:col-span-7 space-y-5">
+                <span className="inline-block bg-black text-white font-mono text-xs font-bold uppercase px-2.5 py-1">
+                  ¿LISTO?
+                </span>
+
+                <h2 className="font-[family-name:var(--font-space-grotesk)] text-4xl sm:text-6xl font-black uppercase tracking-[-0.03em] leading-[0.94] text-black">
+                  BRINCA AL VACÍO.
+                  <br />
+                  <span className="inline-block bg-white text-black px-3.5 py-1 border-[3px] border-black shadow-[5px_5px_0px_#000000] mt-2">
+                    HÁBLAME,
+                    <br />
+                    PLATICAMOS.
+                  </span>
+                </h2>
+
+                <p className="text-sm sm:text-base font-medium text-black/90 max-w-md leading-relaxed">
+                  • ¿Tienes una idea, un proyecto o solo curiosidad? No importa.
+                  Escríbeme y veamos qué podemos crear juntos (antes de que se
+                  te pase la idea).
+                </p>
+
+                <div className="flex flex-wrap items-center gap-5 pt-1">
                   <a
                     href={WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full bg-[#CCFF00] text-black font-black text-base uppercase py-3.5 border-2 border-black shadow-[4px_4px_0px_0px_#000] hover:bg-white transition-none active:translate-x-1 active:translate-y-1 active:shadow-none"
+                    className="bg-black text-white px-7 py-4 font-[family-name:var(--font-space-grotesk)] text-base font-black uppercase tracking-wider border-2 border-black shadow-[5px_5px_0px_#000000] hover:bg-white hover:text-black transition-colors inline-flex items-center gap-3"
                   >
-                    TESTEAR BOT AHORA
+                    <span>HÁBLAME, PLATICAMOS</span>
+                    <span className="text-[#CCFF00]">→</span>
+                  </a>
+                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-black">
+                    IDEAS &nbsp;/&nbsp; AUTOMATIZACIÓN &nbsp;/&nbsp; RESULTADOS
+                  </span>
+                </div>
+              </div>
+
+              <div className="lg:col-span-5 flex justify-center">
+                <img
+                  src="/cerebro.webp"
+                  alt="Cerebro Agencial Talento con Tarifa"
+                  className="w-full max-w-[260px] h-auto object-contain drop-shadow-[0_14px_20px_rgba(0,0,0,0.22)]"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===================================================================
+            6. SECTION: CONTACTO — DOS PUERTAS. MISMO AGUJERO. (#F4F4F0)
+           =================================================================== */}
+        <section
+          id="contacto"
+          className="py-20 bg-[#F4F4F0] border-b-2 border-black scroll-mt-20"
+        >
+          <div className="max-w-6xl mx-auto px-4 sm:px-8">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+              <div>
+                <span className="inline-block bg-[#CCFF00] text-black font-mono text-xs font-bold uppercase px-2.5 py-1 border border-black mb-2">
+                  CONTACTO
+                </span>
+                <h2 className="font-[family-name:var(--font-space-grotesk)] text-3xl sm:text-5xl font-black uppercase tracking-[-0.03em] leading-none text-black">
+                  DOS PUERTAS.
+                  <br />
+                  <span className="bg-[#CCFF00] px-2 inline-block mt-1">
+                    MISMO AGUJERO.
+                  </span>
+                </h2>
+              </div>
+              <span className="font-mono text-xs font-bold uppercase text-black/70">
+                + ELIGE TU FORMA FAVORITA DE ABRIRLO
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+              {/* WhatsApp */}
+              <div className="bg-[#0A0A0A] text-white border-[2.5px] border-black shadow-[6px_6px_0px_#CCFF00] p-7 flex flex-col justify-between gap-5">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between gap-2">
+                    <h3 className="font-[family-name:var(--font-space-grotesk)] text-xl font-black uppercase">
+                      WHATSAPP
+                    </h3>
+                    <span className="font-mono text-xs text-[#CCFF00] font-bold">
+                      {WHATSAPP_DISPLAY}
+                    </span>
+                  </div>
+                  <p className="text-sm text-white/80 leading-relaxed">
+                    La forma más rápida de platicar. Ideal para dudas, ideas o
+                    empezar hoy.
+                  </p>
+                </div>
+                <div>
+                  <a
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 bg-[#CCFF00] text-black font-mono text-xs font-bold uppercase px-5 py-3 border border-black hover:bg-white transition-colors"
+                  >
+                    <span>ESCRÍBEME POR WHATSAPP</span>
+                    <span>→</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="bg-white text-black border-[2.5px] border-black shadow-[6px_6px_0px_#000000] p-7 flex flex-col justify-between gap-5">
+                <div className="space-y-2">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3 className="font-[family-name:var(--font-space-grotesk)] text-xl font-black uppercase">
+                      EMAIL
+                    </h3>
+                    <span className="font-mono text-xs text-black/70 font-bold break-all">
+                      {CONTACT_EMAIL}
+                    </span>
+                  </div>
+                  <p className="text-sm text-black/80 leading-relaxed">
+                    Si prefieres escribir con calma, aquí estoy. Te respondo en
+                    menos de 24h.
+                  </p>
+                </div>
+                <div>
+                  <a
+                    href={EMAIL_URL}
+                    className="inline-flex items-center gap-3 bg-white text-black font-mono text-xs font-bold uppercase px-5 py-3 border-2 border-black hover:bg-black hover:text-[#CCFF00] transition-colors"
+                  >
+                    <span>ENVÍAME UN EMAIL</span>
+                    <span>→</span>
                   </a>
                 </div>
               </div>
             </div>
           </div>
         </section>
-
-        {/* SECTION: CIERRE FINAL (#CCFF00 TOTAL, MASIVO) */}
-        <section className="py-28 px-4 sm:px-6 bg-[#CCFF00] text-center relative overflow-hidden">
-          <div className="max-w-4xl mx-auto space-y-8 relative z-10">
-            <div className="inline-block bg-black text-[#CCFF00] px-4 py-1.5 font-mono font-bold text-xs uppercase transform -rotate-2 border-2 border-black shadow-[4px_4px_0px_0px_#FFF]">
-              ACCESO INMEDIATO // SIN FILTROS NI AGENDAS ETERNAS
-            </div>
-
-            <h2 className="text-5xl sm:text-7xl lg:text-8xl font-black text-black leading-none uppercase tracking-tighter">
-              BRINCA AL VACÍO. <br />
-              <span className="bg-white px-3 py-1 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] text-black inline-block transform rotate-1 my-3">
-                HÁBLAME, PLATICAMOS.
-              </span>
-            </h2>
-
-            <p className="text-lg sm:text-2xl font-black text-black max-w-2xl mx-auto leading-relaxed">
-              Dale click al botón verde radioactivo. Te va a responder una máquina que entiende mejor de tus cuellos de botella comerciales que cualquier consultor con traje alquilado.
-            </p>
-
-            {/* CTA 3 (Cierre Gigante) */}
-            <div className="pt-4">
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-4 bg-black text-[#CCFF00] hover:bg-white hover:text-black px-8 sm:px-12 py-6 text-xl sm:text-3xl font-black border-4 border-black shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] active:translate-x-2 active:translate-y-2 active:shadow-none transition-none uppercase tracking-tight group"
-              >
-                <span>HÁBLAME, PLATICAMOS</span>
-                <svg className="w-8 h-8 text-[#CCFF00] group-hover:text-black group-hover:rotate-45 transition-transform" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12.004 2C6.479 2 2 6.48 2 12c0 1.89.525 3.66 1.438 5.178L2 22l4.974-1.39A9.957 9.957 0 0012.004 22C17.528 22 22 17.52 22 12c0-5.52-4.472-10-9.996-10zm5.837 14.223c-.244.686-1.42 1.309-1.983 1.393-.505.076-1.144.108-1.846-.118-.427-.137-.974-.316-1.673-.618-2.955-1.274-4.887-4.24-5.035-4.436-.148-.196-1.198-1.595-1.198-3.042 0-1.447.76-2.158 1.03-2.453.27-.294.59-.368.787-.368.196 0 .393.002.565.01.18.009.421-.069.66.505.244.587.835 2.036.908 2.184.074.148.123.321.025.518-.098.196-.148.318-.295.49-.148.173-.31.385-.443.518-.148.147-.302.308-.13.603.172.296.76 1.256 1.63 2.032 1.121 1.001 2.066 1.31 2.36 1.458.295.147.467.123.64-.074.172-.197.737-.858.934-1.152.196-.295.393-.246.66-.148.27.098 1.714.808 2.009.955.295.148.491.222.565.344.074.123.074.71-.17 1.396z"/>
-                </svg>
-              </a>
-            </div>
-
-            {/* Reassurance Brutalist Ribbon */}
-            <div className="pt-6 flex flex-wrap justify-center items-center gap-3 sm:gap-4 font-mono text-xs sm:text-sm uppercase font-black text-black">
-              <span className="bg-white px-3 py-1.5 border-2 border-black shadow-[3px_3px_0px_0px_#000]">
-                ✓ Sin presentaciones de 40 diapositivas
-              </span>
-              <span className="bg-white px-3 py-1.5 border-2 border-black shadow-[3px_3px_0px_0px_#000]">
-                ✓ Te decimos la verdad en 10 minutos
-              </span>
-              <span className="bg-white px-3 py-1.5 border-2 border-black shadow-[3px_3px_0px_0px_#000]">
-                ✓ Si no te conviene te lo decimos de frente
-              </span>
-            </div>
-          </div>
-        </section>
-        {/* SECTION: CANALES DE CONTACTO (WhatsApp vs Correo) */}
-        <section id="contacto" className="py-24 px-4 sm:px-6 bg-[#FAFAFA] border-t-4 border-black relative scroll-mt-24">
-          <div className="max-w-7xl mx-auto space-y-12">
-            <div className="space-y-4 max-w-3xl">
-              <div className="inline-block bg-black text-[#CCFF00] px-4 py-1.5 font-mono font-bold text-xs uppercase transform -rotate-1 border-2 border-black shadow-[4px_4px_0px_0px_#CCFF00]">
-                CANALES ABIERTOS // ELIGE TU PUERTA
-              </div>
-              <h2 className="text-4xl sm:text-6xl font-black text-black leading-none uppercase tracking-tight">
-                DOS PUERTAS. <br />
-                <span className="bg-[#CCFF00] px-2 border-4 border-black inline-block mt-2 transform -rotate-1">MISMO AGUJERO.</span>
-              </h2>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Puerta 1: WhatsApp */}
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group bg-black text-white border-4 border-black p-8 sm:p-10 shadow-[8px_8px_0px_0px_#CCFF00] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_0px_#CCFF00] transition-all flex flex-col justify-between gap-8 min-h-[280px]"
-              >
-                <div className="flex justify-between items-start gap-4">
-                  <span className="font-mono text-xs uppercase font-black bg-[#CCFF00] text-black px-3 py-1 border-2 border-black">
-                    PUERTA 01 // RÁPIDA
-                  </span>
-                  <span className="font-mono text-xs uppercase font-black text-[#CCFF00]">&lt; 15 SEG</span>
-                </div>
-                <div className="space-y-3">
-                  <h3 className="text-3xl sm:text-4xl font-black uppercase leading-none">WhatsApp</h3>
-                  <p className="font-bold text-gray-300 text-base sm:text-lg leading-relaxed">
-                    Te contesta el bot al instante. Lo mismo que le instalaríamos a tu negocio, en vivo.
-                  </p>
-                </div>
-                <div className="flex items-center justify-between border-t-2 border-[#CCFF00]/40 pt-5">
-                  <span className="font-mono font-black text-lg sm:text-xl text-[#CCFF00]">{WHATSAPP_DISPLAY}</span>
-                  <span aria-hidden className="text-3xl font-black text-[#CCFF00] transition-transform group-hover:translate-x-2">→</span>
-                </div>
-              </a>
-
-              {/* Puerta 2: Correo */}
-              <a
-                href={EMAIL_URL}
-                className="group bg-white text-black border-4 border-black p-8 sm:p-10 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all flex flex-col justify-between gap-8 min-h-[280px] md:rotate-1 hover:rotate-0"
-              >
-                <div className="flex justify-between items-start gap-4">
-                  <span className="font-mono text-xs uppercase font-black bg-black text-[#CCFF00] px-3 py-1 border-2 border-black">
-                    PUERTA 02 // FORMAL
-                  </span>
-                  <span className="font-mono text-xs uppercase font-black text-[#FF0055]">PROPUESTAS · ALIANZAS</span>
-                </div>
-                <div className="space-y-3">
-                  <h3 className="text-3xl sm:text-4xl font-black uppercase leading-none">Correo</h3>
-                  <p className="font-bold text-gray-800 text-base sm:text-lg leading-relaxed">
-                    ¿Brief largo, RFP, alianza o factura? Escríbenos. Lo lee un humano (sí, todavía tenemos uno).
-                  </p>
-                </div>
-                <div className="flex items-center justify-between gap-4 border-t-2 border-black pt-5">
-                  <span className="font-mono font-black text-base sm:text-xl break-all underline decoration-4 decoration-[#CCFF00] underline-offset-4">
-                    {CONTACT_EMAIL}
-                  </span>
-                  <span aria-hidden className="text-3xl font-black transition-transform group-hover:translate-x-2">→</span>
-                </div>
-              </a>
-            </div>
-
-            <p className="font-mono text-xs sm:text-sm font-black uppercase text-gray-700 text-center">
-              ¿Prefieres dejarnos todo por escrito?{" "}
-              <a href="/form" className="text-black underline decoration-4 decoration-[#FF0055] underline-offset-4 hover:bg-[#CCFF00]">
-                Llena el formulario rápido
-              </a>
-            </p>
-          </div>
-        </section>
       </main>
 
-      {/* Footer Neobrutalista Oficial (#CCFF00 con borde negro de 4px) */}
-      <footer className="bg-[#CCFF00] border-t-4 border-black pt-14 pb-28 sm:pb-14 px-6">
-        <div className="max-w-7xl mx-auto grid gap-10 md:grid-cols-3 items-start">
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-black p-1.5 border-2 border-black shadow-[3px_3px_0px_0px_#000]">
-                <img src="/icon.svg" alt="" aria-hidden className="w-full h-full object-contain" />
+      {/* =====================================================================
+          7. FOOTER (#CCFF00 — Minimalista como la inspiración)
+         ===================================================================== */}
+      <footer className="bg-[#CCFF00] py-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-8 space-y-6">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 pb-6 border-b border-black/30">
+            <a href="/" className="flex items-center gap-2.5">
+              <div className="w-8 h-8 bg-black border border-black flex items-center justify-center p-1">
+                <img
+                  src="/icon.svg"
+                  alt=""
+                  aria-hidden="true"
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <span className="font-black text-xl tracking-tight text-black">TALENTO CON TARIFA</span>
-            </div>
-            <p className="font-mono font-bold text-sm text-black max-w-xs">
-              NO BUSCAMOS VOLUMEN. CONECTAMOS CON LOS CORRECTOS.
-            </p>
+              <div className="relative w-40 h-6">
+                <img
+                  src="/horizontal.svg"
+                  alt="Talento con Tarifa"
+                  className="w-full h-full object-contain object-left"
+                />
+              </div>
+            </a>
+
+            <nav
+              aria-label="Enlaces del pie de página"
+              className="flex flex-wrap items-center gap-6 font-mono text-xs font-bold uppercase text-black"
+            >
+              <a href="#servicios" className="hover:underline">
+                SERVICIOS
+              </a>
+              <a href="#nosotros" className="hover:underline">
+                NOSOTROS
+              </a>
+              <a href="/minicurso-robot" className="hover:underline">
+                MINI-CURSO 1€
+              </a>
+              <a href="/form" className="hover:underline">
+                FORMULARIO
+              </a>
+              <a href="/identidad" className="hover:underline">
+                IDENTIDAD
+              </a>
+            </nav>
+
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-black text-white font-mono text-xs font-bold uppercase px-5 py-2.5 border border-black hover:bg-white hover:text-black transition-colors inline-flex items-center gap-2"
+            >
+              <span>HÁBLAME</span>
+              <span className="text-[#CCFF00]">→</span>
+            </a>
           </div>
 
-          <div className="space-y-3">
-            <span className="font-mono text-xs uppercase font-black bg-black text-[#CCFF00] px-2 py-0.5 inline-block">CONTACTO</span>
-            <ul className="space-y-2 font-bold text-black">
-              <li>
-                <a href={EMAIL_URL} className="break-all hover:underline decoration-4 underline-offset-4">
-                  ✉ {CONTACT_EMAIL}
-                </a>
-              </li>
-              <li>
-                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hover:underline decoration-4 underline-offset-4">
-                  ☎ {WHATSAPP_DISPLAY} (WhatsApp)
-                </a>
-              </li>
-            </ul>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 font-mono text-[11px] font-bold uppercase text-black">
+            <span>■ IA &nbsp;+&nbsp; AUTOMATIZACIÓN &nbsp;+&nbsp; TALENTO HUMANO</span>
+            <span>
+              CREADO POR HUMANOS (QUE USAN IA) <span className="text-[#FF0055]">♥</span>
+            </span>
           </div>
-
-          <div className="space-y-3">
-            <span className="font-mono text-xs uppercase font-black bg-black text-[#CCFF00] px-2 py-0.5 inline-block">ATAJOS</span>
-            <ul className="space-y-2 font-bold text-black">
-              <li><a href="#contacto" className="hover:underline decoration-4 underline-offset-4">→ Canales de contacto</a></li>
-              <li><a href="/form" className="hover:underline decoration-4 underline-offset-4">→ Formulario rápido</a></li>
-              <li><a href="/identidad" className="hover:underline decoration-4 underline-offset-4">→ Brief de identidad</a></li>
-            </ul>
-          </div>
-        </div>
-        <div className="max-w-7xl mx-auto mt-10 pt-6 border-t-2 border-black font-mono text-xs font-black uppercase text-black flex flex-col sm:flex-row justify-between gap-2">
-          <span>© {new Date().getFullYear()} TALENTOCONTARIFA.LAT</span>
-          <span>HECHO POR HUMANOS · OPERADO POR BOTS</span>
         </div>
       </footer>
-
-      {/* Floating Brutalist WhatsApp CTA (compacto en móvil) */}
-      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group flex items-center gap-3 bg-black text-[#CCFF00] px-4 py-3 sm:px-5 sm:py-3.5 font-bold text-sm uppercase tracking-wider border-4 border-black shadow-[6px_6px_0px_0px_#000] hover:bg-[#CCFF00] hover:text-black hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all"
-          aria-label="Abrir WhatsApp: háblame, platicamos"
-        >
-          <span className="relative flex w-3 h-3">
-            <span className="absolute inline-flex w-full h-full bg-[#CCFF00] group-hover:bg-black rounded-full animate-ping opacity-75"></span>
-            <span className="relative inline-flex w-3 h-3 bg-[#CCFF00] group-hover:bg-black rounded-full"></span>
-          </span>
-          <span className="hidden sm:inline">HÁBLAME, PLATICAMOS</span>
-          <span className="sm:hidden">WHATSAPP</span>
-        </a>
-      </div>
-    </>
+    </div>
   );
 }
